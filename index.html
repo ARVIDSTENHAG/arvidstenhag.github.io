@@ -1,1 +1,258 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Berghs • Growth Marketing Hub (Svartvit)</title>
+  <meta name="description" content="Svartvit, visuellt tilltalande sida med Berghs-bild, snabblänkar för en Growth Marketer och Google Docs-integration." />
+  <style>
+    :root{
+      --bg:#fff; --fg:#0f0f0f; --muted:#6b6b6b; --line:#1a1a1a; --soft:#f6f6f6;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"}
+    a{color:inherit}
+    .container{max-width:1100px;margin:0 auto;padding:28px}
+
+    /* --- HERO --- */
+    .hero{position:relative;border:1.5px solid var(--line);border-radius:24px;overflow:hidden;background:#000}
+    .hero::before{content:"";position:absolute;inset:0;background:url('https://mnd-assets.mynewsdesk.com/image/upload/fl_attachment/1oks5ip2x7b0f9lr5rndne') center/cover no-repeat;filter:grayscale(1) contrast(1.05) brightness(.8)}
+    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg, rgba(0,0,0,.55), rgba(0,0,0,.2))}
+    .hero-inner{position:relative;z-index:2;display:grid;gap:14px;padding:min(8vw,64px);text-align:left;color:#fff}
+    .kicker{letter-spacing:.2em;text-transform:uppercase;font-size:12px;opacity:.9}
+    h1{font-size:clamp(28px,4.8vw,50px);margin:0 0 4px}
+    .hero p{margin:0;color:#e7e7e7;max-width:70ch}
+    .hero-actions{margin-top:16px;display:flex;flex-wrap:wrap;gap:10px}
+
+    /* --- BUTTONS --- */
+    .btn{appearance:none;background:transparent;color:inherit;border:1.5px solid #fff;padding:10px 16px;border-radius:999px;text-decoration:none;font-weight:600;display:inline-flex;gap:8px;align-items:center;cursor:pointer;transition:transform .08s ease, background .2s ease}
+    .btn:hover{transform:translateY(-1px)}
+    .btn:active{transform:translateY(0)}
+    .btn--ghost{background:rgba(255,255,255,.08)}
+    .btn--dark{border-color:var(--line);color:var(--fg)}
+
+    /* --- SECTIONS --- */
+    section{margin-top:28px}
+    .section-title{display:flex;align-items:baseline;gap:10px;margin:0 0 12px}
+    .section-title h2{margin:0;font-size:clamp(20px,3vw,28px)}
+    .section-title span{color:var(--muted);font-size:14px}
+
+    /* --- GRID --- */
+    .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+    .card{background:var(--bg);border:1.5px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:8px}
+    .card p{margin:0;color:var(--muted)}
+    .card a{font-weight:600;text-decoration:none;border-bottom:1px solid transparent}
+    .card a:hover{border-bottom-color:var(--line)}
+
+    /* --- DOCS PANEL --- */
+    .docs{display:grid;gap:10px;border:1.5px solid var(--line);border-radius:16px;padding:16px;background:var(--soft)}
+    .row{display:flex;flex-wrap:wrap;gap:10px}
+
+    /* --- FOOTER --- */
+    footer{margin:34px 0;color:var(--muted);font-size:13px;text-align:center}
+
+    /* small helper */
+    code.inline{background:#eee;padding:2px 6px;border-radius:6px;border:1px solid #e2e2e2}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- HERO with Berghs image (svartvit) -->
+    <section class="hero" aria-label="Berghs hero">
+      <div class="hero-inner">
+        <span class="kicker">BERGHS SCHOOL OF COMMUNICATION</span>
+        <h1>Growth Marketing Hub — svartvit & snygg</h1>
+        <p>Allt du behöver på ett ställe: snabb åtkomst till verktyg, resurser, svenska branschlänkar — plus en enkel koppling till Google Docs för dina anteckningar, planer och rapporter.</p>
+        <div class="hero-actions">
+          <a class="btn btn--ghost" href="https://www.berghs.se/" target="_blank" rel="noopener">↗ Besök Berghs.se</a>
+          <button id="auth" class="btn btn--ghost" title="Logga in med Google">🔒 Anslut Google</button>
+          <button id="create" class="btn btn--ghost" title="Skapa ett nytt Google-dokument" disabled>✨ Skapa Google Doc</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOCS integration -->
+    <section class="docs" aria-label="Google Docs">
+      <div class="section-title"><h2>Google Docs</h2><span>Skapa dokument direkt härifrån</span></div>
+      <p>Första gången du klickar <em>Anslut Google</em> får du ge tillåtelse (OAuth 2). Sen kan du skapa ett dokument med ett klick. <br/>Ställ in <code class="inline">CLIENT_ID</code> och <code class="inline">API_KEY</code> i koden.</p>
+      <div class="row">
+        <button id="auth2" class="btn btn--dark">🔑 Anslut/Logga ut</button>
+        <button id="create2" class="btn btn--dark" disabled>📝 Skapa mötesanteckningar</button>
+        <button id="create3" class="btn btn--dark" disabled>📊 Skapa kampanjplan</button>
+      </div>
+    </section>
+
+    <!-- Verktyg: Analys & SEO -->
+    <section>
+      <div class="section-title"><h2>Analys & SEO</h2><span>Kolla trafik, sök och mät</span></div>
+      <div class="grid">
+        <div class="card"><a href="https://analytics.google.com/" target="_blank">Google Analytics 4</a><p>All trafik och konverteringar.</p></div>
+        <div class="card"><a href="https://search.google.com/search-console" target="_blank">Google Search Console</a><p>Organisk synlighet och indexering.</p></div>
+        <div class="card"><a href="https://trends.google.com/" target="_blank">Google Trends</a><p>Intressetrender över tid.</p></div>
+        <div class="card"><a href="https://lookerstudio.google.com/" target="_blank">Looker Studio</a><p>Bygg dashboards.</p></div>
+        <div class="card"><a href="https://tagmanager.google.com/" target="_blank">Tag Manager</a><p>Händelser utan koddeploy.</p></div>
+        <div class="card"><a href="https://pagespeed.web.dev/" target="_blank">PageSpeed</a><p>Prestanda och Core Web Vitals.</p></div>
+        <div class="card"><a href="https://www.semrush.com/" target="_blank">Semrush</a><p>Nyckelord, konkurrenter, backlinks.</p></div>
+        <div class="card"><a href="https://ahrefs.com/" target="_blank">Ahrefs</a><p>Backlinks och innehålls-gap.</p></div>
+      </div>
+    </section>
+
+    <!-- Verktyg: Ads & Growth -->
+    <section>
+      <div class="section-title"><h2>Ads & Growth</h2><span>Köp trafik, testa, skala</span></div>
+      <div class="grid">
+        <div class="card"><a href="https://ads.google.com/" target="_blank">Google Ads</a><p>Sök, Performance Max, YouTube.</p></div>
+        <div class="card"><a href="https://business.facebook.com/" target="_blank">Meta Ads Manager</a><p>Facebook & Instagram.</p></div>
+        <div class="card"><a href="https://ads.tiktok.com/" target="_blank">TikTok Ads</a><p>Snabb testning på video.</p></div>
+        <div class="card"><a href="https://business.linkedin.com/marketing-solutions/ads" target="_blank">LinkedIn Ads</a><p>B2B-targeting.</p></div>
+        <div class="card"><a href="https://www.mailchimp.com/" target="_blank">Mailchimp</a><p>Nyhetsbrev & automation.</p></div>
+        <div class="card"><a href="https://zapier.com/" target="_blank">Zapier</a><p>Koppla ihop verktyg och flöden.</p></div>
+        <div class="card"><a href="https://www.hotjar.com/" target="_blank">Hotjar</a><p>Heatmaps & inspelningar.</p></div>
+        <div class="card"><a href="https://www.notion.so/" target="_blank">Notion</a><p>Wikis, roadmaps, backlog.</p></div>
+      </div>
+    </section>
+
+    <!-- Svenska resurser & regler -->
+    <section>
+      <div class="section-title"><h2>Svenska resurser</h2><span>Nyheter, bransch & riktlinjer</span></div>
+      <div class="grid">
+        <div class="card"><a href="https://www.resume.se/" target="_blank">Resumé</a><p>Sveriges reklam- & medienyheter.</p></div>
+        <div class="card"><a href="https://www.dagensmedia.se/" target="_blank">Dagens Media</a><p>Marknad, medier, tech.</p></div>
+        <div class="card"><a href="https://www.iabsweden.se/" target="_blank">IAB Sverige</a><p>Standarder, events, branschpraxis.</p></div>
+        <div class="card"><a href="https://reklamombudsmannen.org/" target="_blank">Reklamombudsmannen</a><p>God marknadsföringssed.</p></div>
+        <div class="card"><a href="https://www.imy.se/" target="_blank">IMY (GDPR)</a><p>Integritet och dataskydd.</p></div>
+        <div class="card"><a href="https://www.konsumentverket.se/" target="_blank">Konsumentverket</a><p>Marknadsföringslagen.</p></div>
+        <div class="card"><a href="https://www.berghs.se/" target="_blank">Berghs artiklar</a><p>Intervjuer, case och tips.</p></div>
+        <div class="card"><a href="https://www.berghs.se/en/press/news/2025/05/berghs-is-the-best-school-in-the-world-historic-top-placement-in-young-ones/" target="_blank">Young Ones: #1 i världen</a><p>Berghs topprankning.</p></div>
+      </div>
+    </section>
+
+    <!-- Snabbverktyg: UTM & Prioritering -->
+    <section>
+      <div class="section-title"><h2>Snabbverktyg</h2><span>Små hjälpmedel i vardagen</span></div>
+      <div class="grid">
+        <div class="card">
+          <strong>UTM-byggare</strong>
+          <p>Sätt spårning på dina länkar.</p>
+          <div class="row">
+            <input id="utm-url" placeholder="https://dinsajt.se/landning" style="flex:1;min-width:160px;padding:8px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--fg)">
+            <input id="utm-src" placeholder="utm_source" style="flex:1;min-width:120px;padding:8px;border:1px solid var(--line);border-radius:10px">
+            <input id="utm-med" placeholder="utm_medium" style="flex:1;min-width:120px;padding:8px;border:1px solid var(--line);border-radius:10px">
+            <input id="utm-cmp" placeholder="utm_campaign" style="flex:1;min-width:120px;padding:8px;border:1px solid var(--line);border-radius:10px">
+            <button class="btn btn--dark" onclick="buildUtm()">Bygg länk</button>
+          </div>
+          <p id="utm-out" style="word-break:break-all"></p>
+        </div>
+        <div class="card">
+          <strong>Prioritering (ICE)</strong>
+          <p>Enkel scoring för att välja experiment.</p>
+          <div class="row">
+            <input id="ice-i" type="number" min="1" max="10" placeholder="Impact (1-10)" style="width:140px;padding:8px;border:1px solid var(--line);border-radius:10px">
+            <input id="ice-c" type="number" min="1" max="10" placeholder="Confidence (1-10)" style="width:160px;padding:8px;border:1px solid var(--line);border-radius:10px">
+            <input id="ice-e" type="number" min="1" max="10" placeholder="Ease (1-10)" style="width:140px;padding:8px;border:1px solid var(--line);border-radius:10px">
+            <button class="btn btn--dark" onclick="calcICE()">Räkna</button>
+          </div>
+          <p id="ice-out"></p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Svartvit layout. Bilden i hero är från Berghs pressmaterial. Anslut Google för att skapa Docs direkt härifrån.
+    </footer>
+  </div>
+
+  <!-- Google klientbibliotek -->
+  <script src="https://apis.google.com/js/api.js" async defer onload="gapiLoaded()"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer onload="gisLoaded()"></script>
+
+  <script>
+    // ======= KONFIG =======
+    const CLIENT_ID = "REPLACE_WITH_YOUR_OAUTH_CLIENT_ID.apps.googleusercontent.com";
+    const API_KEY   = "REPLACE_WITH_YOUR_API_KEY";
+    const SCOPES = "https://www.googleapis.com/auth/documents";
+    const DISCOVERY_DOCS = ["https://docs.googleapis.com/$discovery/rest?version=v1"];
+
+    let tokenClient; let gapiInited = false; let gisInited = false;
+
+    const authBtn   = document.getElementById('auth');
+    const createBtn = document.getElementById('create');
+    const auth2     = document.getElementById('auth2');
+    const create2   = document.getElementById('create2');
+    const create3   = document.getElementById('create3');
+
+    // UTM builder & ICE helpers
+    function buildUtm(){
+      const base = document.getElementById('utm-url').value?.trim();
+      const src = document.getElementById('utm-src').value?.trim();
+      const med = document.getElementById('utm-med').value?.trim();
+      const cmp = document.getElementById('utm-cmp').value?.trim();
+      if(!base) return;
+      const url = new URL(base);
+      if(src) url.searchParams.set('utm_source', src);
+      if(med) url.searchParams.set('utm_medium', med);
+      if(cmp) url.searchParams.set('utm_campaign', cmp);
+      document.getElementById('utm-out').textContent = url.toString();
+    }
+    function calcICE(){
+      const i = Number(document.getElementById('ice-i').value||0);
+      const c = Number(document.getElementById('ice-c').value||0);
+      const e = Number(document.getElementById('ice-e').value||0);
+      const score = Math.round(((i*c*e)/3)*10)/10;
+      document.getElementById('ice-out').textContent = `ICE-score: ${score}`;
+    }
+
+    // Google API laddning
+    async function gapiLoaded(){
+      try{
+        await new Promise(res=>gapi.load('client',res));
+        await gapi.client.init({ apiKey: API_KEY, discoveryDocs: DISCOVERY_DOCS });
+        gapiInited = true; maybeEnable();
+      }catch(e){ console.error('GAPI init fel', e); alert('Kunde inte initiera Google-klienten. Kolla API-nyckeln.'); }
+    }
+    function gisLoaded(){
+      try{
+        tokenClient = google.accounts.oauth2.initTokenClient({
+          client_id: CLIENT_ID, scope: SCOPES,
+          callback: (resp)=>{ if(resp.error){ alert('Inloggning misslyckades'); return;} setAuthed(true); }
+        });
+        gisInited = true; maybeEnable();
+      }catch(e){ console.error('GIS init fel', e); alert('Kolla ditt Client ID.'); }
+    }
+    function maybeEnable(){ if(gapiInited && gisInited){ [authBtn,auth2].forEach(b=>b.disabled=false); [createBtn,create2,create3].forEach(b=>b.disabled=true); bind(); } }
+    function bind(){
+      authBtn.onclick = startAuth; auth2.onclick = startAuth;
+      createBtn.onclick = ()=>createDoc('Snabbt dokument');
+      create2.onclick = ()=>createDoc('Mötesanteckningar – Berghs');
+      create3.onclick = ()=>createDoc('Kampanjplan – Growth');
+    }
+    function setAuthed(x){
+      [createBtn,create2,create3].forEach(b=>b.disabled=!x);
+      authBtn.textContent = x? '✅ Google ansluten' : '🔒 Anslut Google';
+      auth2.textContent   = x? '✅ Ansluten (logga ut)' : '🔑 Anslut/Logga ut';
+    }
+    function startAuth(){
+      const has = !!gapi.client.getToken();
+      if(!has){ tokenClient.requestAccessToken({ prompt: 'consent' }); }
+      else{
+        google.accounts.oauth2.revoke(gapi.client.getToken().access_token, ()=>{ gapi.client.setToken(''); setAuthed(false); });
+      }
+    }
+    async function createDoc(title){
+      try{
+        if(!gapi.client.getToken()){ tokenClient.callback = ()=>createDoc(title); tokenClient.requestAccessToken({ prompt: '' }); return; }
+        const create = await gapi.client.docs.documents.create({ title });
+        const id = create.result.documentId;
+        await gapi.client.docs.documents.batchUpdate({ documentId:id, requests:[{ insertText:{ location:{ index:1 }, text:`Dokument: ${title}
+Skapat: ${new Date().toLocaleString()}
+Kurs: Berghs (Growth Marketing)
+
+`}}]});
+        window.open(`https://docs.google.com/document/d/${id}/edit`, '_blank', 'noopener');
+      }catch(e){ console.error('Create Doc fail', e); alert('Kunde inte skapa dokument. Kontrollera Docs API & behörigheter.'); }
+    }
+  </script>
+</body>
+</html>
 
