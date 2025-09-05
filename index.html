@@ -1,329 +1,34 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NJW2V9RX');</script>
-<!-- End Google Tag Manager -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Arvid Stenhag – Portfolio</title>
-  <meta name="description" content="Portfolio – enkel att uppdatera med nya projekt och bilder." />
   <style>
-    :root {
-      --bg: #ffffff;
-      --fg: #0a0a0a;
-      --muted: #6b6b6b;
-      --border: #e6e6e6;
-      --card: #ffffff;
-    }
-    html, body { height: 100%; }
-    * { box-sizing: border-box; }
     body {
       margin: 0;
-      background: var(--bg);
-      color: var(--fg);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      line-height: 1.5;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #4169E1; /* Royal Blue */
+      font-family: "Helvetica Neue", Arial, sans-serif;
     }
-    a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--fg); }
-    a:hover { opacity: .8; }
 
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 20px 80px; }
-
-    header {
-      display: grid; gap: 8px; margin-bottom: 28px;
-    }
-    header h1 {
-      font-size: clamp(28px, 5vw, 48px);
+    a {
+      text-decoration: none;
+      font-size: 72px;   /* stor text */
       font-weight: 800;
-      letter-spacing: -0.02em;
-      margin: 0;
-    }
-    header p { margin: 0; color: var(--muted); }
-
-    .topbar {
-      display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; margin: 18px 0 32px;
-    }
-    .nav { display: flex; gap: 16px; }
-    .nav a { border: none; padding-bottom: 2px; border-bottom: 1px solid transparent; }
-    .nav a:hover { border-bottom-color: var(--fg); }
-
-    /* Kort-grid */
-    .grid {
-      display: grid; gap: 18px;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-      transition: transform .15s ease, box-shadow .15s ease;
-    }
-    .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.08); }
-    .thumb {
-      width: 100%; height: 180px; object-fit: cover; display: block;
-      filter: grayscale(100%);
-    }
-    .body { padding: 14px 14px 16px; display: grid; gap: 8px; }
-    .title { font-weight: 700; font-size: 16px; letter-spacing: -.01em; }
-    .meta { color: var(--muted); font-size: 12px; }
-    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
-    .tag { font-size: 11px; padding: 3px 8px; border: 1px solid var(--fg); border-radius: 999px; }
-
-    /* Sektioner */
-    section { margin-top: 56px; }
-    section h2 { font-size: 18px; font-weight: 800; letter-spacing: .02em; margin: 0 0 12px; text-transform: uppercase; }
-    section p { margin: 0 0 10px; color: var(--fg); }
-
-    footer { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; }
-
-    /* Modal (native <dialog>) */
-    dialog::backdrop { background: rgba(0,0,0,.5); }
-    dialog {
-      border: 1px solid var(--border);
-      padding: 0; border-radius: 16px; max-width: min(920px, 92vw);
-      width: 100%; overflow: hidden;
-      background: var(--card);
-    }
-    .modal {
-      display: grid; grid-template-columns: 1fr; max-height: 90vh;
-    }
-    .modal-media { max-height: 60vh; overflow: hidden; background: #000; }
-    .modal-media img { width: 100%; height: 100%; object-fit: contain; display: block; filter: grayscale(100%); }
-    .modal-body { padding: 18px; display: grid; gap: 10px; }
-    .modal-top { display: flex; justify-content: space-between; align-items: start; gap: 8px; }
-    .modal-title { font-size: 18px; font-weight: 800; }
-    .close { appearance: none; border: 1px solid var(--fg); background: transparent; color: var(--fg); padding: 6px 10px; border-radius: 999px; cursor: pointer; }
-    .modal-meta { color: var(--muted); font-size: 13px; }
-    .modal-desc { font-size: 14px; }
-    .modal-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-
-    @media (min-width: 860px) {
-      .modal { grid-template-columns: 1.3fr 1fr; }
-      .modal-media { max-height: unset; }
+      color: white;
+      transition: color 0.3s ease;
     }
 
-    /* Hjälpbox för instruktioner (kan tas bort vid produktion) */
-    .hint { border: 1px dashed var(--border); padding: 12px; border-radius: 12px; font-size: 13px; color: var(--muted); }
+    a:hover {
+      color: black;      /* ändrar färg vid hover */
+    }
   </style>
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW2V9RX"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-  <div class="wrap">
-    <header>
-      <h1>Arvid Stenhag</h1>
-      <p>Growth Marketing-student @ Berghs • Enkel, svartvit portfolio</p>
-    </header>
-
-    <div class="topbar">
-      <nav class="nav" aria-label="Primär">
-        <a href="#projekt">Projekt</a>
-        <a href="#om">Om</a>
-        <a href="#kontakt">Kontakt</a>
-      </nav>
-      <div class="hint" role="note">
-        <strong>Tips:</strong> Lägg till nya projekt i <code>projects</code>-listan i koden (se nedan). Byt bara bildväg, titel och text.
-      </div>
-    </div>
-
-    <section id="projekt" aria-labelledby="projekt-heading">
-      <h2 id="projekt-heading">Projekt</h2>
-      <div id="projectGrid" class="grid" aria-live="polite"></div>
-    </section>
-
-    <section id="om">
-      <h2>Om</h2>
-      <p>Jag är en nyfiken och framåt student inom Growth Marketing som gillar tydlig kommunikation och mätbar effekt. Den här portfolion är byggd för att vara snabb, stilren och superenkel att uppdatera.</p>
-    </section>
-
-    <section id="kontakt">
-      <h2>Kontakt</h2>
-      <p>Mail: <a href="mailto:arvid.stenhag@example.com">arvid.stenhag@example.com</a> • LinkedIn: <a href="#">linkedin.com/in/arvidstenhag</a></p>
-    </section>
-
-    <footer>
-      © <span id="year"></span> Arvid Stenhag. Allt i svartvitt – såklart.
-    </footer>
-  </div>
-
-  <!-- Modal -->
-  <dialog id="projectModal" aria-label="Projektinfo">
-    <div class="modal">
-      <div class="modal-media">
-        <img id="modalImg" alt="" />
-      </div>
-      <div class="modal-body">
-        <div class="modal-top">
-          <div>
-            <div class="modal-title" id="modalTitle"></div>
-            <div class="modal-meta" id="modalMeta"></div>
-          </div>
-          <button class="close" id="modalClose" aria-label="Stäng">Stäng</button>
-        </div>
-        <div class="modal-desc" id="modalDesc"></div>
-        <div class="modal-tags" id="modalTags"></div>
-        <div id="modalLinkWrap"></div>
-      </div>
-    </div>
-  </dialog>
-
-  <script>
-    // =============================
-    // 🛠️ SNABB GUIDE (kan raderas)
-    // 1) Lägg dina bilder i mappen /assets (t.ex. assets/fotografiska.jpg)
-    // 2) Lägg till ett nytt objekt i listan 'projects' nedan.
-    // 3) Fyll i title, year, role, client, desc, image, tags, link (valfritt).
-    // 4) Spara filen. Klart!
-    // =============================
-
-    const projects = [
-      {
-        title: "Fotografiska × SL – Pop-up på perronger",
-        year: "2025",
-        role: "Koncept & Growth",
-        client: "Skolprojekt",
-        desc: "Ett inkluderande pop-up-koncept som tar Fotografiska till tunnelbanan. Fotobås i Hans Geddas anda, social spridning och låg tröskel till kultur.",
-        image: "assets/fotografiska-sl.jpg",
-        tags: ["Koncept", "Aktivering", "Growth"],
-        link: "#"
-      },
-      {
-        title: "Vinbanken – Tillväxtidéer & funnel",
-        year: "2025",
-        role: "Growth Marketing",
-        client: "Vinbanken (case)",
-        desc: "Kartlade funnel, identifierade content-gap och förslag på format som når en ny, oväntad målgrupp.",
-        image: "assets/vinbanken.jpg",
-        tags: ["Strategi", "Funnel", "Content"],
-        link: "#"
-      },
-      {
-        title: "Berghs – Kursprojekt och lärdomar",
-        year: "2025",
-        role: "Studentarbete",
-        client: "Berghs",
-        desc: "Urval av uppgifter med fokus på tydligt problem → enkel lösning → mätbar effekt.",
-        image: "assets/berghs.jpg",
-        tags: ["Case", "Analys"],
-        link: "#"
-      }
-    ];
-
-    const grid = document.getElementById('projectGrid');
-
-    function renderProjects(list) {
-      grid.innerHTML = '';
-      list.forEach((p, idx) => {
-        const card = document.createElement('article');
-        card.className = 'card';
-        card.tabIndex = 0;
-        card.setAttribute('role', 'button');
-        card.setAttribute('aria-label', `Öppna projekt: ${p.title}`);
-
-        const img = document.createElement('img');
-        img.className = 'thumb';
-        img.src = p.image;
-        img.alt = p.title;
-
-        const body = document.createElement('div');
-        body.className = 'body';
-
-        const h3 = document.createElement('div');
-        h3.className = 'title';
-        h3.textContent = p.title;
-
-        const meta = document.createElement('div');
-        meta.className = 'meta';
-        meta.textContent = `${p.year} • ${p.role}${p.client ? ' • ' + p.client : ''}`;
-
-        const tags = document.createElement('div');
-        tags.className = 'tags';
-        (p.tags || []).forEach(t => {
-          const span = document.createElement('span');
-          span.className = 'tag';
-          span.textContent = t;
-          tags.appendChild(span);
-        });
-
-        body.appendChild(h3);
-        body.appendChild(meta);
-        body.appendChild(tags);
-
-        card.appendChild(img);
-        card.appendChild(body);
-
-        card.addEventListener('click', () => openModal(p));
-        card.addEventListener('keypress', (e) => { if (e.key === 'Enter') openModal(p); });
-
-        grid.appendChild(card);
-      });
-    }
-
-    // Modal-logik
-    const modal = document.getElementById('projectModal');
-    const modalImg = document.getElementById('modalImg');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalMeta = document.getElementById('modalMeta');
-    const modalDesc = document.getElementById('modalDesc');
-    const modalTags = document.getElementById('modalTags');
-    const modalLinkWrap = document.getElementById('modalLinkWrap');
-    const modalClose = document.getElementById('modalClose');
-
-    function openModal(p) {
-      modalTitle.textContent = p.title;
-      modalMeta.textContent = `${p.year} • ${p.role}${p.client ? ' • ' + p.client : ''}`;
-      modalDesc.textContent = p.desc || '';
-      modalImg.src = p.image;
-      modalImg.alt = p.title;
-
-      modalTags.innerHTML = '';
-      (p.tags || []).forEach(t => {
-        const span = document.createElement('span');
-        span.className = 'tag';
-        span.textContent = t;
-        modalTags.appendChild(span);
-      });
-
-      modalLinkWrap.innerHTML = '';
-      if (p.link) {
-        const a = document.createElement('a');
-        a.href = p.link;
-        a.textContent = 'Öppna projektlänk';
-        a.target = '_blank';
-        a.rel = 'noopener';
-        modalLinkWrap.appendChild(a);
-      }
-
-      if (typeof modal.showModal === 'function') {
-        modal.showModal();
-      } else {
-        // Fallback: enkel klassvisning
-        modal.setAttribute('open', '');
-      }
-    }
-
-    modalClose.addEventListener('click', () => modal.close());
-    modal.addEventListener('click', (event) => {
-      const rect = modal.getBoundingClientRect();
-      const clickedInDialog = (
-        rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
-        rect.left <= event.clientX && event.clientX <= rect.left + rect.width
-      );
-      if (!clickedInDialog) modal.close();
-    });
-
-    // Init
-    renderProjects(projects);
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <a href="https://www.linkedin.com/in/ditt-namn" target="_blank">Arvid</a>
 </body>
 </html>
-
