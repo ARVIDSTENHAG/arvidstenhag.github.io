@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arvid Stenhag – Portfolio</title>
+  <style>
+    /* Grundlayout */
+    body {
+      margin: 0;
+      background-color: #0040ff; /* stark blå bakgrund */
+      font-family: 'Courier New', Courier, monospace; /* liknar Canva-stilen */
+      color: black;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .portrait {
+      flex: 0 0 auto;
+      width: 220px; /* justera storlek på bilden */
+      margin-right: 40px;
+    }
+
+    .portrait img {
+      width: 100%;
+      height: auto;
+      border: none;
+    }
+
+    .content h1 {
+      margin: 0 0 20px 0;
+      font-size: 40px;
+      letter-spacing: 1px;
+    }
+
+    .content p,
+    .content a {
+      font-size: 22px;
+      margin: 6px 0;
+      text-decoration: none;
+      color: black;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #0030cc; /* mörkare blå bottenremsa */
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-size: 16px;
+    }
+
+    .footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="portrait">
+      <img src="dinbild.jpg" alt="Arvid Stenhag porträtt">
+    </div>
+    <div class="content">
+      <h1>ARVID STENHAG</h1>
+      <p>OM MIG</p>
+      <p>TIDIGARE ARBETEN</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="https://www.linkedin.com/in/arvidstenhag" target="_blank">LinkedIn @arvidstenhag</a>
+    &nbsp;|&nbsp;
+    <a href="mailto:arvidstenhag@student.berghs.se">arvidstenhag@student.berghs.se</a>
+  </div>
+
+</body>
+</html>
