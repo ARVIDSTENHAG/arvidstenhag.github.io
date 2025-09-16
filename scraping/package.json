@@ -1,0 +1,25 @@
+{
+  "name": "prisjakt-scraper",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "csv-writer": "^1.6.0",
+    "puppeteer": "^24.21.0"
+  },
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ARVIDSTENHAG/arvidstenhag.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ARVIDSTENHAG/arvidstenhag.github.io/issues"
+  },
+  "homepage": "https://github.com/ARVIDSTENHAG/arvidstenhag.github.io#readme"
+}
