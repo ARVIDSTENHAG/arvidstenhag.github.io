@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NJW2V9RX');</script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arvid Stenhag – Portfolio</title>
+
+  <style>
+    :root{
+      --blue:#0b47ff;
+      --blue-dark:#0a3cbf;
+      --red:#e11d48;
+      --green:#16a34a;
+      --text:#0a0a0a;
+      --accent:#111;
+    }
+    *{box-sizing:border-box}
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:var(--blue);
+      color:var(--text);
+      transition: background 0.4s ease;
+    }
+
+    /* Layout */
+    .hero{
+      max-width:1200px;
+      margin:0 auto;
+      padding:48px clamp(16px,4vw,48px);
+      display:grid;
+      grid-template-columns: 1.1fr 1.2fr;
+      gap: clamp(16px,4vw,48px);
+      min-height:90vh;
+    }
+
+    .portrait{
+      width:min(1640px,62vw);
+      height:auto;
+      object-fit:contain;
+      filter:grayscale(100%);
+      max-width:700px;
+    }
+
+    h1{
+      margin:0 0 16px 0;
+      font-size:clamp(28px,5vw,56px);
+      color:var(--accent);
+      font-weight:900;
+      cursor:pointer;
+    }
+
+    .menu{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+    .menu a{
+      text-decoration:none;
+      font-size:clamp(18px,2.8vw,28px);
+      font-weight:800;
+      color:var(--accent);
+      position:relative;
+      cursor:pointer;
+    }
+    .menu a::after{
+      content:"";
+      position:absolute;
+      left:0; bottom:-2px;
+      width:0%; height:2px;
+      background:var(--accent);
+      transition:width .2s ease;
+    }
+    .menu a:hover::after{width:100%}
+
+    .stripe{
+      background:var(--blue-dark);
+      color:white;
+      padding:10px clamp(12px,3vw,24px);
+      font-size:14px;
+    }
+    .stripe a{color:white;text-decoration:none;font-weight:700}
+    .stripe a:hover{text-decoration:underline}
+
+    section{
+      max-width:900px;
+      margin:0 auto;
+      padding:64px 24px;
+      color:white;
+    }
+    section h2{
+      margin-top:0;
+      color:white;
+      font-size:clamp(22px,4vw,36px);
+    }
+
+    /* Accordion projects */
+    .project{
+      margin: 18px 0;
+      border-bottom: 1px solid rgba(255,255,255,.22);
+      padding-bottom: 14px;
+    }
+
+    .accordion{
+      cursor:pointer;
+      font-weight:900;
+      font-size:clamp(16px,2.2vw,20px);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:14px 0;
+      user-select:none;
+    }
+
+    .accordion::after{
+      content:"+";
+      font-weight:900;
+      transition:transform .2s ease;
+      margin-left:12px;
+    }
+
+    .accordion.active::after{
+      content:"–";
+    }
+
+    .panel{
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .35s ease;
+      opacity:.95;
+      font-size:15px;
+      line-height:1.65;
+    }
+
+    .panel p{ margin: 0 0 12px 0; }
+
+    .meta{
+      opacity:.95;
+      font-size:14px;
+      margin-top:10px;
+      margin-bottom:10px;
+    }
+
+    .panel a{
+      color:white;
+      font-weight:900;
+      text-decoration:underline;
+    }
+
+    .small-note{
+      opacity:.9;
+      margin-top:-10px;
+      margin-bottom:18px;
+      font-size:14px;
+    }
+
+    /* Emoji button */
+    .emoji{
+      position:fixed; right:18px; bottom:18px;
+      width:56px; height:56px;
+      border-radius:50%;
+      display:grid; place-items:center;
+      background:#ffffffcc;
+      backdrop-filter: blur(4px);
+      cursor:pointer;
+      transition:transform .2s ease;
+      font-size:24px;
+      border:none;
+    }
+    .emoji:hover{transform:scale(1.1)}
+  </style>
+</head>
+
+<body id="page">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW2V9RX"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <header class="hero">
+    <div>
+      <img class="portrait" src="../images/korkort_arvid.png" alt="Arvid Stenhag porträtt">
+
+    </div>
+
+    <div>
+      <h1 id="homeLink">ARVID STENHAG</h1>
+
+      <nav class="menu">
+        <a id="omLink" href="#om-mig">ABOUT ARVID</a>
+        <a id="berghsLink" href="#berghs">So far at Berghs</a>
+        <a id="sideLink" href="#side-projects">Side projects</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="stripe">
+    <a href="https://www.linkedin.com/in/arvidstenhag" target="_blank" rel="noopener">LinkedIn</a> &nbsp;|&nbsp;
+    <a href="mailto:arvidstenhag@student.berghs.se">arvidstenhag@student.berghs.se</a> &nbsp;|&nbsp;
+    <a href="https://www.berghs.se/" target="_blank" rel="noopener">Berghs School of Communication</a>
+  </div>
+
+  <section id="om-mig">
+    <h2>ABOUT ARVID</h2>
+
+    <p>
+      Hi, I’m Arvid, 20 years old and born and raised in Stockholm. Sports have always played a big role in my life,
+      from winning a Swedish Basketball Championship to finishing a marathon in 3:09. Both experiences taught me the
+      value of consistency, preparation, and learning from every attempt rather than chasing shortcuts.
+    </p>
+
+    <p>
+      Today I’m putting that same mindset into my studies in growth marketing at Berghs School of Communication.
+      I’m fascinated by how creativity and data can work together to help ideas grow, and I enjoy exploring strategies
+      that balance structure with experimentation. Whether it’s a marketing brief or a training plan, I like breaking
+      challenges down into small, steady steps.
+    </p>
+
+    <p>
+      PS: Always up for a “what if…” conversation — and yeah, I’ll admit I’m quietly proud of my Berghs email:
+      <strong>arvid.stenhag@student.berghs.se</strong>
+    </p>
+  </section>
+
+  <section id="berghs">
+    <h2>So far at Berghs</h2>
+    <p class="small-note">
+
+    <div class="project">
+      <div class="accordion">Communication According to Berghs – Fotografiska</div>
+      <div class="panel">
+        <p>
+          Creative work for Fotografiska where we developed a concept for a pop-up experience.
+          The focus was on storytelling, brand fit and creating a clear idea that could live both
+          physically and digitally.
+        </p>
+        <p>
+          The process included concept development, messaging and visual direction built to feel
+          premium, simple and easy to communicate in a real campaign context.
+        </p>
+        <div class="meta">Betyg: <strong>Väl godkänt</strong></div>
+        <a href="https://www.canva.com/design/DAG1rHO6q9U/840657Y9SD2Jz5gfEz-CNw/view?utm_content=DAG1rHO6q9U&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hd3dd7d8b9d"
+           target="_blank" rel="noopener">View project on Canva</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="accordion">DryPops – Content Marketing</div>
+      <div class="panel">
+        <p>
+          A campaign exploring how storytelling and product functionality can merge through digital growth tactics.
+          We worked with content angles, distribution logic and how creative choices can support measurable outcomes.
+        </p>
+        <p>
+          The deliverable focused on building a clear narrative that could scale across channels while still staying
+          true to the product’s core value.
+        </p>
+        <div class="meta">Betyg: <strong>Väl godkänt</strong></div>
+        <a href="https://www.canva.com/design/DAG0b-yliYI/0ZRjuD0gCm87Y12LdUr1fw/view?utm_content=DAG0b-yliYI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h5b6938275b"
+           target="_blank" rel="noopener">View project on Canva</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="accordion">E-handel – Drinkpinnar för tryggare klubbmiljö</div>
+      <div class="panel">
+        <p>
+          An e-commerce project where we created drink-testing sticks designed to help create a safer environment in nightclubs.
+          The goal was to build a concept that improves safety without amplifying fear, and that can be communicated in a clear,
+          consumer-friendly way.
+        </p>
+        <p>
+          We worked with positioning, messaging and a conversion mindset: what needs to be communicated for trust,
+          how to reduce friction, and how to make the product feel simple to use in real nightlife situations.
+        </p>
+        <div class="meta">Betyg: <strong>Väl godkänt</strong></div>
+        <a href="https://www.canva.com/design/DAG-8gnSAis/30FD609Vlc6fJAAAXAyCBg/view?utm_content=DAG-8gnSAis&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h9e8ca3bce0"
+           target="_blank" rel="noopener">View project on Canva</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="accordion">Stadium – CRM (5,000,000 members)</div>
+      <div class="panel">
+        <p>
+          A CRM assignment for Stadium where we developed a concept tailored to Stadium’s 5,000,000 members.
+          The goal was to move beyond bonus and discounts and instead build loyalty through relevance, behavior and long-term value.
+        </p>
+        <p>
+          The solution focused on how data (purchase + behavior) can trigger communication based on real needs in the training journey,
+          not assumptions at the point of purchase.
+        </p>
+        <div class="meta">Betyg: <strong>Väl godkänt</strong></div>
+        <a href="https://www.canva.com/design/DAHA0yYertE/WhWWSm68VSjshSMm0LJjLA/view?utm_content=DAHA0yYertE&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb31d119a7b"
+           target="_blank" rel="noopener">View project on Canva</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="accordion">CRO – Under Your Skin (Conversion Optimization)</div>
+      <div class="panel">
+        <p>
+          In this project we worked with conversion optimization for Under Your Skin.
+          The focus was on restructuring the website to create clearer user flows,
+          stronger value propositions and more conversion-driven design decisions.
+        </p>
+        <p>
+          We analyzed user journeys, CTA placement, hierarchy and friction points.
+          The outcome was a more structured experience designed to increase engagement and purchase intent.
+        </p>
+        <div class="meta">Betyg: <strong>Väl godkänt</strong></div>
+        <a href="https://www.canva.com/design/DAG4SQHmODk/SmA4bdOTPDk_LDzSv7120Q/view?utm_content=DAG4SQHmODk&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h4e127439ff"
+           target="_blank" rel="noopener">View project on Canva</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="accordion">Stadium ReBrew – Young Lions (Best Design)</div>
+      <div class="panel">
+        <p>
+          We’re competing in Young Lions for Best Design with a concept created for Stadium.
+          The idea is to collect leftover food from sports events and transform it into beer.
+        </p>
+        <p>
+          The project connects sustainability, circular economy and brand storytelling. By turning waste into a celebratory product,
+          we position sustainability as something emotional and community-driven rather than restrictive.
+        </p>
+        <div class="meta">Betyg: <strong>Väl godkänt</strong></div>
+        <!-- Om du får en Keynote/PDF-länk: lägg in här -->
+        <!-- <a href="DIN_LÄNK_HÄR" target="_blank" rel="noopener">View project</a> -->
+      </div>
+    </div>
+
+  </section>
+
+  <section id="side-projects">
+    <h2>Side projects</h2>
+    <p class="small-note">Conversion-driven landing pages and real projects outside school.</p>
+
+    <div class="project">
+      <div class="accordion">Gandini Design – Conversion-driven landing pages</div>
+      <div class="panel">
+        <p>
+          Side project where I built conversion-focused landing pages using Lovable.
+          The focus was on clarity, hierarchy and removing friction: tight structure, strong CTA’s and short paths to action.
+        </p>
+        <p>
+          The goal was to create a simple UX that instantly communicates value, with a design that feels premium and modern.
+        </p>
+        <div class="meta">Project</div>
+        <a href="https://id-preview--f58f84cd-8e21-48ed-b5f2-e28c498d5863.lovable.app/?__lovable_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMWlzUDR4TWE2dVFRMFlHV0pYYkkwOVk1S0wyMiIsInByb2plY3RfaWQiOiJmNThmODRjZC04ZTIxLTQ4ZWQtYjVmMi1lMjhjNDk4ZDU4NjMiLCJhY2Nlc3NfdHlwZSI6InByb2plY3QiLCJpc3MiOiJsb3ZhYmxlLWFwaSIsInN1YiI6ImY1OGY4NGNkLThlMjEtNDhlZC1iNWYyLWUyOGM0OThkNTg2MyIsImF1ZCI6WyJsb3ZhYmxlLWFwcCJdLCJleHAiOjE3NzE1OTAzNzEsIm5iZiI6MTc3MDk4NTU3MSwiaWF0IjoxNzcwOTg1NTcxfQ.gkluEiLJ6F-sb4IAHWliro_P5eNgswYMtxOupsTucENSokAC4slv30SUdL078wTMwH1QD7DnnFWH2JuE5gWCQvdo54yN_n0OOck9ka8X5lOQiqZxnXbauDYfB9HCdivHwlsGp7Mw5nCIv-Nsk8I8WJDy4MJazfaqZ2k26zVrD8fiS1_fmof9WUARj51O05NDrfDx85DndMAKpKfrP5fEYTKlk0wdxfIAtct_LGujAZgZDu368BdagJhXPA7F7Jt9hZ9RyLMwdsVV-XuEwJT71xrKCJrjxj1ZkQkdxd455gvsJHwpFwc3XcOiHatft-nHd5XX1vOgRNfDxODxpkTQ6VRZnJLU01l8hafI_oMvnTRYOOPMQ0YFQds4ZpF0IuwKOdl2eXwX4XO8rPQ49Bgtzic4nF8CNYek973_DCyidMNGqUdBLrp2anUjc-GJmkDB5BpDgyPTeH_imuqC6rHxGKEoMKrZZG87fSgJFif60bQ7eM1SorEVa28aNjL4PybUU2TGMkf1F8LyV2CleRM1ecpUT1_oe-J86AZmU2rutaqrD1srUJbnMxI8l9nDqAf7cj7cHyPvI-afJMFIJszR-dt9Cc3rZBf5t3rORJcmJz1B82n3_vbInBiXdXsZ_TqaP48GtpDDeM0IjX7XuCvBhGqgx8kdzkEALIMlMauaa2s"
+           target="_blank" rel="noopener">View live page</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="accordion">Korvbyrån – Website improvements</div>
+      <div class="panel">
+        <p>
+          Side project where I improved Korvbyrån’s website and structure using Lovable.
+          The work focused on simplifying the flow, making it easier to understand the offering, and improving conversion paths.
+        </p>
+        <p>
+          I also worked with structure and UX decisions that make it easier for visitors to take action quickly (especially for catering).
+        </p>
+        <div class="meta">Project</div>
+        <a href="https://id-preview--3704820b-6b15-480d-b5aa-d06e5ea2f810.lovable.app/?__lovable_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMWlzUDR4TWE2dVFRMFlHV0pYYkkwOVk1S0wyMiIsInByb2plY3RfaWQiOiIzNzA0ODIwYi02YjE1LTQ4MGQtYjVhYS1kMDZlNWVhMmY4MTAiLCJhY2Nlc3NfdHlwZSI6InByb2plY3QiLCJpc3MiOiJsb3ZhYmxlLWFwaSIsInN1YiI6IjM3MDQ4MjBiLTZiMTUtNDgwZC1iNWFhLWQwNmU1ZWEyZjgxMCIsImF1ZCI6WyJsb3ZhYmxlLWFwcCJdLCJleHAiOjE3NzE1OTAzNjIsIm5iZiI6MTc3MDk4NTU2MiwiaWF0IjoxNzcwOTg1NTYyfQ.H3Y-FuC2le5nl13rQorMrhapjgRxgq22i7vtsAwXyo87vJy-5YtqHV1S9PwqYw6DsTEmaekoKYHCyC-D-ZaoTb5Mg5kczVrEts71frcmtnw-NP7L07WCn3KULopBvPccMiuENZmBYYfNQZueIxTiUv7azdS713_1Z4-KOOYsQKAnTwzvCTX8YQCRZezMMD7hvX7vrhXHOlq5hBfuW7QnzNLajxyka9PmiH5SPjWOFRp753TeHhIV7FbQ9D9II5_nsyaISFoFy946jb13wpyK3idKCEAx25NXqPqUBKAlYXS9xbX5q3q3ZRiWFAcblM-w0Vjg8DxZZazKG0-CviBLJVdGQv52xpO9Z6vZVWME5SymPfgsarcb9f6S6G6YuoDU9BFq_n58eCOFWQojVVROBWBWkScF-IVbnQA3a7r1cNI00I7GCYhL50iT1QqD4PcztJV74QOG9K5PcLLeflxw7vZN3HAGz-fqOD7ZlMFSG4P3-1va4uMaLqX-73yDeKtXLYdu1fH1bxW4bOcgFiplmcnOZoTxDiTQj1CC06S5kaxuFgmuKPgw2nrFWnN_f27CmJOXFIKFvogI6730NFO6Zya4AxacdaizGQMkzxcw_f-sNxZIQrlNEIyTv8TPvygJu_faDSqpmdsC2AwoGDSu4Yf3PPVHT0R822H6MqvXR8Q"
+           target="_blank" rel="noopener">View live page</a>
+      </div>
+    </div>
+
+  </section>
+
+  <button class="emoji" id="emojiBtn" aria-label="emoji button">👋</button>
+
+  <script>
+    // Background color changes
+    const body  = document.getElementById('page');
+    const home  = document.getElementById('homeLink');
+    const om    = document.getElementById('omLink');
+    const berghs= document.getElementById('berghsLink');
+    const side  = document.getElementById('sideLink');
+
+    home.addEventListener('click', e => { e.preventDefault(); body.style.background='var(--blue)'; });
+    om.addEventListener('click',   () => body.style.background='var(--red)');
+    berghs.addEventListener('click', () => body.style.background='var(--green)');
+    side.addEventListener('click', () => body.style.background='var(--blue-dark)');
+
+    // Emoji interaction
+    const emoji = document.getElementById('emojiBtn');
+    const glyphs = ["👋","😎","✨","🚀","💡","🔥"];
+    let g = 0;
+    emoji.addEventListener('click', () => {
+      g = (g+1)%glyphs.length;
+      emoji.textContent = glyphs[g];
+    });
+
+    // Accordion logic
+    const accordions = document.querySelectorAll(".accordion");
+    accordions.forEach(acc => {
+      acc.addEventListener("click", function() {
+        this.classList.toggle("active");
+        const panel = this.nextElementSibling;
+
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
