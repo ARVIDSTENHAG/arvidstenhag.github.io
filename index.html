@@ -1,221 +1,419 @@
-import { CateringForm } from "@/components/CateringForm";
-import { Truck, UtensilsCrossed, Sparkles } from "lucide-react";
-import React from "react";
-import korvbyranLogo from "@/assets/clients/korvbyran.png";
-import korvbyranMainLogo from "@/assets/korvbyran-logo.png";
-import vitaminWellLogo from "@/assets/clients/vitamin-well.png";
-import netlightLogo from "@/assets/clients/netlight.png";
-import cocaColaLogo from "@/assets/clients/coca-cola.png";
-import snsLogo from "@/assets/clients/sns-new.png";
-import kayoLogo from "@/assets/clients/kayo.svg";
-import klattenLogo from "@/assets/clients/klatten.png";
-import wayOutWestLogo from "@/assets/clients/way-out-west.png";
-import icaLogo from "@/assets/clients/ica.png";
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NJW2V9RX');</script>
+  <!-- End Google Tag Manager -->
 
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arvid Stenhag – Portfolio</title>
 
-const Catering = () => {
-  const videoRef = React.useRef<HTMLVideoElement>(null);
-  
-  React.useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.currentTime = 7;
-      videoRef.current.play().catch(error => {
-        console.log("Autoplay prevented:", error);
-      });
+  <style>
+    :root{
+      --blue:#0b47ff;
+      --blue-dark:#0a3cbf;
+      --red:#e11d48;
+      --green:#16a34a;
+      --text:#0a0a0a;
+      --accent:#111;
     }
-  }, []);
+    *{box-sizing:border-box}
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:var(--blue);
+      color:var(--text);
+      transition: background 0.4s ease;
+    }
 
-  return (
-    <div className="min-h-screen bg-primary">
-      {/* Header */}
-      <header className="py-8 px-4 bg-white">
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <img src={korvbyranMainLogo} alt="KORVBYRÅN" className="h-12 md:h-16 w-auto mix-blend-multiply" />
-          </div>
-          <nav className="flex gap-6 md:gap-8 text-sm md:text-base font-bold uppercase text-foreground">
-            <a href="/" className="text-accent">Catering</a>
-            <a href="#" className="hover:text-accent transition-colors">Om Oss</a>
-          </nav>
-        </div>
-      </header>
+    /* Layout */
+    .hero{
+      max-width:1200px;
+      margin:0 auto;
+      padding:48px clamp(16px,4vw,48px);
+      display:grid;
+      grid-template-columns: 1.1fr 1.2fr;
+      gap: clamp(16px,4vw,48px);
+      min-height:90vh;
+    }
 
-      {/* Hero Section with Video */}
-      <section className="relative py-12 md:py-20 px-4 overflow-hidden min-h-[60vh] flex items-center">
-        <video 
-          ref={videoRef}
-          autoPlay loop muted playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/videos/catering-video.mov" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-black/40"></div>
-        <div className="container mx-auto text-center relative z-10 animate-slide-in">
-          <h2 className="font-heading text-5xl md:text-7xl uppercase mb-6 text-primary drop-shadow-lg">
-            CATERING
-          </h2>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-4 font-semibold text-white drop-shadow-lg">
-            Luta er tillbaka och låt oss fixa maten till er tillställning!
-          </p>
-          <p className="text-lg md:text-xl max-w-4xl mx-auto text-white drop-shadow-lg">
-            Vi kommer till er och serverar på plats, eller förbereder maten så att ni själva kan fixa den sista touchen och servera era gäster.
-          </p>
-        </div>
-      </section>
+    .portrait{
+      width:min(1640px,62vw);
+      height:auto;
+      object-fit:contain;
+      filter:grayscale(100%);
+      max-width:700px;
+    }
 
-      {/* Info Cards */}
-      <section className="py-12 px-4">
-        <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-background/10 backdrop-blur-sm border-4 border-foreground rounded-2xl p-6 text-center">
-            <div className="mb-4 flex justify-center">
-              <Truck className="w-12 h-12 text-accent" strokeWidth={2.5} />
-            </div>
-            <h3 className="font-heading text-2xl uppercase mb-3">Foodtruck</h3>
-            <p className="text-base">
-              Vi har en foodtruck och en mobil korvbar, perfekt för att ge er tillställning en extra touch!
-            </p>
-          </div>
-          <div className="bg-background/10 backdrop-blur-sm border-4 border-foreground rounded-2xl p-6 text-center">
-            <div className="mb-4 flex justify-center">
-              <UtensilsCrossed className="w-12 h-12 text-accent" strokeWidth={2.5} />
-            </div>
-            <h3 className="font-heading text-2xl uppercase mb-3">Tre Menyer</h3>
-            <p className="text-base">
-              Välj mellan Korv i Bröd, Big French eller Tunnbrödsrulle. Alla med flera varianter!
-            </p>
-          </div>
-          <div className="bg-background/10 backdrop-blur-sm border-4 border-foreground rounded-2xl p-6 text-center">
-            <div className="mb-4 flex justify-center">
-              <Sparkles className="w-12 h-12 text-accent" strokeWidth={2.5} />
-            </div>
-            <h3 className="font-heading text-2xl uppercase mb-3">Flexibelt</h3>
-            <p className="text-base">Snabb lösning</p>
-          </div>
-        </div>
-      </section>
+    h1{
+      margin:0 0 16px 0;
+      font-size:clamp(28px,5vw,56px);
+      color:var(--accent);
+      font-weight:900;
+      cursor:pointer;
+    }
 
-      {/* Menu Section */}
-      <section className="py-6 px-4">
-        <div className="container mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-0 lg:divide-x-4 lg:divide-foreground">
-            <div className="px-0 lg:px-3">
-              <h3 className="font-heading text-xl uppercase mb-2 underline decoration-2">MENY 1</h3>
-              <h4 className="font-heading text-lg uppercase mb-2 underline">KORV I BRÖD</h4>
-              <div className="space-y-2 text-xs">
-                <div><h5 className="font-bold mb-0">BANH MI</h5><p className="leading-tight">Kycklingkorv, kimchi, picklad rättika, chilimajo, rostad lök & koriander</p></div>
-                <div><h5 className="font-bold mb-0">REUBEN</h5><p className="leading-tight">Wienergrill, chilifärskost, surkål, dijon & saltgurka</p></div>
-                <div><h5 className="font-bold mb-0">SALSICCIA</h5><p className="leading-tight">Pestomajo, ruccola, citron, mozzarella, tomat, soltorkad tomat & parmesan</p></div>
-                <div><h5 className="font-bold mb-0">WIENERGRILL</h5><p className="leading-tight">Ketchup, senap, boston & rostad lök</p></div>
-              </div>
-            </div>
-            <div className="px-0 lg:px-3">
-              <h3 className="font-heading text-xl uppercase mb-2 underline decoration-2">MENY 2</h3>
-              <h4 className="font-heading text-lg uppercase mb-2 underline">BIG FRENCH</h4>
-              <div className="space-y-2 text-xs mb-2">
-                <div><h5 className="font-bold mb-0">BANH MI</h5><p className="leading-tight">Kycklingkorv, kimchi, picklad rättika, chilimajo, rostad lök & koriander</p></div>
-                <div><h5 className="font-bold mb-0">REUBEN</h5><p className="leading-tight">Wienergrill, chilifärskost, surkål, dijon & saltgurka</p></div>
-                <div><h5 className="font-bold mb-0">SALSICCIA</h5><p className="leading-tight">Pestomajo, ruccola, citron, mozzarella, tomat, soltorkad tomat & parmesan</p></div>
-              </div>
-              <p className="text-xs leading-tight">Big French är Korvbyråns tolkning av den klassiska French Hot Dog – en rejälare variant med större baguette.</p>
-            </div>
-            <div className="px-0 lg:px-3">
-              <h3 className="font-heading text-xl uppercase mb-2 underline decoration-2">MENY 3</h3>
-              <h4 className="font-heading text-lg uppercase mb-2 underline">TUNNBRÖDSRULLE</h4>
-              <div className="space-y-2 text-xs mb-2">
-                <div><h5 className="font-bold mb-0">KLASSISK</h5><p className="leading-tight">Wienergrill, Kb's mos, räksallad, pressgurka, rostad lök, senap, ketchup, isberg & tomat</p></div>
-                <div><h5 className="font-bold mb-0">LAMMET</h5><p className="leading-tight">Lammkorv, potato pops, surkål, ajvar, pico de gallo, kål, gurka, tomat & fetaost</p></div>
-                <div><h5 className="font-bold mb-0">CHEESE N BACON</h5><p className="leading-tight">Chorizo, cheddar, stekt ägg, romansallad, potato pops, bacon, Kb's original sås</p></div>
-              </div>
-              <p className="text-xs leading-tight">Korvbyråns tunnbrödsrullar är genomtänkta och innovativa – de ska vara en riktigt bra maträtt!</p>
-            </div>
-            <div className="px-0 lg:px-3">
-              <h3 className="font-heading text-xl uppercase mb-2 underline decoration-2">SIDES</h3>
-              <div className="space-y-3 text-xs">
-                <div>
-                  <h4 className="font-bold mb-0.5 flex items-center gap-1">POTATO POPS 🌱</h4>
-                  <p className="leading-tight mb-0.5">Friterade potatiskroketter. Dippsåser: <em>Tryffelmajo, Chilimajo, aioli & BBQ</em></p>
-                  <p className="text-xs italic leading-tight">Endast via foodtruck.</p>
-                  <p className="font-bold">49:-/pp</p>
-                </div>
-                <div>
-                  <h4 className="font-bold mb-0.5">DRYCK</h4>
-                  <p className="leading-tight mb-0.5">Pucko, trocadero eller champis? Säg till vilken dryck som önskas!</p>
-                  <p className="font-bold">30:-/pp</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    .menu{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+    .menu a{
+      text-decoration:none;
+      font-size:clamp(18px,2.8vw,28px);
+      font-weight:800;
+      color:var(--accent);
+      position:relative;
+      cursor:pointer;
+    }
+    .menu a::after{
+      content:"";
+      position:absolute;
+      left:0; bottom:-2px;
+      width:0%; height:2px;
+      background:var(--accent);
+      transition:width .2s ease;
+    }
+    .menu a:hover::after{width:100%}
 
-      {/* Previous Clients */}
-      <section className="py-12 px-4 overflow-hidden">
-        <div className="container mx-auto">
-          <h3 className="font-heading text-3xl md:text-4xl uppercase mb-8 text-center">Tidigare Samarbeten</h3>
-          <div className="relative">
-            <div className="flex animate-scroll-horizontal hover:[animation-play-state:paused]">
-              <div className="flex gap-16 md:gap-20 items-center whitespace-nowrap pr-16 md:pr-20 shrink-0">
-                <img src={korvbyranLogo} alt="Korvbyrån" className="h-12 md:h-16 w-auto transition-all duration-300 mix-blend-multiply" />
-                <img src={vitaminWellLogo} alt="Vitamin Well" className="h-12 md:h-16 w-auto transition-all duration-300 mix-blend-multiply" />
-                <img src={netlightLogo} alt="Netlight" className="h-12 md:h-16 w-auto transition-all duration-300 mix-blend-multiply" />
-                <img src={cocaColaLogo} alt="Coca-Cola" className="h-12 md:h-16 w-auto transition-all duration-300 mix-blend-multiply" />
-                <img src={snsLogo} alt="SNS" className="h-12 md:h-16 w-auto transition-all duration-300 mix-blend-multiply" />
-                <img src={kayoLogo} alt="Ka Yo" className="h-10 md:h-12 w-auto transition-all duration-300 mix-blend-multiply" />
-                <img src={klattenLogo} alt="Klätten" className="h-16 md:h-20 w-auto transition-all duration-300 mix-blend-multiply" />
-                <img src={wayOutWestLogo} alt="Way Out West" className="h-12 md:h-16 w-auto transition-all duration-300 mix-blend-multiply" />
-                <img src={icaLogo} alt="ICA" className="h-12 md:h-16 w-auto transition-all duration-300 mix-blend-multiply" />
-              </div>
-              <div className="flex gap-16 md:gap-20 items-center whitespace-nowrap pr-16 md:pr-20 shrink-0">
-                <img src={korvbyranLogo} alt="Korvbyrån" className="h-12 md:h-16 w-auto transition-all duration-300 mix-blend-multiply" />
-                <img src={vitaminWellLogo} alt="Vitamin Well" className="h-12 md:h-16 w-auto transition-all duration-300 mix-blend-multiply" />
-                <img src={netlightLogo} alt="Netlight" className="h-12 md:h-16 w-auto transition-all duration-300 mix-blend-multiply" />
-                <img src={cocaColaLogo} alt="Coca-Cola" className="h-12 md:h-16 w-auto transition-all duration-300 mix-blend-multiply" />
-                <img src={snsLogo} alt="SNS" className="h-12 md:h-16 w-auto transition-all duration-300 mix-blend-multiply" />
-                <img src={kayoLogo} alt="Ka Yo" className="h-10 md:h-12 w-auto transition-all duration-300 mix-blend-multiply" />
-                <img src={klattenLogo} alt="Klätten" className="h-16 md:h-20 w-auto transition-all duration-300 mix-blend-multiply" />
-                <img src={wayOutWestLogo} alt="Way Out West" className="h-12 md:h-16 w-auto transition-all duration-300 mix-blend-multiply" />
-                <img src={icaLogo} alt="ICA" className="h-12 md:h-16 w-auto transition-all duration-300 mix-blend-multiply" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    .stripe{
+      background:var(--blue-dark);
+      color:white;
+      padding:10px clamp(12px,3vw,24px);
+      font-size:14px;
+    }
+    .stripe a{color:white;text-decoration:none;font-weight:700}
+    .stripe a:hover{text-decoration:underline}
 
-      {/* Booking Form */}
-      <section className="py-12 md:py-16 px-4">
-        <div className="container mx-auto max-w-4xl">
-          <div className="p-8 md:p-12">
-            <h3 className="font-heading text-3xl md:text-4xl uppercase mb-3 text-center">Boka Catering</h3>
-            <p className="text-center mb-8 text-lg">Fyll i formuläret så återkommer vi med ett skräddarsytt upplägg för just er!</p>
-            <CateringForm />
-          </div>
-        </div>
-      </section>
+    section{
+      max-width:900px;
+      margin:0 auto;
+      padding:64px 24px;
+      color:white;
+    }
+    section h2{
+      margin-top:0;
+      color:white;
+      font-size:clamp(22px,4vw,36px);
+    }
 
-      {/* Contact Info */}
-      <section className="py-12 px-4">
-        <div className="container mx-auto text-center">
-          <h3 className="font-heading text-2xl md:text-3xl uppercase mb-4">Har du frågor?</h3>
-          <p className="text-lg md:text-xl mb-6">
-            Kontakta oss på{" "}
-            <a href="mailto:info@korvbyran.se" className="font-bold underline hover:text-accent transition-colors">
-              info@korvbyran.se
-            </a>
-          </p>
-          <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-            Avbokning måste ske senast 7 dagar före bokat datum. 
-            Är du ett företag visas priserna ex moms. 
-            Eventuella fakturaavgifter kan tillkomma.
-          </p>
-        </div>
-      </section>
+    /* Accordion projects */
+    .project{
+      margin: 18px 0;
+      border-bottom: 1px solid rgba(255,255,255,.22);
+      padding-bottom: 14px;
+    }
 
-      {/* Footer */}
-      <footer className="py-8 px-4 text-center">
-        <p className="font-bold">© 2025 KORVBYRÅN - Stockholm</p>
-      </footer>
+    .accordion{
+      cursor:pointer;
+      font-weight:900;
+      font-size:clamp(16px,2.2vw,20px);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:14px 0;
+      user-select:none;
+    }
+
+    .accordion::after{
+      content:"+";
+      font-weight:900;
+      transition:transform .2s ease;
+      margin-left:12px;
+    }
+
+    .accordion.active::after{
+      content:"–";
+    }
+
+    .panel{
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .35s ease;
+      opacity:.95;
+      font-size:15px;
+      line-height:1.65;
+    }
+
+    .panel p{ margin: 0 0 12px 0; }
+
+    .meta{
+      opacity:.95;
+      font-size:14px;
+      margin-top:10px;
+      margin-bottom:10px;
+    }
+
+    .panel a{
+      color:white;
+      font-weight:900;
+      text-decoration:underline;
+    }
+
+    .small-note{
+      opacity:.9;
+      margin-top:-10px;
+      margin-bottom:18px;
+      font-size:14px;
+    }
+
+    /* Emoji button */
+    .emoji{
+      position:fixed; right:18px; bottom:18px;
+      width:56px; height:56px;
+      border-radius:50%;
+      display:grid; place-items:center;
+      background:#ffffffcc;
+      backdrop-filter: blur(4px);
+      cursor:pointer;
+      transition:transform .2s ease;
+      font-size:24px;
+      border:none;
+    }
+    .emoji:hover{transform:scale(1.1)}
+  </style>
+</head>
+
+<body id="page">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW2V9RX"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <header class="hero">
+    <div>
+      <img class="portrait" src="../images/korkort_arvid.png" alt="Arvid Stenhag porträtt">
+
     </div>
-  );
-};
 
-export default Catering;
+    <div>
+      <h1 id="homeLink">ARVID STENHAG</h1>
+
+      <nav class="menu">
+        <a id="omLink" href="#om-mig">ABOUT ARVID</a>
+        <a id="berghsLink" href="#berghs">So far at Berghs</a>
+        <a id="sideLink" href="#side-projects">Side projects</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="stripe">
+    <a href="https://www.linkedin.com/in/arvidstenhag" target="_blank" rel="noopener">LinkedIn</a> &nbsp;|&nbsp;
+    <a href="mailto:arvidstenhag@student.berghs.se">arvidstenhag@student.berghs.se</a> &nbsp;|&nbsp;
+    <a href="https://www.berghs.se/" target="_blank" rel="noopener">Berghs School of Communication</a>
+  </div>
+
+  <section id="om-mig">
+    <h2>ABOUT ARVID</h2>
+
+    <p>
+      Hi, I’m Arvid, 20 years old and born and raised in Stockholm. Sports have always played a big role in my life,
+      from winning a Swedish Basketball Championship to finishing a marathon in 3:09. Both experiences taught me the
+      value of consistency, preparation, and learning from every attempt rather than chasing shortcuts.
+    </p>
+
+    <p>
+      Today I’m putting that same mindset into my studies in growth marketing at Berghs School of Communication.
+      I’m fascinated by how creativity and data can work together to help ideas grow, and I enjoy exploring strategies
+      that balance structure with experimentation. Whether it’s a marketing brief or a training plan, I like breaking
+      challenges down into small, steady steps.
+    </p>
+
+    <p>
+      PS: Always up for a “what if…” conversation — and yeah, I’ll admit I’m quietly proud of my Berghs email:
+      <strong>arvid.stenhag@student.berghs.se</strong>
+    </p>
+  </section>
+
+  <section id="berghs">
+    <h2>So far at Berghs</h2>
+    <p class="small-note">
+
+    <div class="project">
+      <div class="accordion">Communication According to Berghs – Fotografiska</div>
+      <div class="panel">
+        <p>
+          Creative work for Fotografiska where we developed a concept for a pop-up experience.
+          The focus was on storytelling, brand fit and creating a clear idea that could live both
+          physically and digitally.
+        </p>
+        <p>
+          The process included concept development, messaging and visual direction built to feel
+          premium, simple and easy to communicate in a real campaign context.
+        </p>
+        <div class="meta">Betyg: <strong>Väl godkänt</strong></div>
+        <a href="https://www.canva.com/design/DAG1rHO6q9U/840657Y9SD2Jz5gfEz-CNw/view?utm_content=DAG1rHO6q9U&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hd3dd7d8b9d"
+           target="_blank" rel="noopener">View project on Canva</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="accordion">DryPops – Content Marketing</div>
+      <div class="panel">
+        <p>
+          A campaign exploring how storytelling and product functionality can merge through digital growth tactics.
+          We worked with content angles, distribution logic and how creative choices can support measurable outcomes.
+        </p>
+        <p>
+          The deliverable focused on building a clear narrative that could scale across channels while still staying
+          true to the product’s core value.
+        </p>
+        <div class="meta">Betyg: <strong>Väl godkänt</strong></div>
+        <a href="https://www.canva.com/design/DAG0b-yliYI/0ZRjuD0gCm87Y12LdUr1fw/view?utm_content=DAG0b-yliYI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h5b6938275b"
+           target="_blank" rel="noopener">View project on Canva</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="accordion">E-handel – Drinkpinnar för tryggare klubbmiljö</div>
+      <div class="panel">
+        <p>
+          An e-commerce project where we created drink-testing sticks designed to help create a safer environment in nightclubs.
+          The goal was to build a concept that improves safety without amplifying fear, and that can be communicated in a clear,
+          consumer-friendly way.
+        </p>
+        <p>
+          We worked with positioning, messaging and a conversion mindset: what needs to be communicated for trust,
+          how to reduce friction, and how to make the product feel simple to use in real nightlife situations.
+        </p>
+        <div class="meta">Betyg: <strong>Väl godkänt</strong></div>
+        <a href="https://www.canva.com/design/DAG-8gnSAis/30FD609Vlc6fJAAAXAyCBg/view?utm_content=DAG-8gnSAis&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h9e8ca3bce0"
+           target="_blank" rel="noopener">View project on Canva</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="accordion">Stadium – CRM (5,000,000 members)</div>
+      <div class="panel">
+        <p>
+          A CRM assignment for Stadium where we developed a concept tailored to Stadium’s 5,000,000 members.
+          The goal was to move beyond bonus and discounts and instead build loyalty through relevance, behavior and long-term value.
+        </p>
+        <p>
+          The solution focused on how data (purchase + behavior) can trigger communication based on real needs in the training journey,
+          not assumptions at the point of purchase.
+        </p>
+        <div class="meta">Betyg: <strong>Väl godkänt</strong></div>
+        <a href="https://www.canva.com/design/DAHA0yYertE/WhWWSm68VSjshSMm0LJjLA/view?utm_content=DAHA0yYertE&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb31d119a7b"
+           target="_blank" rel="noopener">View project on Canva</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="accordion">CRO – Under Your Skin (Conversion Optimization)</div>
+      <div class="panel">
+        <p>
+          In this project we worked with conversion optimization for Under Your Skin.
+          The focus was on restructuring the website to create clearer user flows,
+          stronger value propositions and more conversion-driven design decisions.
+        </p>
+        <p>
+          We analyzed user journeys, CTA placement, hierarchy and friction points.
+          The outcome was a more structured experience designed to increase engagement and purchase intent.
+        </p>
+        <div class="meta">Betyg: <strong>Väl godkänt</strong></div>
+        <a href="https://www.canva.com/design/DAG4SQHmODk/SmA4bdOTPDk_LDzSv7120Q/view?utm_content=DAG4SQHmODk&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h4e127439ff"
+           target="_blank" rel="noopener">View project on Canva</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="accordion">Stadium ReBrew – Young Lions (Best Design)</div>
+      <div class="panel">
+        <p>
+          We’re competing in Young Lions for Best Design with a concept created for Stadium.
+          The idea is to collect leftover food from sports events and transform it into beer.
+        </p>
+        <p>
+          The project connects sustainability, circular economy and brand storytelling. By turning waste into a celebratory product,
+          we position sustainability as something emotional and community-driven rather than restrictive.
+        </p>
+        <div class="meta">Betyg: <strong>Väl godkänt</strong></div>
+        <!-- Om du får en Keynote/PDF-länk: lägg in här -->
+        <!-- <a href="DIN_LÄNK_HÄR" target="_blank" rel="noopener">View project</a> -->
+      </div>
+    </div>
+
+  </section>
+
+  <section id="side-projects">
+    <h2>Side projects</h2>
+    <p class="small-note">Conversion-driven landing pages and real projects outside school.</p>
+
+    <div class="project">
+      <div class="accordion">Gandini Design – Conversion-driven landing pages</div>
+      <div class="panel">
+        <p>
+          Side project where I built conversion-focused landing pages using Lovable.
+          The focus was on clarity, hierarchy and removing friction: tight structure, strong CTA’s and short paths to action.
+        </p>
+        <p>
+          The goal was to create a simple UX that instantly communicates value, with a design that feels premium and modern.
+        </p>
+        <div class="meta">Project</div>
+        <a href="https://id-preview--f58f84cd-8e21-48ed-b5f2-e28c498d5863.lovable.app/?__lovable_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMWlzUDR4TWE2dVFRMFlHV0pYYkkwOVk1S0wyMiIsInByb2plY3RfaWQiOiJmNThmODRjZC04ZTIxLTQ4ZWQtYjVmMi1lMjhjNDk4ZDU4NjMiLCJhY2Nlc3NfdHlwZSI6InByb2plY3QiLCJpc3MiOiJsb3ZhYmxlLWFwaSIsInN1YiI6ImY1OGY4NGNkLThlMjEtNDhlZC1iNWYyLWUyOGM0OThkNTg2MyIsImF1ZCI6WyJsb3ZhYmxlLWFwcCJdLCJleHAiOjE3NzE1OTAzNzEsIm5iZiI6MTc3MDk4NTU3MSwiaWF0IjoxNzcwOTg1NTcxfQ.gkluEiLJ6F-sb4IAHWliro_P5eNgswYMtxOupsTucENSokAC4slv30SUdL078wTMwH1QD7DnnFWH2JuE5gWCQvdo54yN_n0OOck9ka8X5lOQiqZxnXbauDYfB9HCdivHwlsGp7Mw5nCIv-Nsk8I8WJDy4MJazfaqZ2k26zVrD8fiS1_fmof9WUARj51O05NDrfDx85DndMAKpKfrP5fEYTKlk0wdxfIAtct_LGujAZgZDu368BdagJhXPA7F7Jt9hZ9RyLMwdsVV-XuEwJT71xrKCJrjxj1ZkQkdxd455gvsJHwpFwc3XcOiHatft-nHd5XX1vOgRNfDxODxpkTQ6VRZnJLU01l8hafI_oMvnTRYOOPMQ0YFQds4ZpF0IuwKOdl2eXwX4XO8rPQ49Bgtzic4nF8CNYek973_DCyidMNGqUdBLrp2anUjc-GJmkDB5BpDgyPTeH_imuqC6rHxGKEoMKrZZG87fSgJFif60bQ7eM1SorEVa28aNjL4PybUU2TGMkf1F8LyV2CleRM1ecpUT1_oe-J86AZmU2rutaqrD1srUJbnMxI8l9nDqAf7cj7cHyPvI-afJMFIJszR-dt9Cc3rZBf5t3rORJcmJz1B82n3_vbInBiXdXsZ_TqaP48GtpDDeM0IjX7XuCvBhGqgx8kdzkEALIMlMauaa2s"
+           target="_blank" rel="noopener">View live page</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="accordion">Korvbyrån – Website improvements</div>
+      <div class="panel">
+        <p>
+          Side project where I improved Korvbyrån’s website and structure using Lovable.
+          The work focused on simplifying the flow, making it easier to understand the offering, and improving conversion paths.
+        </p>
+        <p>
+          I also worked with structure and UX decisions that make it easier for visitors to take action quickly (especially for catering).
+        </p>
+        <div class="meta">Project</div>
+        <a href="https://id-preview--3704820b-6b15-480d-b5aa-d06e5ea2f810.lovable.app/?__lovable_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMWlzUDR4TWE2dVFRMFlHV0pYYkkwOVk1S0wyMiIsInByb2plY3RfaWQiOiIzNzA0ODIwYi02YjE1LTQ4MGQtYjVhYS1kMDZlNWVhMmY4MTAiLCJhY2Nlc3NfdHlwZSI6InByb2plY3QiLCJpc3MiOiJsb3ZhYmxlLWFwaSIsInN1YiI6IjM3MDQ4MjBiLTZiMTUtNDgwZC1iNWFhLWQwNmU1ZWEyZjgxMCIsImF1ZCI6WyJsb3ZhYmxlLWFwcCJdLCJleHAiOjE3NzE1OTAzNjIsIm5iZiI6MTc3MDk4NTU2MiwiaWF0IjoxNzcwOTg1NTYyfQ.H3Y-FuC2le5nl13rQorMrhapjgRxgq22i7vtsAwXyo87vJy-5YtqHV1S9PwqYw6DsTEmaekoKYHCyC-D-ZaoTb5Mg5kczVrEts71frcmtnw-NP7L07WCn3KULopBvPccMiuENZmBYYfNQZueIxTiUv7azdS713_1Z4-KOOYsQKAnTwzvCTX8YQCRZezMMD7hvX7vrhXHOlq5hBfuW7QnzNLajxyka9PmiH5SPjWOFRp753TeHhIV7FbQ9D9II5_nsyaISFoFy946jb13wpyK3idKCEAx25NXqPqUBKAlYXS9xbX5q3q3ZRiWFAcblM-w0Vjg8DxZZazKG0-CviBLJVdGQv52xpO9Z6vZVWME5SymPfgsarcb9f6S6G6YuoDU9BFq_n58eCOFWQojVVROBWBWkScF-IVbnQA3a7r1cNI00I7GCYhL50iT1QqD4PcztJV74QOG9K5PcLLeflxw7vZN3HAGz-fqOD7ZlMFSG4P3-1va4uMaLqX-73yDeKtXLYdu1fH1bxW4bOcgFiplmcnOZoTxDiTQj1CC06S5kaxuFgmuKPgw2nrFWnN_f27CmJOXFIKFvogI6730NFO6Zya4AxacdaizGQMkzxcw_f-sNxZIQrlNEIyTv8TPvygJu_faDSqpmdsC2AwoGDSu4Yf3PPVHT0R822H6MqvXR8Q"
+           target="_blank" rel="noopener">View live page</a>
+      </div>
+    </div>
+
+  </section>
+
+  <button class="emoji" id="emojiBtn" aria-label="emoji button">👋</button>
+
+  <script>
+    // Background color changes
+    const body  = document.getElementById('page');
+    const home  = document.getElementById('homeLink');
+    const om    = document.getElementById('omLink');
+    const berghs= document.getElementById('berghsLink');
+    const side  = document.getElementById('sideLink');
+
+    home.addEventListener('click', e => { e.preventDefault(); body.style.background='var(--blue)'; });
+    om.addEventListener('click',   () => body.style.background='var(--red)');
+    berghs.addEventListener('click', () => body.style.background='var(--green)');
+    side.addEventListener('click', () => body.style.background='var(--blue-dark)');
+
+    // Emoji interaction
+    const emoji = document.getElementById('emojiBtn');
+    const glyphs = ["👋","😎","✨","🚀","💡","🔥"];
+    let g = 0;
+    emoji.addEventListener('click', () => {
+      g = (g+1)%glyphs.length;
+      emoji.textContent = glyphs[g];
+    });
+
+    // Accordion logic
+    const accordions = document.querySelectorAll(".accordion");
+    accordions.forEach(acc => {
+      acc.addEventListener("click", function() {
+        this.classList.toggle("active");
+        const panel = this.nextElementSibling;
+
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
