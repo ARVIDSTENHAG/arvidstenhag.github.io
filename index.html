@@ -44,11 +44,11 @@
     }
 
     .portrait{
-      width:min(1640px,62vw);
+      width:min(640px,62vw);
       height:auto;
       object-fit:contain;
       filter:grayscale(100%);
-      max-width:700px;
+      max-width:600px;
     }
 
     h1{
@@ -184,8 +184,7 @@
 
   <header class="hero">
     <div>
-      <img class="portrait" src="../images/korkort_arvid.png" alt="Arvid Stenhag porträtt">
-
+      <img class="portrait" src="images/korkort_arvid.png" alt="Arvid Stenhag porträtt">
     </div>
 
     <div>
@@ -195,6 +194,7 @@
         <a id="omLink" href="#om-mig">ABOUT ARVID</a>
         <a id="berghsLink" href="#berghs">So far at Berghs</a>
         <a id="sideLink" href="#side-projects">Side projects</a>
+        <a id="toolboxLink" href="#toolbox">Toolbox</a>
       </nav>
     </div>
   </header>
@@ -229,7 +229,7 @@
 
   <section id="berghs">
     <h2>So far at Berghs</h2>
-    <p class="small-note">
+    <p class="small-note">All projects graded: <strong>Väl godkänt</strong>.</p>
 
     <div class="project">
       <div class="accordion">Communication According to Berghs – Fotografiska</div>
@@ -331,8 +331,6 @@
           we position sustainability as something emotional and community-driven rather than restrictive.
         </p>
         <div class="meta">Betyg: <strong>Väl godkänt</strong></div>
-        <!-- Om du får en Keynote/PDF-länk: lägg in här -->
-        <!-- <a href="DIN_LÄNK_HÄR" target="_blank" rel="noopener">View project</a> -->
       </div>
     </div>
 
@@ -376,20 +374,71 @@
 
   </section>
 
+  <section id="toolbox">
+    <h2>Toolbox</h2>
+    <p class="small-note">Tools I use to build, measure and optimize.</p>
+
+    <div class="project">
+      <div class="accordion">Analytics & Tracking</div>
+      <div class="panel">
+        <p><strong>Google Tag Manager (GTM)</strong> – Event tracking, dataLayer logic and conversion setup.</p>
+        <p><strong>Google Analytics 4 (GA4)</strong> – Funnel analysis, event tracking, conversion insights.</p>
+        <p><strong>Looker Studio</strong> – Dashboards, reporting and visualizing performance.</p>
+        <p><strong>Lucky Orange</strong> – Heatmaps, session recordings and user behavior insights.</p>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="accordion">Performance Marketing</div>
+      <div class="panel">
+        <p><strong>Meta Ads</strong> – Campaign setup, audiences, creatives and optimization.</p>
+        <p><strong>Google Ads</strong> – Search campaigns, keywords, intent-based acquisition.</p>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="accordion">E-commerce & CRM</div>
+      <div class="panel">
+        <p><strong>Shopify</strong> – Product pages, checkout flows and conversion structure.</p>
+        <p><strong>Email/CRM tooling</strong> – Basic segmentation thinking, triggers and lifecycle structure.</p>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="accordion">Design</div>
+      <div class="panel">
+        <p><strong>Adobe Photoshop</strong> – Image editing, mockups and campaign visuals.</p>
+        <p><strong>Adobe Illustrator</strong> – Vector graphics, layout and branding elements.</p>
+        <p><strong>Canva</strong> – Presentations, concept decks and fast iteration.</p>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="accordion">Development & Prototyping</div>
+      <div class="panel">
+        <p><strong>VS Code</strong> – Frontend structure, HTML/CSS/JS.</p>
+        <p><strong>GitHub</strong> – Version control and portfolio hosting.</p>
+        <p><strong>Lovable</strong> – Conversion-driven landing pages and rapid prototyping.</p>
+      </div>
+    </div>
+  </section>
+
   <button class="emoji" id="emojiBtn" aria-label="emoji button">👋</button>
 
   <script>
     // Background color changes
-    const body  = document.getElementById('page');
-    const home  = document.getElementById('homeLink');
-    const om    = document.getElementById('omLink');
-    const berghs= document.getElementById('berghsLink');
-    const side  = document.getElementById('sideLink');
+    const body   = document.getElementById('page');
+    const home   = document.getElementById('homeLink');
+    const om     = document.getElementById('omLink');
+    const berghs = document.getElementById('berghsLink');
+    const side   = document.getElementById('sideLink');
+    const toolbox= document.getElementById('toolboxLink');
 
     home.addEventListener('click', e => { e.preventDefault(); body.style.background='var(--blue)'; });
     om.addEventListener('click',   () => body.style.background='var(--red)');
     berghs.addEventListener('click', () => body.style.background='var(--green)');
     side.addEventListener('click', () => body.style.background='var(--blue-dark)');
+    toolbox.addEventListener('click', () => body.style.background='var(--blue)');
 
     // Emoji interaction
     const emoji = document.getElementById('emojiBtn');
@@ -412,6 +461,14 @@
         } else {
           panel.style.maxHeight = panel.scrollHeight + "px";
         }
+      });
+    });
+
+    // Optional: make accordion height adapt if you open one, then resize window
+    window.addEventListener('resize', () => {
+      document.querySelectorAll('.accordion.active').forEach(acc => {
+        const panel = acc.nextElementSibling;
+        panel.style.maxHeight = panel.scrollHeight + "px";
       });
     });
   </script>
