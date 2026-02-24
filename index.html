@@ -12,7 +12,375 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Arvid Stenhag – Portfolio</title>
-  <link rel="stylesheet" href="css/styles.css?v=1.1">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Förfinade, djupare färger som ger bättre kontrast och premiumkänsla */
+      --blue: #2563eb;
+      --blue-dark: #1e3a8a;
+      --red: #be123c;
+      --green: #15803d;
+      --text: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.85);
+      --accent: #f8fafc;
+      --panel-bg: rgba(0, 0, 0, 0.15);
+      --panel-border: rgba(255, 255, 255, 0.15);
+    }
+    
+    * { box-sizing: border-box; }
+    
+    html { 
+      scroll-behavior: smooth; 
+      scroll-padding-top: 60px;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--blue);
+      color: var(--text);
+      transition: background 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Typography */
+    h1, h2, h3 { 
+      line-height: 1.1; 
+      letter-spacing: -0.02em; 
+    }
+
+    /* Layout */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 10vh clamp(24px, 5vw, 48px);
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: clamp(32px, 6vw, 64px);
+      min-height: 90vh;
+      align-items: center;
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .portrait-wrapper {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .portrait-wrapper:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 50px rgba(0,0,0,0.3);
+    }
+
+    .portrait {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(100%) contrast(1.1);
+      transition: filter 0.5s ease;
+    }
+    
+    .portrait-wrapper:hover .portrait {
+      filter: grayscale(0%) contrast(1.05);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(40px, 6vw, 72px);
+      color: var(--accent);
+      font-weight: 900;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .jesper-trigger {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--accent);
+      opacity: 0.6;
+      cursor: pointer;
+      margin: 8px 0 32px 0;
+      transition: opacity 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+
+    .jesper-trigger:hover {
+      opacity: 1;
+      transform: translateX(4px);
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    
+    .menu a {
+      text-decoration: none;
+      font-size: clamp(20px, 3vw, 32px);
+      font-weight: 800;
+      color: var(--accent);
+      width: fit-content;
+      position: relative;
+      opacity: 0.8;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    
+    .menu a:hover {
+      opacity: 1;
+      transform: translateX(8px);
+    }
+    
+    .menu a::after {
+      content: "";
+      position: absolute;
+      left: 0; 
+      bottom: -4px;
+      width: 0%; 
+      height: 3px;
+      background: var(--accent);
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .menu a:hover::after { width: 100%; }
+
+    .stripe {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: white;
+      padding: 16px clamp(24px, 5vw, 48px);
+      font-size: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 24px;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .stripe a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      transition: color 0.2s;
+    }
+    
+    .stripe a:hover { color: rgba(255,255,255,0.7); }
+    .stripe span { opacity: 0.4; }
+    .stripe svg { margin-right: 8px; }
+
+    section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      color: var(--text-muted);
+    }
+    
+    section p {
+      font-size: 18px;
+      margin-bottom: 24px;
+    }
+    
+    section h2 {
+      margin-top: 0;
+      color: white;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 800;
+      margin-bottom: 40px;
+    }
+
+    /* Accordion projects */
+    .project {
+      margin: 24px 0;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    
+    .project:hover {
+      background: rgba(0, 0, 0, 0.25);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .accordion {
+      cursor: pointer;
+      font-weight: 800;
+      font-size: clamp(18px, 2.5vw, 22px);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px;
+      user-select: none;
+      transition: padding 0.3s ease;
+    }
+
+    .accordion::after {
+      content: "+";
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 1;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-left: 16px;
+      opacity: 0.7;
+    }
+
+    .accordion.active::after {
+      transform: rotate(45deg);
+    }
+    
+    .accordion.active {
+      padding-bottom: 12px;
+    }
+
+    .panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease, opacity 0.4s ease;
+      opacity: 0;
+      font-size: 16px;
+      padding: 0 24px;
+    }
+    
+    .accordion.active + .panel {
+      opacity: 1;
+      padding-bottom: 24px;
+    }
+
+    .panel p { 
+      margin: 0 0 16px 0; 
+      color: var(--text-muted);
+    }
+
+    .meta {
+      display: inline-block;
+      background: rgba(255,255,255,0.1);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+      margin: 16px 0;
+    }
+
+    .panel a.btn {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 12px 24px;
+      background: white;
+      color: black;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .panel a.btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    .project-img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      display: block;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .small-note {
+      opacity: 0.8;
+      margin-top: -32px;
+      margin-bottom: 40px;
+      font-size: 16px;
+      font-weight: 600;
+      color: white;
+    }
+
+    /* Emoji button */
+    .emoji {
+      position: fixed; 
+      right: 24px; 
+      bottom: 24px;
+      width: 64px; 
+      height: 64px;
+      border-radius: 50%;
+      display: grid; 
+      place-items: center;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.3);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), background 0.2s;
+      font-size: 28px;
+      z-index: 1000;
+    }
+    
+    .emoji:hover {
+      transform: scale(1.1) rotate(10deg);
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 12vh;
+        text-align: center;
+      }
+      .portrait-wrapper {
+        max-width: 300px;
+        margin: 0 auto;
+      }
+      .menu {
+        align-items: center;
+      }
+      .menu a::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .menu a:hover::after {
+        width: 100%;
+        left: 0;
+        transform: translateX(0);
+      }
+      .stripe {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+      .stripe span { display: none; }
+    }
+  </style>
 </head>
 
 <body id="page">
@@ -22,12 +390,13 @@
   <!-- End Google Tag Manager (noscript) -->
 
   <header class="hero">
-    <div>
+    <div class="portrait-wrapper">
       <img class="portrait" src="images/korkort_arvid.png" alt="Arvid Stenhag porträtt">
     </div>
 
     <div>
       <h1 id="homeLink">ARVID STENHAG</h1>
+      <div class="jesper-trigger" id="jesperLink">FOR JESPER</div>
 
       <nav class="menu">
         <a id="omLink" href="#om-mig">ABOUT ARVID</a>
@@ -39,33 +408,65 @@
   </header>
 
   <div class="stripe">
-    <a href="https://www.linkedin.com/in/arvidstenhag" target="_blank" rel="noopener">LinkedIn</a> &nbsp;|&nbsp;
-    <a href="mailto:arvidstenhag@student.berghs.se">arvidstenhag@student.berghs.se</a> &nbsp;|&nbsp;
+    <a href="https://www.linkedin.com/in/arvidstenhag" target="_blank" rel="noopener">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+      LinkedIn
+    </a> <span>|</span>
+    <a href="mailto:arvidstenhag@student.berghs.se">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+      arvidstenhag@student.berghs.se
+    </a> <span>|</span>
     <a href="https://www.berghs.se/" target="_blank" rel="noopener">Berghs School of Communication</a>
   </div>
 
+  <section id="jesper-section" style="display:none;">
+    <h2>FOR JESPER</h2>
+    <p class="small-note">Private project access unlocked.</p>
+
+    <div class="project">
+      <div class="accordion">Strava Runner Predictor – Fullstack Chrome Extension</div>
+      <div class="panel">
+        <img class="project-img" src="images/strava-preview.png" alt="Strava Runner Predictor Preview">
+        <p>
+          An advanced Fullstack Chrome Extension (Manifest V3) engineered with a dedicated Node.js/Express backend 
+          to provide runners with precise, data-driven marathon predictions using real-time Strava API data.
+        </p>
+        <p>
+          The architecture features a secure OAuth 2.0 flow where sensitive client secrets are managed via server-side 
+          environment variables, ensuring maximum data integrity. By applying the Riegel formula to analyze historical 
+          performance, the application transforms raw training data into actionable, personalized race forecasts.
+        </p>
+        <div class="meta">Fullstack / API Integration</div><br>
+        <a class="btn" href="https://github.com/arvidstenhag/strava-runner-predictor" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
   <section id="om-mig">
     <h2>ABOUT ARVID</h2>
+
     <p>
       Hi, I’m Arvid, 20 years old and born and raised in Stockholm. Sports have always played a big role in my life,
       from winning a Swedish Basketball Championship to finishing a marathon in 3:09. Both experiences taught me the
       value of consistency, preparation, and learning from every attempt rather than chasing shortcuts.
     </p>
+
     <p>
       Today I’m putting that same mindset into my studies in growth marketing at Berghs School of Communication.
       I’m fascinated by how creativity and data can work together to help ideas grow, and I enjoy exploring strategies
       that balance structure with experimentation. Whether it’s a marketing brief or a training plan, I like breaking
       challenges down into small, steady steps.
     </p>
+
     <p>
       PS: Always up for a “what if…” conversation — and yeah, I’ll admit I’m quietly proud of my Berghs email:
-      <strong>arvid.stenhag@student.berghs.se</strong>
+      <strong style="color:white">arvid.stenhag@student.berghs.se</strong>
     </p>
   </section>
 
   <section id="berghs">
     <h2>So far at Berghs</h2>
-    <p class="small-note">All projects graded: <strong>Väl godkänt</strong>.</p>
+    <p class="small-note">All projects graded: <strong>Väl godkänt</strong></p>
 
     <div class="project">
       <div class="accordion">Communication According to Berghs – Fotografiska</div>
@@ -79,9 +480,9 @@
           The process included concept development, messaging and visual direction built to feel
           premium, simple and easy to communicate in a real campaign context.
         </p>
-        <div class="meta">Betyg: <strong>Väl godkänt</strong></div>
-        <a href="https://www.canva.com/design/DAG1rHO6q9U/840657Y9SD2Jz5gfEz-CNw/view?utm_content=DAG1rHO6q9U&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hd3dd7d8b9d"
-           target="_blank" rel="noopener">View project on Canva</a>
+        <div class="meta">Betyg: Väl godkänt</div><br>
+        <a class="btn" href="https://www.canva.com/design/DAG1rHO6q9U/840657Y9SD2Jz5gfEz-CNw/view?utm_content=DAG1rHO6q9U&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hd3dd7d8b9d"
+           target="_blank" rel="noopener">View project</a>
       </div>
     </div>
 
@@ -96,9 +497,9 @@
           The deliverable focused on building a clear narrative that could scale across channels while still staying
           true to the product’s core value.
         </p>
-        <div class="meta">Betyg: <strong>Väl godkänt</strong></div>
-        <a href="https://www.canva.com/design/DAG0b-yliYI/0ZRjuD0gCm87Y12LdUr1fw/view?utm_content=DAG0b-yliYI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h5b6938275b"
-           target="_blank" rel="noopener">View project on Canva</a>
+        <div class="meta">Betyg: Väl godkänt</div><br>
+        <a class="btn" href="https://www.canva.com/design/DAG0b-yliYI/0ZRjuD0gCm87Y12LdUr1fw/view?utm_content=DAG0b-yliYI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h5b6938275b"
+           target="_blank" rel="noopener">View project</a>
       </div>
     </div>
 
@@ -114,9 +515,9 @@
           We worked with positioning, messaging and a conversion mindset: what needs to be communicated for trust,
           how to reduce friction, and how to make the product feel simple to use in real nightlife situations.
         </p>
-        <div class="meta">Betyg: <strong>Väl godkänt</strong></div>
-        <a href="https://www.canva.com/design/DAG-8gnSAis/30FD609Vlc6fJAAAXAyCBg/view?utm_content=DAG-8gnSAis&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h9e8ca3bce0"
-           target="_blank" rel="noopener">View project on Canva</a>
+        <div class="meta">Betyg: Väl godkänt</div><br>
+        <a class="btn" href="https://www.canva.com/design/DAG-8gnSAis/30FD609Vlc6fJAAAXAyCBg/view?utm_content=DAG-8gnSAis&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h9e8ca3bce0"
+           target="_blank" rel="noopener">View project</a>
       </div>
     </div>
 
@@ -131,14 +532,14 @@
           The solution focused on how data (purchase + behavior) can trigger communication based on real needs in the training journey,
           not assumptions at the point of purchase.
         </p>
-        <div class="meta">Betyg: <strong>Väl godkänt</strong></div>
-        <a href="https://www.canva.com/design/DAHA0yYertE/WhWWSm68VSjshSMm0LJjLA/view?utm_content=DAHA0yYertE&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb31d119a7b"
-           target="_blank" rel="noopener">View project on Canva</a>
+        <div class="meta">Betyg: Väl godkänt</div><br>
+        <a class="btn" href="https://www.canva.com/design/DAHA0yYertE/WhWWSm68VSjshSMm0LJjLA/view?utm_content=DAHA0yYertE&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb31d119a7b"
+           target="_blank" rel="noopener">View project</a>
       </div>
     </div>
 
     <div class="project">
-      <div class="accordion">CRO – Under Your Skin (Conversion Optimization)</div>
+      <div class="accordion">CRO – Under Your Skin</div>
       <div class="panel">
         <p>
           In this project we worked with conversion optimization for Under Your Skin.
@@ -149,9 +550,9 @@
           We analyzed user journeys, CTA placement, hierarchy and friction points.
           The outcome was a more structured experience designed to increase engagement and purchase intent.
         </p>
-        <div class="meta">Betyg: <strong>Väl godkänt</strong></div>
-        <a href="https://www.canva.com/design/DAG4SQHmODk/SmA4bdOTPDk_LDzSv7120Q/view?utm_content=DAG4SQHmODk&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h4e127439ff"
-           target="_blank" rel="noopener">View project on Canva</a>
+        <div class="meta">Betyg: Väl godkänt</div><br>
+        <a class="btn" href="https://www.canva.com/design/DAG4SQHmODk/SmA4bdOTPDk_LDzSv7120Q/view?utm_content=DAG4SQHmODk&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h4e127439ff"
+           target="_blank" rel="noopener">View project</a>
       </div>
     </div>
 
@@ -166,9 +567,10 @@
           The project connects sustainability, circular economy and brand storytelling. By turning waste into a celebratory product,
           we position sustainability as something emotional and community-driven rather than restrictive.
         </p>
-        <div class="meta">Betyg: <strong>Väl godkänt</strong></div>
+        <div class="meta">Betyg: Väl godkänt</div>
       </div>
     </div>
+
   </section>
 
   <section id="side-projects">
@@ -176,21 +578,7 @@
     <p class="small-note">Conversion-driven landing pages and real projects outside school.</p>
 
     <div class="project">
-      <div class="accordion">Strava Runner Predictor – Fullstack Performance Forecasting</div>
-      <div class="panel">
-        <p>
-          A sophisticated Fullstack Chrome Extension (Manifest V3) integrated with a dedicated Node.js/Express backend, designed to bridge the gap between raw training data and actionable race goals. By leveraging the Strava API, the application fetches real-time performance metrics to deliver precise marathon time predictions directly in the browser.
-        </p>
-        <p>
-          The architecture prioritizes security and technical integrity, featuring a robust OAuth 2.0 implementation where sensitive credentials are encapsulated within server-side environment variables (.env) to protect user data. Utilizing the Riegel formula ($T_2 = T_1 \times (D_2 / D_1)^{1.06}$), the extension performs advanced calculations on historical activity data to provide athletes with reliable, personalized race-day projections.
-        </p>
-        <div class="meta">Fullstack / API Integration</div>
-        <a href="https://github.com/ARVIDSTENHAG/strava-runner-predictor" target="_blank" rel="noopener">View on GitHub</a>
-      </div>
-    </div>
-
-    <div class="project">
-      <div class="accordion">Gandini Design – Conversion-driven landing pages</div>
+      <div class="accordion">Gandini Design – Landing pages</div>
       <div class="panel">
         <p>
           Side project where I built conversion-focused landing pages using Lovable.
@@ -199,8 +587,8 @@
         <p>
           The goal was to create a simple UX that instantly communicates value, with a design that feels premium and modern.
         </p>
-        <div class="meta">Project</div>
-        <a href="https://id-preview--f58f84cd-8e21-48ed-b5f2-e28c498d5863.lovable.app/"
+        <div class="meta">Project</div><br>
+        <a class="btn" href="https://id-preview--f58f84cd-8e21-48ed-b5f2-e28c498d5863.lovable.app/?__lovable_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMWlzUDR4TWE2dVFRMFlHV0pYYkkwOVk1S0wyMiIsInByb2plY3RfaWQiOiJmNThmODRjZC04ZTIxLTQ4ZWQtYjVmMi1lMjhjNDk4ZDU4NjMiLCJhY2Nlc3NfdHlwZSI6InByb2plY3QiLCJpc3MiOiJsb3ZhYmxlLWFwaSIsInN1YiI6ImY1OGY4NGNkLThlMjEtNDhlZC1iNWYyLWUyOGM0OThkNTg2MyIsImF1ZCI6WyJsb3ZhYmxlLWFwcCJdLCJleHAiOjE3NzE1OTAzNzEsIm5iZiI6MTc3MDk4NTU3MSwiaWF0IjoxNzcwOTg1NTcxfQ.gkluEiLJ6F-sb4IAHWliro_P5eNgswYMtxOupsTucENSokAC4slv30SUdL078wTMwH1QD7DnnFWH2JuE5gWCQvdo54yN_n0OOck9ka8X5lOQiqZxnXbauDYfB9HCdivHwlsGp7Mw5nCIv-Nsk8I8WJDy4MJazfaqZ2k26zVrD8fiS1_fmof9WUARj51O05NDrfDx85DndMAKpKfrP5fEYTKlk0wdxfIAtct_LGujAZgZDu368BdagJhXPA7F7Jt9hZ9RyLMwdsVV-XuEwJT71xrKCJrjxj1ZkQkdxd455gvsJHwpFwc3XcOiHatft-nHd5XX1vOgRNfDxODxpkTQ6VRZnJLU01l8hafI_oMvnTRYOOPMQ0YFQds4ZpF0IuwKOdl2eXwX4XO8rPQ49Bgtzic4nF8CNYek973_DCyidMNGqUdBLrp2anUjc-GJmkDB5BpDgyPTeH_imuqC6rHxGKEoMKrZZG87fSgJFif60bQ7eM1SorEVa28aNjL4PybUU2TGMkf1F8LyV2CleRM1ecpUT1_oe-J86AZmU2rutaqrD1srUJbnMxI8l9nDqAf7cj7cHyPvI-afJMFIJszR-dt9Cc3rZBf5t3rORJcmJz1B82n3_vbInBiXdXsZ_TqaP48GtpDDeM0IjX7XuCvBhGqgx8kdzkEALIMlMauaa2s"
            target="_blank" rel="noopener">View live page</a>
       </div>
     </div>
@@ -215,11 +603,12 @@
         <p>
           I also worked with structure and UX decisions that make it easier for visitors to take action quickly (especially for catering).
         </p>
-        <div class="meta">Project</div>
-        <a href="https://id-preview--3704820b-6b15-480d-b5aa-d06e5ea2f810.lovable.app/"
+        <div class="meta">Project</div><br>
+        <a class="btn" href="https://id-preview--3704820b-6b15-480d-b5aa-d06e5ea2f810.lovable.app/?__lovable_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMWlzUDR4TWE2dVFRMFlHV0pYYkkwOVk1S0wyMiIsInByb2plY3RfaWQiOiIzNzA0ODIwYi02YjE1LTQ4MGQtYjVhYS1kMDZlNWVhMmY4MTAiLCJhY2Nlc3NfdHlwZSI6InByb2plY3QiLCJpc3MiOiIzNzA0ODIwYi02YjE1LTQ4MGQtYjVhYS1kMDZlNWVhMmY4MTAiLCImF1ZCI6WyJsb3ZhYmxlLWFwcCJdLCJleHAiOjE3NzE1OTAzNjIsIm5iZiI6MTc3MDk4NTU2MiwiaWF0IjoxNzcwOTg1NTYyfQ.H3Y-FuC2le5nl13rQorMrhapjgRxgq22i7vtsAwXyo87vJy-5YtqHV1S9PwqYw6DsTEmaekoKYHCyC-D-ZaoTb5Mg5kczVrEts71frcmtnw-NP7L07WCn3KULopBvPccMiuENZmBYYfNQZueIxTiUv7azdS713_1Z4-KOOYsQKAnTwzvCTX8YQCRZezMMD7hvX7vrhXHOlq5hBfuW7QnzNLajxyka9PmiH5SPjWOFRp753TeHhIV7FbQ9D9II5_nsyaISFoFy946jb13wpyK3idKCEAx25NXqPqUBKAlYXS9xbX5q3q3ZRiWFAcblM-w0Vjg8DxZZazKG0-CviBLJVdGQv52xpO9Z6vZVWME5SymPfgsarcb9f6S6G6YuoDU9BFq_n58eCOFWQojVVROBWBWkScF-IVbnQA3a7r1cNI00I7GCYhL50iT1QqD4PcztJV74QOG9K5PcLLeflxw7vZN3HAGz-fqOD7ZlMFSG4P3-1va4uMaLqX-73yDeKtXLYdu1fH1bxW4bOcgFiplmcnOZoTxDiTQj1CC06S5kaxuFgmuKPgw2nrFWnN_f27CmJOXFIKFvogI6730NFO6Zya4AxacdaizGQMkzxcw_f-sNxZIQrlNEIyTv8TPvygJu_faDSqpmdsC2AwoGDSu4Yf3PPVHT0R822H6MqvXR8Q"
            target="_blank" rel="noopener">View live page</a>
       </div>
     </div>
+
   </section>
 
   <section id="toolbox">
@@ -229,50 +618,139 @@
     <div class="project">
       <div class="accordion">Analytics & Tracking</div>
       <div class="panel">
-        <p><strong>Google Tag Manager (GTM)</strong> – Event tracking, dataLayer logic and conversion setup.</p>
-        <p><strong>Google Analytics 4 (GA4)</strong> – Funnel analysis, event tracking, conversion insights.</p>
-        <p><strong>Looker Studio</strong> – Dashboards, reporting and visualizing performance.</p>
-        <p><strong>Lucky Orange</strong> – Heatmaps, session recordings and user behavior insights.</p>
+        <p><strong style="color:white">Google Tag Manager (GTM)</strong> – Event tracking, dataLayer logic and conversion setup.</p>
+        <p><strong style="color:white">Google Analytics 4 (GA4)</strong> – Funnel analysis, event tracking, conversion insights.</p>
+        <p><strong style="color:white">Looker Studio</strong> – Dashboards, reporting and visualizing performance.</p>
+        <p><strong style="color:white">Lucky Orange</strong> – Heatmaps, session recordings and user behavior insights.</p>
       </div>
     </div>
 
     <div class="project">
       <div class="accordion">Performance Marketing</div>
       <div class="panel">
-        <p><strong>Meta Ads</strong> – Campaign setup, audiences, creatives and optimization.</p>
-        <p><strong>Google Ads</strong> – Search campaigns, keywords, intent-based acquisition.</p>
+        <p><strong style="color:white">Meta Ads</strong> – Campaign setup, audiences, creatives and optimization.</p>
+        <p><strong style="color:white">Google Ads</strong> – Search campaigns, keywords, intent-based acquisition.</p>
       </div>
     </div>
 
     <div class="project">
       <div class="accordion">E-commerce & CRM</div>
       <div class="panel">
-        <p><strong>Shopify</strong> – Product pages, checkout flows and conversion structure.</p>
-        <p><strong>Email/CRM tooling</strong> – Basic segmentation thinking, triggers and lifecycle structure.</p>
+        <p><strong style="color:white">Shopify</strong> – Product pages, checkout flows and conversion structure.</p>
+        <p><strong style="color:white">Email/CRM tooling</strong> – Basic segmentation thinking, triggers and lifecycle structure.</p>
       </div>
     </div>
 
     <div class="project">
       <div class="accordion">Design</div>
       <div class="panel">
-        <p><strong>Adobe Photoshop</strong> – Image editing, mockups and campaign visuals.</p>
-        <p><strong>Adobe Illustrator</strong> – Vector graphics, layout and branding elements.</p>
-        <p><strong>Canva</strong> – Presentations, concept decks and fast iteration.</p>
+        <p><strong style="color:white">Adobe Photoshop</strong> – Image editing, mockups and campaign visuals.</p>
+        <p><strong style="color:white">Adobe Illustrator</strong> – Vector graphics, layout and branding elements.</p>
+        <p><strong style="color:white">Canva</strong> – Presentations, concept decks and fast iteration.</p>
       </div>
     </div>
 
     <div class="project">
       <div class="accordion">Development & Prototyping</div>
       <div class="panel">
-        <p><strong>VS Code</strong> – Frontend structure, HTML/CSS/JS.</p>
-        <p><strong>GitHub</strong> – Version control and portfolio hosting.</p>
-        <p><strong>Lovable</strong> – Conversion-driven landing pages and rapid prototyping.</p>
+        <p><strong style="color:white">VS Code</strong> – Frontend structure, HTML/CSS/JS.</p>
+        <p><strong style="color:white">GitHub</strong> – Version control and portfolio hosting.</p>
+        <p><strong style="color:white">Lovable</strong> – Conversion-driven landing pages and rapid prototyping.</p>
       </div>
     </div>
   </section>
 
   <button class="emoji" id="emojiBtn" aria-label="emoji button">👋</button>
 
-  <script src="js/main.js?v=1.1"></script>
+  <script>
+    // Background color changes
+    const body   = document.getElementById('page');
+    const home   = document.getElementById('homeLink');
+    const om     = document.getElementById('omLink');
+    const berghs = document.getElementById('berghsLink');
+    const side   = document.getElementById('sideLink');
+    const toolbox= document.getElementById('toolboxLink');
+
+    home.addEventListener('click', e => { 
+      e.preventDefault(); 
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      body.style.background = 'var(--blue)'; 
+    });
+    om.addEventListener('click',   () => body.style.background='var(--red)');
+    berghs.addEventListener('click', () => body.style.background='var(--green)');
+    side.addEventListener('click', () => body.style.background='var(--blue-dark)');
+    toolbox.addEventListener('click', () => body.style.background='var(--blue)');
+
+    // Jesper password logic
+    const jesperLink = document.getElementById('jesperLink');
+    const jesperSection = document.getElementById('jesper-section');
+    
+    jesperLink.addEventListener('click', () => {
+      const pw = prompt("Lösenord?");
+      if (pw === "tech") {
+        jesperSection.style.display = 'block';
+        jesperSection.scrollIntoView({ behavior: 'smooth' });
+        body.style.background = 'var(--blue-dark)';
+      } else if (pw !== null) {
+        alert("Fel lösenord.");
+      }
+    });
+
+    // Emoji interaction
+    const emoji = document.getElementById('emojiBtn');
+    const glyphs = ["👋","😎","✨","🚀","💡","🔥"];
+    let g = 0;
+    emoji.addEventListener('click', () => {
+      g = (g+1)%glyphs.length;
+      emoji.textContent = glyphs[g];
+    });
+
+    // Accordion logic
+    const accordions = document.querySelectorAll(".accordion");
+    accordions.forEach(acc => {
+      acc.addEventListener("click", function() {
+        this.classList.toggle("active");
+        const panel = this.nextElementSibling;
+
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          // Calculate height precisely including the padding set in css
+          panel.style.maxHeight = panel.scrollHeight + 40 + "px"; 
+        }
+      });
+    });
+
+    // Adapt accordion height on resize
+    window.addEventListener('resize', () => {
+      document.querySelectorAll('.accordion.active').forEach(acc => {
+        const panel = acc.nextElementSibling;
+        panel.style.maxHeight = panel.scrollHeight + 40 + "px";
+      });
+    });
+  </script>
+  <script>
+window.addEventListener("DOMContentLoaded", function () {
+  const map = {
+    omLink: "about",
+    berghsLink: "berghs",
+    sideLink: "projects",
+    toolboxLink: "toolbox"
+  };
+
+  Object.keys(map).forEach((id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    el.addEventListener("click", function () {
+      window.dataLayer = window.dataLayer || [];
+      dataLayer.push({
+        event: "section_click",
+        section_name: map[id]
+      });
+    });
+  });
+});
+  </script>
 </body>
 </html>
