@@ -15,7 +15,7 @@
 
   <style>
     :root{
-      --blue:#0b47ff;
+      --blue:#0800ff;
       --blue-dark:#0a3cbf;
       --red:#e11d48;
       --green:#16a34a;
@@ -341,6 +341,20 @@
     <p class="small-note">Conversion-driven landing pages and real projects outside school.</p>
 
     <div class="project">
+      <div class="accordion">Strava Runner Predictor – Fullstack Performance Forecasting</div>
+      <div class="panel">
+        <p>
+          A sophisticated Fullstack Chrome Extension (Manifest V3) integrated with a dedicated Node.js/Express backend, designed to bridge the gap between raw training data and actionable race goals. By leveraging the Strava API, the application fetches real-time performance metrics to deliver precise marathon time predictions directly in the browser.
+        </p>
+        <p>
+          The architecture prioritizes security and technical integrity, featuring a robust OAuth 2.0 implementation where sensitive credentials are encapsulated within server-side environment variables (.env) to protect user data. Utilizing the Riegel formula ($T_2 = T_1 \times (D_2 / D_1)^{1.06}$), the extension performs advanced calculations on historical activity data to provide athletes with reliable, personalized race-day projections.
+        </p>
+        <div class="meta">Fullstack / API Integration</div>
+        <a href="https://github.com/your-username/strava-runner-predictor" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
+
+    <div class="project">
       <div class="accordion">Gandini Design – Conversion-driven landing pages</div>
       <div class="panel">
         <p>
@@ -472,5 +486,33 @@
       });
     });
   </script>
+  <script>
+window.addEventListener("DOMContentLoaded", function () {
+
+  const map = {
+    omLink: "about",
+    berghsLink: "berghs",
+    sideLink: "projects",
+    toolboxLink: "toolbox"
+  };
+
+  Object.keys(map).forEach((id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    el.addEventListener("click", function () {
+      window.dataLayer = window.dataLayer || [];
+      dataLayer.push({
+        event: "section_click",
+        section_name: map[id]
+      });
+
+      console.log("✅ section_click pushed:", map[id]);
+    });
+  });
+
+});
+</script>
+
 </body>
 </html>
