@@ -12,168 +12,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Arvid Stenhag – Portfolio</title>
-
-  <style>
-    :root{
-      --blue:#0800ff;
-      --blue-dark:#0a3cbf;
-      --red:#e11d48;
-      --green:#16a34a;
-      --text:#0a0a0a;
-      --accent:#111;
-    }
-    *{box-sizing:border-box}
-    html{ scroll-behavior:smooth; }
-    body{
-      margin:0;
-      font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      background:var(--blue);
-      color:var(--text);
-      transition: background 0.4s ease;
-    }
-
-    /* Layout */
-    .hero{
-      max-width:1200px;
-      margin:0 auto;
-      padding:48px clamp(16px,4vw,48px);
-      display:grid;
-      grid-template-columns: 1.1fr 1.2fr;
-      gap: clamp(16px,4vw,48px);
-      min-height:90vh;
-    }
-
-    .portrait{
-      width:min(640px,62vw);
-      height:auto;
-      object-fit:contain;
-      filter:grayscale(100%);
-      max-width:600px;
-    }
-
-    h1{
-      margin:0 0 16px 0;
-      font-size:clamp(28px,5vw,56px);
-      color:var(--accent);
-      font-weight:900;
-      cursor:pointer;
-    }
-
-    .menu{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
-    .menu a{
-      text-decoration:none;
-      font-size:clamp(18px,2.8vw,28px);
-      font-weight:800;
-      color:var(--accent);
-      position:relative;
-      cursor:pointer;
-    }
-    .menu a::after{
-      content:"";
-      position:absolute;
-      left:0; bottom:-2px;
-      width:0%; height:2px;
-      background:var(--accent);
-      transition:width .2s ease;
-    }
-    .menu a:hover::after{width:100%}
-
-    .stripe{
-      background:var(--blue-dark);
-      color:white;
-      padding:10px clamp(12px,3vw,24px);
-      font-size:14px;
-    }
-    .stripe a{color:white;text-decoration:none;font-weight:700}
-    .stripe a:hover{text-decoration:underline}
-
-    section{
-      max-width:900px;
-      margin:0 auto;
-      padding:64px 24px;
-      color:white;
-    }
-    section h2{
-      margin-top:0;
-      color:white;
-      font-size:clamp(22px,4vw,36px);
-    }
-
-    /* Accordion projects */
-    .project{
-      margin: 18px 0;
-      border-bottom: 1px solid rgba(255,255,255,.22);
-      padding-bottom: 14px;
-    }
-
-    .accordion{
-      cursor:pointer;
-      font-weight:900;
-      font-size:clamp(16px,2.2vw,20px);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:14px 0;
-      user-select:none;
-    }
-
-    .accordion::after{
-      content:"+";
-      font-weight:900;
-      transition:transform .2s ease;
-      margin-left:12px;
-    }
-
-    .accordion.active::after{
-      content:"–";
-    }
-
-    .panel{
-      max-height:0;
-      overflow:hidden;
-      transition:max-height .35s ease;
-      opacity:.95;
-      font-size:15px;
-      line-height:1.65;
-    }
-
-    .panel p{ margin: 0 0 12px 0; }
-
-    .meta{
-      opacity:.95;
-      font-size:14px;
-      margin-top:10px;
-      margin-bottom:10px;
-    }
-
-    .panel a{
-      color:white;
-      font-weight:900;
-      text-decoration:underline;
-    }
-
-    .small-note{
-      opacity:.9;
-      margin-top:-10px;
-      margin-bottom:18px;
-      font-size:14px;
-    }
-
-    /* Emoji button */
-    .emoji{
-      position:fixed; right:18px; bottom:18px;
-      width:56px; height:56px;
-      border-radius:50%;
-      display:grid; place-items:center;
-      background:#ffffffcc;
-      backdrop-filter: blur(4px);
-      cursor:pointer;
-      transition:transform .2s ease;
-      font-size:24px;
-      border:none;
-    }
-    .emoji:hover{transform:scale(1.1)}
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body id="page">
@@ -207,20 +46,17 @@
 
   <section id="om-mig">
     <h2>ABOUT ARVID</h2>
-
     <p>
       Hi, I’m Arvid, 20 years old and born and raised in Stockholm. Sports have always played a big role in my life,
       from winning a Swedish Basketball Championship to finishing a marathon in 3:09. Both experiences taught me the
       value of consistency, preparation, and learning from every attempt rather than chasing shortcuts.
     </p>
-
     <p>
       Today I’m putting that same mindset into my studies in growth marketing at Berghs School of Communication.
       I’m fascinated by how creativity and data can work together to help ideas grow, and I enjoy exploring strategies
       that balance structure with experimentation. Whether it’s a marketing brief or a training plan, I like breaking
       challenges down into small, steady steps.
     </p>
-
     <p>
       PS: Always up for a “what if…” conversation — and yeah, I’ll admit I’m quietly proud of my Berghs email:
       <strong>arvid.stenhag@student.berghs.se</strong>
@@ -333,7 +169,6 @@
         <div class="meta">Betyg: <strong>Väl godkänt</strong></div>
       </div>
     </div>
-
   </section>
 
   <section id="side-projects">
@@ -350,7 +185,7 @@
           The architecture prioritizes security and technical integrity, featuring a robust OAuth 2.0 implementation where sensitive credentials are encapsulated within server-side environment variables (.env) to protect user data. Utilizing the Riegel formula ($T_2 = T_1 \times (D_2 / D_1)^{1.06}$), the extension performs advanced calculations on historical activity data to provide athletes with reliable, personalized race-day projections.
         </p>
         <div class="meta">Fullstack / API Integration</div>
-        <a href="https://github.com/your-username/strava-runner-predictor" target="_blank" rel="noopener">View on GitHub</a>
+        <a href="https://github.com/ARVIDSTENHAG/strava-runner-predictor" target="_blank" rel="noopener">View on GitHub</a>
       </div>
     </div>
 
@@ -365,7 +200,7 @@
           The goal was to create a simple UX that instantly communicates value, with a design that feels premium and modern.
         </p>
         <div class="meta">Project</div>
-        <a href="https://id-preview--f58f84cd-8e21-48ed-b5f2-e28c498d5863.lovable.app/?__lovable_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMWlzUDR4TWE2dVFRMFlHV0pYYkkwOVk1S0wyMiIsInByb2plY3RfaWQiOiJmNThmODRjZC04ZTIxLTQ4ZWQtYjVmMi1lMjhjNDk4ZDU4NjMiLCJhY2Nlc3NfdHlwZSI6InByb2plY3QiLCJpc3MiOiJsb3ZhYmxlLWFwaSIsInN1YiI6ImY1OGY4NGNkLThlMjEtNDhlZC1iNWYyLWUyOGM0OThkNTg2MyIsImF1ZCI6WyJsb3ZhYmxlLWFwcCJdLCJleHAiOjE3NzE1OTAzNzEsIm5iZiI6MTc3MDk4NTU3MSwiaWF0IjoxNzcwOTg1NTcxfQ.gkluEiLJ6F-sb4IAHWliro_P5eNgswYMtxOupsTucENSokAC4slv30SUdL078wTMwH1QD7DnnFWH2JuE5gWCQvdo54yN_n0OOck9ka8X5lOQiqZxnXbauDYfB9HCdivHwlsGp7Mw5nCIv-Nsk8I8WJDy4MJazfaqZ2k26zVrD8fiS1_fmof9WUARj51O05NDrfDx85DndMAKpKfrP5fEYTKlk0wdxfIAtct_LGujAZgZDu368BdagJhXPA7F7Jt9hZ9RyLMwdsVV-XuEwJT71xrKCJrjxj1ZkQkdxd455gvsJHwpFwc3XcOiHatft-nHd5XX1vOgRNfDxODxpkTQ6VRZnJLU01l8hafI_oMvnTRYOOPMQ0YFQds4ZpF0IuwKOdl2eXwX4XO8rPQ49Bgtzic4nF8CNYek973_DCyidMNGqUdBLrp2anUjc-GJmkDB5BpDgyPTeH_imuqC6rHxGKEoMKrZZG87fSgJFif60bQ7eM1SorEVa28aNjL4PybUU2TGMkf1F8LyV2CleRM1ecpUT1_oe-J86AZmU2rutaqrD1srUJbnMxI8l9nDqAf7cj7cHyPvI-afJMFIJszR-dt9Cc3rZBf5t3rORJcmJz1B82n3_vbInBiXdXsZ_TqaP48GtpDDeM0IjX7XuCvBhGqgx8kdzkEALIMlMauaa2s"
+        <a href="https://id-preview--f58f84cd-8e21-48ed-b5f2-e28c498d5863.lovable.app/"
            target="_blank" rel="noopener">View live page</a>
       </div>
     </div>
@@ -381,11 +216,10 @@
           I also worked with structure and UX decisions that make it easier for visitors to take action quickly (especially for catering).
         </p>
         <div class="meta">Project</div>
-        <a href="https://id-preview--3704820b-6b15-480d-b5aa-d06e5ea2f810.lovable.app/?__lovable_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMWlzUDR4TWE2dVFRMFlHV0pYYkkwOVk1S0wyMiIsInByb2plY3RfaWQiOiIzNzA0ODIwYi02YjE1LTQ4MGQtYjVhYS1kMDZlNWVhMmY4MTAiLCJhY2Nlc3NfdHlwZSI6InByb2plY3QiLCJpc3MiOiJsb3ZhYmxlLWFwaSIsInN1YiI6IjM3MDQ4MjBiLTZiMTUtNDgwZC1iNWFhLWQwNmU1ZWEyZjgxMCIsImF1ZCI6WyJsb3ZhYmxlLWFwcCJdLCJleHAiOjE3NzE1OTAzNjIsIm5iZiI6MTc3MDk4NTU2MiwiaWF0IjoxNzcwOTg1NTYyfQ.H3Y-FuC2le5nl13rQorMrhapjgRxgq22i7vtsAwXyo87vJy-5YtqHV1S9PwqYw6DsTEmaekoKYHCyC-D-ZaoTb5Mg5kczVrEts71frcmtnw-NP7L07WCn3KULopBvPccMiuENZmBYYfNQZueIxTiUv7azdS713_1Z4-KOOYsQKAnTwzvCTX8YQCRZezMMD7hvX7vrhXHOlq5hBfuW7QnzNLajxyka9PmiH5SPjWOFRp753TeHhIV7FbQ9D9II5_nsyaISFoFy946jb13wpyK3idKCEAx25NXqPqUBKAlYXS9xbX5q3q3ZRiWFAcblM-w0Vjg8DxZZazKG0-CviBLJVdGQv52xpO9Z6vZVWME5SymPfgsarcb9f6S6G6YuoDU9BFq_n58eCOFWQojVVROBWBWkScF-IVbnQA3a7r1cNI00I7GCYhL50iT1QqD4PcztJV74QOG9K5PcLLeflxw7vZN3HAGz-fqOD7ZlMFSG4P3-1va4uMaLqX-73yDeKtXLYdu1fH1bxW4bOcgFiplmcnOZoTxDiTQj1CC06S5kaxuFgmuKPgw2nrFWnN_f27CmJOXFIKFvogI6730NFO6Zya4AxacdaizGQMkzxcw_f-sNxZIQrlNEIyTv8TPvygJu_faDSqpmdsC2AwoGDSu4Yf3PPVHT0R822H6MqvXR8Q"
+        <a href="https://id-preview--3704820b-6b15-480d-b5aa-d06e5ea2f810.lovable.app/"
            target="_blank" rel="noopener">View live page</a>
       </div>
     </div>
-
   </section>
 
   <section id="toolbox">
@@ -439,80 +273,6 @@
 
   <button class="emoji" id="emojiBtn" aria-label="emoji button">👋</button>
 
-  <script>
-    // Background color changes
-    const body   = document.getElementById('page');
-    const home   = document.getElementById('homeLink');
-    const om     = document.getElementById('omLink');
-    const berghs = document.getElementById('berghsLink');
-    const side   = document.getElementById('sideLink');
-    const toolbox= document.getElementById('toolboxLink');
-
-    home.addEventListener('click', e => { e.preventDefault(); body.style.background='var(--blue)'; });
-    om.addEventListener('click',   () => body.style.background='var(--red)');
-    berghs.addEventListener('click', () => body.style.background='var(--green)');
-    side.addEventListener('click', () => body.style.background='var(--blue-dark)');
-    toolbox.addEventListener('click', () => body.style.background='var(--blue)');
-
-    // Emoji interaction
-    const emoji = document.getElementById('emojiBtn');
-    const glyphs = ["👋","😎","✨","🚀","💡","🔥"];
-    let g = 0;
-    emoji.addEventListener('click', () => {
-      g = (g+1)%glyphs.length;
-      emoji.textContent = glyphs[g];
-    });
-
-    // Accordion logic
-    const accordions = document.querySelectorAll(".accordion");
-    accordions.forEach(acc => {
-      acc.addEventListener("click", function() {
-        this.classList.toggle("active");
-        const panel = this.nextElementSibling;
-
-        if (panel.style.maxHeight) {
-          panel.style.maxHeight = null;
-        } else {
-          panel.style.maxHeight = panel.scrollHeight + "px";
-        }
-      });
-    });
-
-    // Optional: make accordion height adapt if you open one, then resize window
-    window.addEventListener('resize', () => {
-      document.querySelectorAll('.accordion.active').forEach(acc => {
-        const panel = acc.nextElementSibling;
-        panel.style.maxHeight = panel.scrollHeight + "px";
-      });
-    });
-  </script>
-  <script>
-window.addEventListener("DOMContentLoaded", function () {
-
-  const map = {
-    omLink: "about",
-    berghsLink: "berghs",
-    sideLink: "projects",
-    toolboxLink: "toolbox"
-  };
-
-  Object.keys(map).forEach((id) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-
-    el.addEventListener("click", function () {
-      window.dataLayer = window.dataLayer || [];
-      dataLayer.push({
-        event: "section_click",
-        section_name: map[id]
-      });
-
-      console.log("✅ section_click pushed:", map[id]);
-    });
-  });
-
-});
-</script>
-
+  <script src="js/main.js"></script>
 </body>
 </html>
