@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NJW2V9RX');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Svartvit</title>
+    <title>Portfolio | Arvid Stenhag</title>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -18,7 +13,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <!-- End Google Tag Manager -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -26,73 +21,151 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW2V9RX"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <header class="header">
-        <h1 class="logo">Portfolio</h1>
+
+    <header class="header container">
+        <a href="#" class="logo-wrapper">
+            <svg class="logo-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Peak A / Growth -->
+                <path d="M25 75L50 25L75 75" stroke="var(--primary-green)" stroke-width="4" stroke-linejoin="round"/>
+                <!-- Geometric S / Endurance Track -->
+                <path d="M30 55C30 55 45 45 55 55C65 65 80 55 80 55" stroke="var(--gold-accent)" stroke-width="6" stroke-linecap="round"/>
+                <!-- Bottom Anchor -->
+                <rect x="25" y="75" width="50" height="4" fill="var(--text-main)"/>
+            </svg>
+            <h1 class="logo-text">ARVID STENHAG</h1>
+        </a>
         <nav class="nav">
-            <a href="#about">Om mig</a>
-            <a href="#projects">Projekt</a>
+            <a href="#about">Strategi</a>
+            <a href="#projects">Case</a>
+            <a href="#toolbox">Toolbox</a>
             <a href="#contact">Kontakt</a>
         </nav>
     </header>
 
     <main class="container">
         <section id="hero" class="section">
-            <h2 class="title">Hej. Jag skriver kod.</h2>
-            <p>Välkommen till min minimalistiska, svartvita portfolio, utformad med Roboto Mono.</p>
+            <h2 class="title">GROWTH <br>THROUGH <br>SYSTEMS.</h2>
+            <p>Growth Marketer & Tech-Strategist på Berghs. Jag kombinerar datadriven optimering med teknisk precision för att bygga hållbar tillväxt.</p>
         </section>
 
         <section id="about" class="section">
-            <h2 class="title">Om mig</h2>
-            <p>Jag är en utvecklare som värderar funktion, tydlighet och minimalism. Jag bygger system som löser problem utan onödigt brus.</p>
-        </section>
-
-        <section id="marathon-tool" class="section" style="background: #ffffff; border: 2px solid #FC4C02; padding: 40px; border-radius: 16px; text-align: center; margin: 40px 0; box-shadow: 0 4px 20px rgba(252, 76, 2, 0.1);">
-            <h2 class="title" style="color: #333; margin-bottom: 15px;">Beräkna din Marathon-tid</h2>
-            <p style="color: #666; margin-bottom: 25px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6;">
-                Anslut ditt Strava-konto för att se din beräknade marathontid baserat på din faktiska löpdata och Riegels formel.
+            <h2 class="title">STRATEGI</h2>
+            <p>
+                Jag är 20 år, född och uppvuxen i Stockholm, och ser marknadsföring som en uthållighetssport. 
+                Från ett svenskt mästerskapsguld i basket till att springa marathon på 3:09 – mina erfarenheter har lärt mig värdet av konsekvens, förberedelse och att se varje försök som en chans till optimering snarare än att söka genvägar.
             </p>
-            <a href="https://www.strava.com/oauth/authorize?client_id=205442&response_type=code&redirect_uri=https://strava-backend-n6zk.onrender.com/exchange&approval_prompt=force&scope=read,activity:read_all" 
-               class="btn" 
-               style="background: #FC4C02; color: #fff; padding: 16px 32px; text-decoration: none; font-weight: bold; border-radius: 8px; display: inline-block;"
-               onclick="dataLayer.push({'event': 'lead_magnet_usage'});">
-                Anslut Strava &rarr;
-            </a>
+            <p style="margin-top: 2rem; color: var(--text-muted);">
+                På Berghs specialiserar jag mig på hur kreativitet och data kan samverka. Jag drivs av att bryta ner komplexa affärsutmaningar i mätbara, metodiska steg.
+            </p>
         </section>
 
         <section id="projects" class="section">
-            <h2 class="title">Projekt</h2>
-            <div class="grid">
+            <h2 class="title">UTVALDA CASE</h2>
+            
+            <span class="category-label">// Akademiska Case (Berghs)</span>
+            <div class="grid-small">
                 <article class="card">
-                    <h3>Strava Runner (Chrome Extension)</h3>
-                    <p>En extension som hämtar din löpdata direkt från Strava och beräknar din marathontid med hjälp av Riegels formel.</p>
-                    <a href="https://www.strava.com/oauth/authorize?client_id=205442&response_type=code&redirect_uri=https://strava-backend-n6zk.onrender.com/exchange&approval_prompt=force&scope=read,activity:read_all" 
-                       class="btn" 
-                       onclick="dataLayer.push({'event': 'lead_magnet_used'});">
-                        Beräkna min Marathon-tid &rarr;
-                    </a>
+                    <span class="meta-tag">CRM / Data</span>
+                    <h3>Stadium CRM</h3>
+                    <p>Utveckling av lojalitetsstrategi för 5 miljoner medlemmar. Fokus på beteendestyrd kommunikation snarare än generiska rabatter.</p>
+                    <a href="https://www.canva.com/design/DAHA0yYertE/WhWWSm68VSjshSMm0LJjLA/view" class="btn" target="_blank">Visa Deck &rarr;</a>
                 </article>
+
                 <article class="card">
-                    <h3>Projekt Ett</h3>
-                    <p>En beskrivning av mitt första fantastiska projekt. Byggt med teknik X och Y.</p>
-                    <a href="#" class="btn">Läs mer &rarr;</a>
+                    <span class="meta-tag">CRO / UX</span>
+                    <h3>Under Your Skin</h3>
+                    <p>Optimering av konverteringsflöden och värdepropositioner. Analys av friktionspunkter och restrukturering av användarresan.</p>
+                    <a href="https://www.canva.com/design/DAG4SQHmODk/SmA4bdOTPDk_LDzSv7120Q/view" class="btn" target="_blank">Läs mer &rarr;</a>
                 </article>
+
                 <article class="card">
-                    <h3>Projekt Två</h3>
-                    <p>Ett annat spännande projekt som demonstrerar mina färdigheter inom området Z.</p>
-                    <a href="#" class="btn">Läs mer &rarr;</a>
+                    <span class="meta-tag">Design / Sustain</span>
+                    <h3>Stadium ReBrew</h3>
+                    <p>Young Lions-bidrag (Best Design). Ett cirkulärt koncept som förvandlar matsvinn från sportevent till en premiumprodukt.</p>
+                    <span class="btn">Väl godkänt</span>
+                </article>
+
+                <article class="card">
+                    <span class="meta-tag">E-commerce</span>
+                    <h3>Tryggare Klubb</h3>
+                    <p>Konceptutveckling för drink-teststickor. Balansering av säkerhetsbudskap med en premium och förtroendeingivande UX.</p>
+                    <a href="https://www.canva.com/design/DAG-8gnSAis/30FD609Vlc6fJAAAXAyCBg/view" class="btn" target="_blank">Visa Case &rarr;</a>
+                </article>
+            </div>
+
+            <span class="category-label" style="margin-top: 6rem;">// Tekniska Case & Side Projects</span>
+            <div class="grid-small">
+                <article class="card">
+                    <span class="meta-tag">Fullstack / API</span>
+                    <h3>Strava Predictor</h3>
+                    <p>Fullstack Chrome Extension (OAuth 2.0 & Node.js). Beräknar marathontid baserat på realtidsdata och Riegels formel.</p>
+                    <a href="https://github.com/arvidstenhag/strava-runner-predictor" class="btn" target="_blank">GitHub &rarr;</a>
+                </article>
+
+                <article class="card">
+                    <span class="meta-tag">Conversion / Dev</span>
+                    <h3>Gandini Design</h3>
+                    <p>Byggt konverteringsfokuserade landningssidor med Lovable. Fokus på hierarki och minimal friktion i köpresan.</p>
+                    <a href="#" class="btn" target="_blank">Visa Live &rarr;</a>
                 </article>
             </div>
         </section>
 
+        <section id="toolbox" class="section">
+            <h2 class="title">TOOLBOX</h2>
+            <div class="toolbox-grid">
+                <div class="toolbox-column">
+                    <h3>Analytics</h3>
+                    <ul>
+                        <li>GTM & GA4</li>
+                        <li>Looker Studio</li>
+                        <li>Lucky Orange</li>
+                        <li>DataLayer Logic</li>
+                    </ul>
+                </div>
+                <div class="toolbox-column">
+                    <h3>Performance</h3>
+                    <ul>
+                        <li>Meta Ads</li>
+                        <li>Google Ads</li>
+                        <li>CRO & Funnels</li>
+                        <li>CRM Triggers</li>
+                    </ul>
+                </div>
+                <div class="toolbox-column">
+                    <h3>Technical</h3>
+                    <ul>
+                        <li>HTML / CSS / JS</li>
+                        <li>Node.js / Express</li>
+                        <li>GitHub</li>
+                        <li>Lovable (Rapid Dev)</li>
+                    </ul>
+                </div>
+                <div class="toolbox-column">
+                    <h3>Design</h3>
+                    <ul>
+                        <li>Photoshop</li>
+                        <li>Illustrator</li>
+                        <li>Canva</li>
+                        <li>Brand Storytelling</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
         <section id="contact" class="section">
-            <h2 class="title">Kontakt</h2>
-            <p>Redo att prata? Skicka ett meddelande.</p>
-            <a href="mailto:hej@exempel.se" class="btn">hej@exempel.se</a>
+            <h2 class="title">KONTAKT</h2>
+            <p>Arvid Stenhag // Growth Marketer & Tech-Strategist</p>
+            <p style="color: var(--gold-accent); font-weight: 800; font-size: 1.2rem;">arvid.stenhag@student.berghs.se</p>
+            <div style="margin-top: 4rem; display: flex; gap: 2rem;">
+                <a href="https://www.linkedin.com/in/arvidstenhag" class="btn" target="_blank">LinkedIn</a>
+                <a href="mailto:arvid.stenhag@student.berghs.se" class="btn">E-post</a>
+            </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <p>&copy; 2026 Arvid Stenhag. Byggt i svartvitt.</p>
+    <footer class="footer container">
+        <p>&copy; 2026 Arvid Stenhag // Tech-Strategist // High-End Green Mode</p>
     </footer>
 
     <script src="script.js"></script>
