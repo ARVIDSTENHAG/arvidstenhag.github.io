@@ -209,15 +209,88 @@ body {
 }
 
 /* Grid & Cards */
-/* Project Categorization */
-.category-label {
-    font-size: 0.7rem;
-    font-weight: 800;
-    color: var(--gold-accent);
-    letter-spacing: 0.2rem;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
+/* Technical Case Study - Polestar Minimalism */
+.case-study-polestar {
+    font-family: 'Roboto Mono', monospace;
+    background: #fff;
+    color: #000;
+    margin: 0;
+    padding: 15rem 4rem;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+}
+
+.case-study-polestar .title {
+    color: #000;
+    font-size: 1.5rem;
+    letter-spacing: 0.5rem;
+    font-weight: 300;
+    margin-bottom: 10rem;
+    text-align: center;
+}
+
+.white-paper-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8rem 12rem;
+}
+
+.wp-section {
+    position: relative;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+}
+
+.wp-number {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #999;
     display: block;
+    margin-bottom: 2rem;
+}
+
+.wp-section h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+}
+
+.wp-section h3 small {
+    display: block;
+    font-weight: 300;
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+.wp-section p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+}
+
+.wp-section code {
+    background: #f5f5f5;
+    padding: 0.2rem 0.4rem;
+    font-size: 0.85rem;
+}
+
+@media (max-width: 1024px) {
+    .white-paper-content {
+        grid-template-columns: 1fr;
+        gap: 6rem;
+    }
+    .case-study-polestar {
+        padding: 10rem 2rem;
+    }
 }
 
 .grid-small {
