@@ -151,7 +151,7 @@
                 <div class="calculator-ui">
                     <span class="mono" style="font-size: 0.75rem; color: #666; letter-spacing: 0.05em;">ESTIMATED_FINISH_TIME</span>
                     <div class="calc-result">3:11:51</div>
-                    <a href="growth-lab/index.html" class="btn-connect" id="main-cta-btn">Initialize Strava Connect</a>
+                    <a href="growth-lab/" class="btn-connect" id="main-cta-btn">Initialize Strava Connect</a>
                 </div>
             </div>
         </section>
@@ -219,13 +219,17 @@
 
     <script src="script.js"></script>
     <script>
-        // 1. CTA Tracking (Befintlig)
-        document.getElementById('main-cta-btn')?.addEventListener('click', function() {
+        // 1. CTA Tracking & Navigation
+        document.getElementById('main-cta-btn')?.addEventListener('click', function(e) {
+            e.preventDefault();
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
                 'event': 'lead_magnet_usage',
                 'cta_location': 'hero_calculator'
             });
+            setTimeout(() => {
+                window.location.href = "growth-lab/";
+            }, 100);
         });
 
         // 2. Whitepaper Tracking (Ny)
