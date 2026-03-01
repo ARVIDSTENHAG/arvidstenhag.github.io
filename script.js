@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. API Success Check (from URL params)
     const code = new URLSearchParams(window.location.search).get('code');
     if (code) {
-        const API_URL = "https://strava-backend-n6zk.onrender.com/exchange";
+        const API_URL = window.SITE_CONFIG.API_BASE + "/exchange";
         fetch(API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
