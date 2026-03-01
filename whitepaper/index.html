@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whitepaper: Technical Growth Strategies | Arvid Stenhag</title>
+    <!-- GTM -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NJW2V9RX');</script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .wp-container { max-width: 800px; margin: 4rem auto; padding: 0 2rem; }
+        .wp-hero { background: #111; padding: 4rem; border-left: 8px solid #fff; margin-bottom: 4rem; }
+        .wp-content { line-height: 1.8; color: #ccc; }
+        .wp-list { list-style: none; padding: 0; margin: 2rem 0; }
+        .wp-list li { padding: 1rem 0; border-bottom: 1px solid #222; position: relative; padding-left: 2rem; }
+        .wp-list li::before { content: "//"; position: absolute; left: 0; color: #fff; }
+        .download-cta { margin-top: 4rem; border: 1px solid #333; padding: 3rem; text-align: center; }
+    </style>
+</head>
+<body>
+    <header class="header container">
+        <a href="../" class="logo-wrapper">
+            <div class="logo-as-flash">
+                <span class="flash-char">A</span>
+                <span class="flash-char">S</span>
+            </div>
+            <h1 class="logo-text">ARVID STENHAG</h1>
+        </a>
+        <nav class="nav">
+            <a href="../">Hem</a>
+            <a href="../growth-lab/">Growth Lab</a>
+            <a href="index.html" class="active">Whitepaper</a>
+        </nav>
+    </header>
+
+    <main class="wp-container">
+        <header class="wp-hero">
+            <h2 class="title" style="font-size: 2.5rem; margin: 0;">TECHNICAL <br>CASE <br>STUDY.</h2>
+            <p style="margin-top: 1.5rem; color: #888;">Strategies for API-Driven Growth & Data-Driven Optimization.</p>
+        </header>
+
+        <section class="wp-content">
+            <p>Denna fallstudie djupdyker i den tekniska arkitekturen bakom moderna growth loops. Genom att kombinera realtidsdata från externa API:er med automatiserad event-tracking skapar vi system som inte bara mäter tillväxt, utan driver den.</p>
+            
+            <ul class="wp-list">
+                <li><strong>API Orchestration:</strong> Hur man hanterar OAuth 2.0 flöden säkert i molnmiljöer.</li>
+                <li><strong>Event Engineering:</strong> Implementering av avancerad tracking utan att kompromissa med prestanda.</li>
+                <li><strong>Growth Loops:</strong> Skapandet av tekniska "Lead Magnets" som ger omedelbart värde.</li>
+            </ul>
+
+            <div class="download-cta">
+                <h3 class="title" style="font-size: 1.5rem; margin-bottom: 1.5rem;">GET THE FULL REPORT</h3>
+                <p style="margin-bottom: 2rem; color: #888;">Ladda ner den fullständiga PDF-versionen för tekniska diagram och kodexempel.</p>
+                <a href="../assets/whitepaper.pdf" id="download-wp-btn" class="btn" download>Download PDF &rarr;</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer container">
+        <p>&copy; 2026 Arvid Stenhag // Technical Whitepaper // Distributed via Social Channels</p>
+    </footer>
+
+    <script src="../assets/tracking.js"></script>
+    <script>
+        document.getElementById('download-wp-btn').addEventListener('click', function() {
+            window.trackEvent('whitepaper_download', { asset: '/assets/whitepaper.pdf' });
+            localStorage.setItem('whitepaper_done', 'true');
+        });
+    </script>
+</body>
+</html>

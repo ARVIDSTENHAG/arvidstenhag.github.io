@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth Lab - Proof | Arvid Stenhag Portfolio</title>
+    <!-- GTM Container -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NJW2V9RX');</script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="growth-lab.css">
+</head>
+<body class="growth-lab-page">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW2V9RX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <header class="header container">
+        <a href="../" class="logo-wrapper">
+            <div class="logo-as-flash">
+                <span class="flash-char">A</span>
+                <span class="flash-char">S</span>
+            </div>
+            <h1 class="logo-text">ARVID STENHAG</h1>
+        </a>
+        <nav class="nav">
+            <a href="../">Hem</a>
+            <a href="index.html" class="active">Growth Lab</a>
+            <a href="../whitepaper/">Whitepaper</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section id="hero-lab" class="section">
+            <h2 class="title">GROWTH <br>LAB – <br>PROOF.</h2>
+            <p>Technically verifiable data and growth instrumentation. This page provides real-time proof of system integration, tracking, and API-driven value creation.</p>
+        </section>
+
+        <section class="proof-grid">
+            <!-- Checklist Card -->
+            <div class="card checklist-card">
+                <span class="meta-tag">// COURSE REQUIREMENTS</span>
+                <h3>System Integrity Check</h3>
+                <ul id="checklist" class="lab-list">
+                    <li data-flag="lead_magnet_done"><span>⚠️</span> 1. Lead-magnet / Growth Loop</li>
+                    <li data-flag="tracking_verified"><span>⚠️</span> 2. Event Tracking (GA4 via GTM)</li>
+                    <li data-flag="api_done"><span>⚠️</span> 3. API-data (Fetch Success)</li>
+                    <li data-flag="whitepaper_done"><span>⚠️</span> 4. Whitepaper / Sharing Loop</li>
+                    <li data-flag="plugin_done"><span>⚠️</span> 5. Browser Plugin (VG Requirement)</li>
+                </ul>
+                <button id="verify-tracking" class="btn">Verify Tracking (Manual Test)</button>
+            </div>
+
+            <!-- API Proof Card -->
+            <div class="card api-card">
+                <span class="meta-tag">// BACKEND (RENDER)</span>
+                <h3>API Connectivity</h3>
+                <p>Verify live connection to Strava backend on Render.</p>
+                <button id="test-api-btn" class="btn">Run API Prediction Test</button>
+                <div id="api-result" class="debug-output">Idle...</div>
+            </div>
+
+            <!-- Plugin Card -->
+            <div class="card plugin-card">
+                <span class="meta-tag">// ECOSYSTEM (CHROME)</span>
+                <h3>Browser Plugin (VG)</h3>
+                <p>Strava Connector Extension integration.</p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button id="plugin-repo-btn" class="btn">GitHub Repo &rarr;</button>
+                    <button id="plugin-install-btn" class="btn">Install Guide</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Debug Panel -->
+        <section class="section debug-panel">
+            <h2 class="title" style="font-size: 2rem;">// EVENT LOG (REALTIME)</h2>
+            <div class="log-container">
+                <table id="event-log-table">
+                    <thead>
+                        <tr>
+                            <th>TIMESTAMP</th>
+                            <th>EVENT</th>
+                            <th>DATA / PATH</th>
+                        </tr>
+                    </thead>
+                    <tbody id="event-log-body">
+                        <!-- Events renderas här -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Proof Report -->
+        <section class="section proof-pack">
+            <h2 class="title" style="font-size: 2rem;">// SUBMISSION DATA</h2>
+            <p>Generate a technical summary of all verified systems.</p>
+            <textarea id="proof-text-area" readonly placeholder="Verification pending..."></textarea>
+            <button id="gen-proof-btn" class="btn">Generate Submission Text</button>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="plugin-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 class="title" style="font-size: 1.5rem;">PLUGIN INSTALLATION</h2>
+            <ol class="lab-list" style="margin-top: 2rem;">
+                <li>Clone repository from GitHub.</li>
+                <li>Open <code>chrome://extensions/</code>.</li>
+                <li>Enable "Developer mode".</li>
+                <li>Click "Load unpacked" and select the extension folder.</li>
+                <li>The plugin will now interact with Strava's web interface.</li>
+            </ol>
+        </div>
+    </div>
+
+    <footer class="footer container">
+        <p>&copy; 2026 Arvid Stenhag // Growth Lab // Proof Mode Active</p>
+    </footer>
+
+    <script src="../assets/tracking.js"></script>
+    <script src="growth-lab.js"></script>
+</body>
+</html>

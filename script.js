@@ -1,76 +1,112 @@
+/**
+ * SYSTEM RUNTIME (LOVE + POLESTAR STYLE)
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
-    /**
-     * 1. Scroll-triggered Reveals (Intersection Observer)
-     * Adds 'visible' class to sections when they enter the viewport
-     */
-    const observerOptions = {
-        threshold: 0.15,
-        rootMargin: '0px 0px -50px 0px'
-    };
+    
+    // 1. Centralized Click Handler (Robust & Safe)
+    document.addEventListener('click', (e) => {
+        const target = e.target;
 
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                // Once visible, we can stop observing this section
-                revealObserver.unobserve(entry.target);
+        // A. Handle Navigation & Anchors
+        const anchor = target.closest('a[href^="#"]');
+        if (anchor) {
+            const id = anchor.getAttribute('href');
+            if (id === '#') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
             }
-        });
-    }, observerOptions);
 
-    const sections = document.querySelectorAll('.section');
-    sections.forEach(section => {
-        revealObserver.observe(section);
-    });
+            const targetElement = document.querySelector(id);
+            if (targetElement) {
+                e.preventDefault();
+                const offset = 80; // Adjusted for sticky nav
+                const bodyRect = document.body.getBoundingClientRect().top;
+                const elementRect = targetElement.getBoundingClientRect().top;
+                const elementPosition = elementRect - bodyRect;
+                const offsetPosition = elementPosition - offset;
 
-    /**
-     * 2. Smooth Scrolling refinement (for Safari/older browsers)
-     */
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
+                window.scrollTo({
+                    top: offsetPosition,
                     behavior: 'smooth'
                 });
+                
+                if (window.trackEvent) window.trackEvent('nav_scroll', { target: id });
             }
-        });
+        }
+
+        // B. Handle System Actions
+        const actionEl = target.closest('[data-action]');
+        if (actionEl) {
+            const action = actionEl.getAttribute('data-action');
+            handleAction(action);
+        }
+
+        // C. Track data-track elements
+        const trackEl = target.closest('[data-track]');
+        if (trackEl && window.trackEvent) {
+            window.trackEvent('interaction', { id: trackEl.getAttribute('data-track') });
+        }
     });
 
-    /**
-     * 3. Animated Result Count-up (VG-detalj)
-     * Call this function on the results page to animate the marathon time.
-     * Example usage: animateTimeCount('result-display', '03:11:51');
-     */
-    window.animateTimeCount = function(elementId, targetTimeStr) {
-        const element = document.getElementById(elementId);
-        if (!element) return;
+    // 2. Action Logic
+    function handleAction(action) {
+        switch(action) {
+            case 'strava-connect':
+                const clientId = '205442';
+                const redirectUri = window.location.origin + window.location.pathname;
+                const scope = 'read,activity:read_all';
+                const authUrl = `https://www.strava.com/oauth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&approval_prompt=force&scope=${scope}`;
+                
+                if (window.trackEvent) window.trackEvent('lead_magnet_usage', { type: 'strava_oauth_init' });
+                localStorage.setItem('lead_magnet_done', 'true');
+                window.location.href = authUrl;
+                break;
+                
+            case 'scroll-top':
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                break;
+        }
+    }
 
-        // Parse HH:MM:SS to total seconds
-        const parts = targetTimeStr.split(':').map(Number);
-        const targetSeconds = (parts[0] * 3600) + (parts[1] * 60) + parts[2];
-        
-        let currentSeconds = 0;
-        const duration = 2000; // 2 seconds animation
-        const frameRate = 60;
-        const totalFrames = (duration / 1000) * frameRate;
-        const increment = targetSeconds / totalFrames;
+    // 3. ScrollSpy (Active Nav Highlighting)
+    const navLinks = document.querySelectorAll('.nav a[href^="#"]');
+    const sections = Array.from(navLinks).map(link => document.querySelector(link.getAttribute('href'))).filter(s => s !== null);
 
-        const timer = setInterval(() => {
-            currentSeconds += increment;
-            if (currentSeconds >= targetSeconds) {
-                currentSeconds = targetSeconds;
-                clearInterval(timer);
+    window.addEventListener('scroll', () => {
+        let current = "";
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= (sectionTop - 200)) {
+                current = section.getAttribute('id');
             }
+        });
 
-            // Format back to HH:MM:SS
-            const h = Math.floor(currentSeconds / 3600);
-            const m = Math.floor((currentSeconds % 3600) / 60);
-            const s = Math.floor(currentSeconds % 60);
-            
-            element.textContent = 
-                `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-        }, 1000 / frameRate);
-    };
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    }, { passive: true });
+
+    // 4. API Success Check (from URL params)
+    const code = new URLSearchParams(window.location.search).get('code');
+    if (code) {
+        const API_URL = "https://strava-backend-n6zk.onrender.com/exchange";
+        fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ code: code })
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log('[System] API Connection Verified');
+            localStorage.setItem('api_done', 'true');
+            // Notify tracking
+            if (window.trackEvent) window.trackEvent('api_connection_success');
+        })
+        .catch(err => console.error('[System] API Fetch Error:', err));
+    }
 });
