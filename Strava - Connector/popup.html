@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Strava Connector</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="icons/icon48.png" alt="Logo" class="logo">
+      <h1>Strava Runner</h1>
+    </header>
+
+    <main>
+      <div id="auth-section">
+        <div class="welcome-text">
+          <p>Connect your Strava account to see your marathon predictions based on your recent runs.</p>
+        </div>
+        <button id="connect-btn" class="primary-btn">Connect with Strava</button>
+        <p class="note">Requires a running local server on port 3000.</p>
+      </div>
+
+      <div id="data-section" style="display: none;">
+        <div class="status-bar">
+          <span id="status-icon">●</span>
+          <span id="status">Checking connection...</span>
+        </div>
+        
+        <div id="results">
+          <div class="prediction-card">
+            <h3>Marathon Prediction</h3>
+            <div id="prediction-text">
+              <p class="placeholder">Fetch data to see your predicted time.</p>
+            </div>
+          </div>
+          
+          <div class="activities-header">
+            <h4>Recent Runs</h4>
+            <button id="fetch-btn" class="secondary-btn">Refresh</button>
+          </div>
+          <ul id="activities-list"></ul>
+        </div>
+        
+        <footer>
+          <button id="logout-btn" class="text-btn">Logout</button>
+        </footer>
+      </div>
+    </main>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
