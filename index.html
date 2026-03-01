@@ -1,10 +1,12 @@
+=== /portfolio/index.html ===
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arvid Stenhag | Growth Infrastructure & Tech Strategy</title>
-    <!-- Google Tag Manager (ORÖRD) -->
+    
+    <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -14,12 +16,63 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <script src="assets/config.js"></script>
-    <script src="assets/tracking.js"></script>
+    
+    <link rel="stylesheet" href="./style.css">
+    
+    <style>
+        /* Growth Logic Styling */
+        .lead-magnet-box {
+            background: #f9f9f9;
+            border: 1px solid #eee;
+            padding: 3rem;
+            margin-top: 2rem;
+            text-align: left;
+            border-radius: 4px;
+        }
+        .signup-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .signup-input {
+            flex: 1;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            font-family: inherit;
+        }
+        .hidden { display: none !important; }
+        .proof-section {
+            background: #f4f4f4;
+            padding: 4rem 0;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        .proof-item {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        .proof-check { color: #10b981; font-weight: bold; margin-right: 0.5rem; }
+        .share-success {
+            font-size: 0.8rem;
+            color: #10b981;
+            margin-top: 1rem;
+        }
+        .wp-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+    </style>
 </head>
 <body class="love-layout">
-    <!-- Google Tag Manager (noscript) (ORÖRD) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW2V9RX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <header class="header sticky-nav">
@@ -32,10 +85,9 @@
                 <h1 class="logo-text">ARVID STENHAG</h1>
             </a>
             <nav class="nav">
-                <a href="#growth-tech" data-track="nav_growth_tech">Growth & Tech</a>
-                <a href="#projects" data-track="nav_projects">Works</a>
-                <a href="#toolbox" data-track="nav_toolbox">Expertise</a>
-                <a href="#contact" data-track="nav_contact">Connect</a>
+                <a href="#architecture">System Architecture</a>
+                <a href="#projects">Works</a>
+                <a href="#contact">Connect</a>
             </nav>
         </div>
     </header>
@@ -43,81 +95,113 @@
     <main>
         <section id="hero" class="hero-section container">
             <div class="hero-content">
-                <div class="hero-label">// Tech-Strategist & Growth Engineer</div>
+                <div class="hero-label mono">// Tech-Strategist & Growth Engineer</div>
                 <h2 class="hero-title">ENGINEERING <br>GROWTH <br>SYSTEMS.</h2>
-                <p class="hero-subtitle">Specializing in data-driven optimization and technical infrastructure. I build the systems that transform raw data into scalable growth loops.</p>
-                <div class="hero-cta">
-                    <a href="#growth-tech" class="btn btn-primary">View System Specs &rarr;</a>
+                <p class="hero-subtitle">Focusing on high-performance technical infrastructure and data-driven optimization. I build scalable systems that bridge the gap between raw data and user growth.</p>
+            </div>
+        </section>
+
+        <!-- PROOF SECTION -->
+        <section id="proof" class="proof-section">
+            <div class="container">
+                <div class="tech-header" style="margin-bottom: 3rem; border: none; padding: 0;">
+                    <span class="mono" style="color: #666;">// PROOF (TECH X GROWTH)</span>
+                </div>
+                <div class="proof-grid">
+                    <div class="proof-item"><span class="proof-check">✔</span>Lead Magnet (Growth-Grade)</div>
+                    <div class="proof-item"><span class="proof-check">✔</span>Event Tracking (GTM/DataLayer)</div>
+                    <div class="proof-item"><span class="proof-check">✔</span>API Integration (Strava API)</div>
+                    <div class="proof-item"><span class="proof-check">✔</span>Whitepaper (Infrastructure Audit)</div>
                 </div>
             </div>
         </section>
 
-        <!-- GROWTH & TECH SECTION (OFFICIAL TECH SPEC) -->
-        <section id="growth-tech" class="growth-tech-area">
+        <!-- SYSTEM ARCHITECTURE -->
+        <section id="architecture" class="tech-hub-area">
             <div class="container">
-                <div class="gt-header">
-                    <span class="mono">// OFFICIAL TECHNICAL SPECIFICATION</span>
-                    <h2 class="gt-main-title">GROWTH & TECH</h2>
+                <div class="tech-header">
+                    <span class="mono">// 01 SYSTEM ARCHITECTURE</span>
+                    <h2 class="tech-main-title">TECHNICAL INFRASTRUCTURE</h2>
                 </div>
 
-                <!-- STATUS-BOARD -->
-                <div class="status-board">
-                    <div class="status-indicator">
-                        <span class="checkmark">✅</span>
-                        <span class="checkmark">✅</span>
-                        <span class="checkmark">✅</span>
-                        <span class="checkmark">✅</span>
-                        <span class="checkmark">✅</span>
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <div class="mono tech-tag">BACKEND_INTEGRATION</div>
+                        <h3>The Data Engine</h3>
+                        <p>Orchestrated a secure OAuth 2.0 connection to the Strava API to fetch real-time activity data for algorithmic processing.</p>
+                        <div class="mono-specs">
+                            STATUS: ACTIVE<br>
+                            BACKEND: NODE.JS / RENDER<br>
+                            LOGIC: RIEGELS_FORMULA<br>
+                            DEMO: <a href="/growth-lab/index.html" class="strava-orange" style="text-decoration: underline;" data-project-slug="growth-lab">Launch Growth Lab &rarr;</a>
+                        </div>
                     </div>
-                    <div class="status-text mono">SYSTEM STATUS: ALL CRITERIA MET</div>
+
+                    <div class="tech-card">
+                        <div class="mono tech-tag">DATA_INSTRUMENTATION</div>
+                        <h3>Analytics Architecture</h3>
+                        <p>Implemented granular event monitoring to track conversion friction and user behavior within the growth loop.</p>
+                        <div class="mono-specs">
+                            IMPLEMENTATION: GTM-NJW2V9RX<br>
+                            PRIMARY_EVENT: portfolio_signup_submit<br>
+                            LAYER: DATALAYER_V2
+                        </div>
+                    </div>
+
+                    <div class="tech-card tech-card-wide">
+                        <div class="mono tech-tag">PRODUCT_EXPANSION</div>
+                        <h3>Product Expansion: Chrome Extension</h3>
+                        <p>Developed a companion tool that injects prediction logic directly into the Strava.com interface, reducing friction significantly.</p>
+                        
+                        <div class="extension-guide-grid">
+                            <div class="guide-text mono">
+                                <strong>DEPLOYMENT:</strong><br>
+                                1. Download zip from GitHub.<br>
+                                2. Enable Developer Mode.<br>
+                                3. Load Unpacked.
+                            </div>
+                            <div class="guide-actions">
+                                <a href="https://github.com/ARVIDSTENHAG/athlete-guess-chrome-extension" class="btn btn-secondary mono" target="_blank" data-project-slug="chrome-extension">View Source (GitHub)</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- BEVIS-GRID -->
-                <div class="bevis-grid">
-                    <!-- Box 1: Lead Magnet -->
-                    <div class="bevis-box">
-                        <div class="bevis-header mono">CONVERSION ENGINE</div>
-                        <p>Interactive Marathon Predictor live. Strategi: Value-exchange via Strava-data. Genererar tillväxt genom omedelbart användarvärde.</p>
-                        <div class="bevis-footer">
-                            <button type="button" id="connect-strava-btn" class="btn btn-cta" data-action="strava-connect">Run Engine Audit</button>
-                        </div>
+        <!-- WHITE PAPER SECTION -->
+        <section id="whitepaper-section" class="wp-container">
+            <div class="container">
+                <div class="wp-content">
+                    <h2 class="wp-title">Growth & Tech White Paper</h2>
+                    <p class="wp-description">
+                        Lås upp den fullständiga tekniska fallstudien om hur vi kombinerar realtidsdata från Strava API med avancerad event-tracking.
+                    </p>
+                    
+                    <!-- LOCKED STATE (FORM) -->
+                    <div id="lead-magnet-form" class="lead-magnet-box">
+                        <p class="mono" style="font-size: 0.8rem; margin-bottom: 1rem;">// SIGNUP TO UNLOCK ACCESS</p>
+                        <form id="portfolio-signup" class="signup-form">
+                            <input type="text" id="signup-name" class="signup-input" placeholder="Namn (valfritt)">
+                            <input type="email" id="signup-email" class="signup-input" placeholder="din.email@exempel.se" required>
+                            <button type="submit" class="wp-btn wp-btn-primary">Unlock Now</button>
+                        </form>
                     </div>
 
-                    <!-- Box 2: API Integration -->
-                    <div class="bevis-box">
-                        <div class="bevis-header mono">DATA ARCHITECTURE</div>
-                        <p>Live-anslutning till Strava API (OAuth 2.0). Backend: Node.js på Render.</p>
-                        <div class="mono-code">
-                            LAST_RESULT: <span class="strava-orange">3:11:51</span><br>
-                            STACK: NODE.JS // RENDER
+                    <!-- UNLOCKED STATE (DOWNLOAD/READ) -->
+                    <div id="lead-magnet-unlocked" class="hidden">
+                        <div class="wp-actions">
+                            <a href="/whitepaper.html" class="wp-btn wp-btn-secondary" id="read-wp-link">
+                                Read Whitepaper
+                            </a>
+                            <a href="/assets/whitepaper.pdf" download class="wp-btn wp-btn-primary" id="download-wp-link">
+                                Download PDF
+                            </a>
+                            <button id="share-btn" class="wp-btn wp-btn-secondary">
+                                Share Loop
+                            </button>
                         </div>
-                    </div>
-
-                    <!-- Box 3: Event Tracking -->
-                    <div class="bevis-box">
-                        <div class="bevis-header mono">ANALYTICS & DATA LAYER</div>
-                        <p>Google Tag Manager installerat. Spårar aktivt eventet <code>lead_magnet_usage</code> för konverteringsoptimering.</p>
-                        <div class="mono-id-box mono">
-                            CONTAINER_ID: <span class="strava-orange">GTM-NJW2V9RX</span>
-                        </div>
-                    </div>
-
-                    <!-- Box 4: Browser Plugin -->
-                    <div class="bevis-box">
-                        <div class="bevis-header mono">CHROME EXTENSION</div>
-                        <p>Utvecklat Strava Connector (Manifest V3). Minskar friktion genom direkt-injektion på Strava.com.</p>
-                        <div class="bevis-footer">
-                            <a href="#" data-track="plugin_repo_click" class="btn btn-secondary">Repo Audit &rarr;</a>
-                        </div>
-                    </div>
-
-                    <!-- Box 5: Whitepaper -->
-                    <div class="bevis-box bevis-box-wide">
-                        <div class="bevis-header mono">STRATEGIC DOCUMENTATION</div>
-                        <p>Teknisk fallstudie som mappar tillväxt mot systemarkitektur. En fullständig genomgång av hur kod och data driver affärsnytta.</p>
-                        <div class="bevis-footer">
-                            <a href="whitepaper/" class="btn btn-secondary">Read Full Study &rarr;</a>
-                        </div>
+                        <p id="share-msg" class="share-success hidden">Link copied to clipboard!</p>
                     </div>
                 </div>
             </div>
@@ -125,48 +209,23 @@
 
         <section id="projects" class="section container">
             <div class="section-header">
-                <span class="meta-tag">// WORKS</span>
-                <h2 class="title">SELECTED WORKS</h2>
+                <span class="meta-tag">// 02 WORKS</span>
+                <h2 class="title">SELECTED PROJECTS</h2>
             </div>
             <div class="project-grid">
                 <article class="project-card large">
-                    <div class="card-content">
-                        <span class="meta-tag">CRM / Data</span>
-                        <h3>Stadium CRM Strategy</h3>
-                        <p>Lifecycle optimization for 5 million members. Behavior-driven communication architecture focused on retention.</p>
-                        <a href="https://www.canva.com/design/DAHA0yYertE/WhWWSm68VSjshSMm0LJjLA/view" class="btn btn-secondary" target="_blank">View Strategy &rarr;</a>
-                    </div>
+                    <span class="meta-tag">Growth Loop</span>
+                    <h3>The Predictor Engine</h3>
+                    <p>En Strava-baserad loop som konverterar användare via personliga data-audits.</p>
+                    <a href="/growth-lab/index.html" class="btn btn-cta" id="cta-growthlab" data-project-slug="growth-lab">Explore Growth Lab</a>
                 </article>
 
                 <article class="project-card">
-                    <div class="card-content">
-                        <span class="meta-tag">CRO / UX</span>
-                        <h3>Under Your Skin</h3>
-                        <p>Friction analysis and restructuring of e-commerce user journeys.</p>
-                        <a href="https://www.canva.com/design/DAG4SQHmODk/SmA4bdOTPDk_LDzSv7120Q/view" class="btn btn-secondary" target="_blank">Read Case &rarr;</a>
-                    </div>
+                    <span class="meta-tag">CRM</span>
+                    <h3>Stadium CRM Strategy</h3>
+                    <p>Behavior-driven retention för 5M medlemmar.</p>
+                    <a href="https://www.canva.com/design/DAHA0yYertE/WhWWSm68VSjshSMm0LJjLA/view" class="btn btn-secondary" target="_blank" data-project-slug="stadium-crm">View Case</a>
                 </article>
-            </div>
-        </section>
-
-        <section id="toolbox" class="section container">
-            <div class="section-header">
-                <span class="meta-tag">// SKILLS</span>
-                <h2 class="title">EXPERTISE</h2>
-            </div>
-            <div class="toolbox-grid">
-                <div class="toolbox-column">
-                    <h3>Analytics</h3>
-                    <ul><li>GTM & GA4</li><li>Looker Studio</li><li>DataLayer Logic</li></ul>
-                </div>
-                <div class="toolbox-column">
-                    <h3>Performance</h3>
-                    <ul><li>Meta & Google Ads</li><li>CRO & Funnels</li><li>CRM Triggers</li></ul>
-                </div>
-                <div class="toolbox-column">
-                    <h3>Technical</h3>
-                    <ul><li>Node.js / Express</li><li>HTML / CSS / JS</li><li>Git / CI/CD</li></ul>
-                </div>
             </div>
         </section>
 
@@ -177,23 +236,100 @@
                     <a href="https://www.linkedin.com/in/arvidstenhag" class="large-link" target="_blank">LinkedIn</a>
                     <a href="mailto:arvid.stenhag@student.berghs.se" class="large-link">Email</a>
                 </div>
-                <div class="footer-meta">
-                    <p>&copy; 2026 Arvid Stenhag // Built for Performance</p>
+                <div class="footer-meta mono">
+                    &copy; 2026 ARVID STENHAG // SYSTEM_MODE: PRODUCTION
                 </div>
             </div>
         </section>
     </main>
 
-    <script src="script.js"></script>
+    <script src="./script.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const config = window.SITE_CONFIG;
-            const repoLinks = document.querySelectorAll('a[data-track*="plugin"]');
-            repoLinks.forEach(link => {
-                if (config && config.PLUGIN_REPO_URL && !config.PLUGIN_REPO_URL.includes('TODO')) {
-                    link.href = config.PLUGIN_REPO_URL;
-                }
+        /**
+         * TECH X GROWTH ENGINE
+         */
+        
+        // 1. Tracking Helper
+        window.trackEvent = function(name, params = {}) {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                event: name,
+                timestamp: Date.now(),
+                ...params
             });
+            console.log(`[Tracking]: ${name}`, params);
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const formBox = document.getElementById('lead-magnet-form');
+            const unlockedBox = document.getElementById('lead-magnet-unlocked');
+
+            // Initialize Unlock State
+            if (localStorage.getItem('portfolio_leads_count')) {
+                formBox?.classList.add('hidden');
+                unlockedBox?.classList.remove('hidden');
+            }
+
+            // 2. Lead Magnet Logic
+            const signupForm = document.getElementById('portfolio-signup');
+            if (signupForm) {
+                signupForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const email = document.getElementById('signup-email').value;
+                    const name = document.getElementById('signup-name').value;
+                    
+                    if (email) {
+                        const domain = email.split('@')[1] || 'unknown';
+                        const timestamp = Date.now();
+                        
+                        // Storage Logic (Append)
+                        let leads = JSON.parse(localStorage.getItem('portfolio_leads') || '[]');
+                        leads.push({ email_domain: domain, timestamp, name: name || undefined });
+                        localStorage.setItem('portfolio_leads', JSON.stringify(leads));
+                        localStorage.setItem('portfolio_leads_count', leads.length);
+
+                        // Tracking
+                        window.trackEvent('portfolio_signup_submit', { email_domain: domain });
+                        
+                        // Switch UI
+                        formBox?.classList.add('hidden');
+                        unlockedBox?.classList.remove('hidden');
+                    }
+                });
+            }
+
+            // 3. Project & CTA Tracking
+            document.querySelectorAll('[data-project-slug]').forEach(el => {
+                el.addEventListener('click', () => {
+                    const slug = el.getAttribute('data-project-slug');
+                    window.trackEvent('portfolio_project_open', { project: slug });
+                    if (el.id === 'cta-growthlab') {
+                        window.trackEvent('portfolio_cta_growthlab_click');
+                    }
+                });
+            });
+
+            // 4. Whitepaper Tracking
+            document.getElementById('read-wp-link')?.addEventListener('click', () => {
+                window.trackEvent('portfolio_whitepaper_click', { format: 'html' });
+            });
+            document.getElementById('download-wp-link')?.addEventListener('click', () => {
+                window.trackEvent('portfolio_whitepaper_click', { format: 'pdf' });
+            });
+
+            // 5. Share Loop Logic
+            const shareBtn = document.getElementById('share-btn');
+            if (shareBtn) {
+                shareBtn.addEventListener('click', () => {
+                    const shareText = `Kolla in Arvid Stenhags Growth Portfolio - Teknik x Tillväxt: ${window.location.origin}${window.location.pathname}`;
+                    navigator.clipboard.writeText(shareText).then(() => {
+                        const msg = document.getElementById('share-msg');
+                        msg?.classList.remove('hidden');
+                        window.trackEvent('portfolio_share_click', { method: 'clipboard' });
+                        setTimeout(() => msg?.classList.add('hidden'), 3000);
+                    });
+                });
+            }
         });
     </script>
 </body>

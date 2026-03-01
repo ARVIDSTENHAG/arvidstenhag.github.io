@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Pace Badge Highlighter",
+  "version": "1.0",
+  "description": "Highlightar tider på webbsidor och lägger till Pace-badges (Demo för Growth Lab).",
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}

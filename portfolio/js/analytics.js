@@ -36,24 +36,29 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Track CTA button clicks
-    document.getElementById('cta-button').addEventListener('click', function() {
-        pushToDataLayer('cta_click', {
-            button_id: 'cta-button',
-            button_text: this.textContent
+    const ctaButton = document.getElementById('cta-button');
+    if (ctaButton) {
+        ctaButton.addEventListener('click', function() {
+            pushToDataLayer('cta_click', {
+                button_id: 'cta-button',
+                button_text: this.textContent
+            });
         });
-    });
+    }
     
     // Track product interactions
-    document.querySelectorAll('.add-to-cart').forEach(button => {
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    addToCartButtons.forEach(button => {
         button.addEventListener('click', function() {
             const product = this.closest('.product');
-            
-            pushToDataLayer('add_to_cart', {
-                product_id: product.dataset.productId,
-                product_name: product.dataset.productName,
-                product_price: parseFloat(product.dataset.productPrice),
-                currency: 'USD'
-            });
+            if (product) {
+                pushToDataLayer('add_to_cart', {
+                    product_id: product.dataset.productId,
+                    product_name: product.dataset.productName,
+                    product_price: parseFloat(product.dataset.productPrice),
+                    currency: 'USD'
+                });
+            }
         });
     });
 });

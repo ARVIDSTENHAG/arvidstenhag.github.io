@@ -2,8 +2,10 @@
  * STARTUP MVP ENGINE
  */
 
+// 1. CONFIG
 const config = window.SITE_CONFIG || { WHITEPAPER_URL: 'assets/whitepaper.pdf', SHARE_URL: window.location.href };
 
+// 2. FUNNEL LOGIC (State Management)
 const funnelState = {
     users: parseInt(localStorage.getItem('f_users') || 0),
     api: parseInt(localStorage.getItem('f_api') || 0),
@@ -18,14 +20,17 @@ function updateFunnel(key) {
 }
 
 function renderFunnel() {
-    const ids = ['stat-users', 'stat-api', 'stat-leads', 'stat-shares'];
-    ids.forEach(id => {
-        const el = document.getElementById(id);
-        const key = id.split('-')[1];
-        if(el) el.innerText = funnelState[key];
-    });
+    const u = document.getElementById('stat-users');
+    const a = document.getElementById('stat-api');
+    const l = document.getElementById('stat-leads');
+    const s = document.getElementById('stat-shares');
+    if(u) u.innerText = funnelState.users;
+    if(a) a.innerText = funnelState.api;
+    if(l) l.innerText = funnelState.leads;
+    if(s) s.innerText = funnelState.shares;
 }
 
+// Tracking Wrapper
 function trackEvent(name, params = {}) {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: name, timestamp: new Date().toISOString(), ...params });
@@ -35,9 +40,12 @@ function trackEvent(name, params = {}) {
         li.innerText = name;
         list.prepend(li);
     }
+    console.log(`[Growth Track]: ${name}`, params);
 }
 
+// 3. PERFORMANCE SCORE SYSTEM
 function calculateScore(timeStr) {
+    // Fake logic: 3:00:00 = 100 pts, 5:00:00 = 0 pts
     const parts = timeStr.split(':').map(Number);
     const totalMinutes = (parts[0] * 60) + parts[1];
     let score = Math.round(100 - ((totalMinutes - 180) / 1.2));
@@ -48,21 +56,26 @@ function updateScoreUI(score, time) {
     const circle = document.getElementById('score-circle');
     const val = document.getElementById('score-value');
     const badge = document.getElementById('score-badge');
+    const pct = document.getElementById('percentile-text');
+    
     if(val) val.innerText = score;
     if(badge) badge.innerText = `Score: ${score}/100`;
+    
     if(circle) {
-        if (score > 80) circle.style.borderColor = "#10b981";
-        else if (score > 60) circle.style.borderColor = "#f59e0b";
-        else circle.style.borderColor = "#ef4444";
+        if (score > 80) circle.style.borderColor = "#10b981"; // Success Green
+        else if (score > 60) circle.style.borderColor = "#f59e0b"; // Warning Orange
+        else circle.style.borderColor = "#ef4444"; // Danger Red
     }
-    document.getElementById('percentile-text').innerText = `You are faster than ${score + 2}% of analyzed runners.`;
+    
+    if(pct) pct.innerText = `You are faster than ${score + 2}% of analyzed runners.`;
 }
 
+// 4. SOCIAL PROOF: LEADERBOARD
 function addToLeaderboard(score, time) {
     let board = JSON.parse(localStorage.getItem('leaderboard') || '[]');
     board.push({ score, time, id: Date.now() });
     board.sort((a, b) => b.score - a.score);
-    board = board.slice(0, 5);
+    board = board.slice(0, 5); // Top 5
     localStorage.setItem('leaderboard', JSON.stringify(board));
     renderLeaderboard(board);
 }
@@ -72,19 +85,29 @@ function renderLeaderboard(board = null) {
     const list = document.getElementById('leaderboard-list');
     if(list) {
         list.innerHTML = board.map((item, idx) => `
-            <li><span>#${idx+1} Anonymous Athlete</span><strong>${item.score} pts (${item.time})</strong></li>
+            <li>
+                <span>#${idx+1} Anonymous Athlete</span>
+                <strong>${item.score} pts (${item.time})</strong>
+            </li>
         `).join('');
     }
 }
 
+// 5. EVENT HANDLERS
 document.getElementById('strava-connect')?.addEventListener('click', () => {
     updateFunnel('users');
     trackEvent('connect_click');
+    
+    // Simulate API Analysis
     setTimeout(() => {
         const time = "3:12:45";
         const score = calculateScore(time);
-        document.getElementById('strava-section')?.classList.remove('hidden');
-        document.getElementById('prediction-result').innerText = time;
+        
+        const section = document.getElementById('strava-section');
+        const res = document.getElementById('prediction-result');
+        if(section) section.classList.remove('hidden');
+        if(res) res.innerText = time;
+        
         updateScoreUI(score, time);
         addToLeaderboard(score, time);
         updateFunnel('api');
@@ -98,6 +121,8 @@ document.getElementById('signup-form')?.addEventListener('submit', (e) => {
     trackEvent('signup_submit');
     document.getElementById('lead-form-container')?.classList.add('hidden');
     document.getElementById('unlocked-container')?.classList.remove('hidden');
+    const dl = document.getElementById('download-link');
+    if(dl) dl.href = config.WHITEPAPER_URL;
 });
 
 document.getElementById('share-btn')?.addEventListener('click', () => {
@@ -109,5 +134,6 @@ document.getElementById('share-btn')?.addEventListener('click', () => {
     alert("Result copied to clipboard!");
 });
 
+// Init
 renderFunnel();
 renderLeaderboard();
