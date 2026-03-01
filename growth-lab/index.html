@@ -149,20 +149,32 @@
         <a href="../index.html" class="back-link mono">&larr; Return to Infrastructure</a>
     </div>
 
+    <!-- Technical Infrastructure -->
+    <script src="../config.js"></script>
+    <script src="../script.js"></script>
+
     <script>
         console.log("Growth Lab Loaded");
 
-        // Simple Tracking Push for the Growth Lab CTA
+        // 1. CTA Tracking & Navigation to Render Backend
         document.getElementById('strava-connect-btn')?.addEventListener('click', function() {
-            console.log("Connecting to Strava...");
+            console.log("Connecting to Strava via Render Backend...");
+            
+            // Push to dataLayer for tracking
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
                 'event': 'growth_lab_connect_click',
                 'experiment': 'marathon_predictor'
             });
             
-            // Placeholder alert to simulate action
-            alert("Connecting to Strava API via Node.js/Render engine...");
+            // Redirect to Strava Auth on Render
+            if (window.SITE_CONFIG?.API_BASE) {
+                window.location.href = window.SITE_CONFIG.API_BASE + "/auth/strava";
+            } else {
+                console.error("Critical: SITE_CONFIG not loaded.");
+                // Fallback if config failed for some reason
+                window.location.href = "https://strava-backend-n6zk.onrender.com/auth/strava";
+            }
         });
     </script>
 </body>
