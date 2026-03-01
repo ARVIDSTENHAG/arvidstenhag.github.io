@@ -1,113 +1,135 @@
 /**
- * STARTUP MVP ENGINE
+ * SYSTEM RUNTIME (LOVE + POLESTAR STYLE)
  */
 
-const config = window.SITE_CONFIG || { WHITEPAPER_URL: 'assets/whitepaper.pdf', SHARE_URL: window.location.href };
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // 1. Centralized Click Handler (Robust & Safe)
+    document.addEventListener('click', (e) => {
+        const target = e.target;
 
-const funnelState = {
-    users: parseInt(localStorage.getItem('f_users') || 0),
-    api: parseInt(localStorage.getItem('f_api') || 0),
-    leads: parseInt(localStorage.getItem('f_leads') || 0),
-    shares: parseInt(localStorage.getItem('f_shares') || 0)
-};
+        // A. Handle Navigation & Anchors
+        const anchor = target.closest('a[href^="#"]');
+        if (anchor) {
+            const id = anchor.getAttribute('href');
+            if (id === '#') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
 
-function updateFunnel(key) {
-    funnelState[key]++;
-    localStorage.setItem(`f_${key}`, funnelState[key]);
-    renderFunnel();
-}
+            const targetElement = document.querySelector(id);
+            if (targetElement) {
+                e.preventDefault();
+                const offset = 80; // Adjusted for sticky nav
+                const bodyRect = document.body.getBoundingClientRect().top;
+                const elementRect = targetElement.getBoundingClientRect().top;
+                const elementPosition = elementRect - bodyRect;
+                const offsetPosition = elementPosition - offset;
 
-function renderFunnel() {
-    const ids = ['stat-users', 'stat-api', 'stat-leads', 'stat-shares'];
-    ids.forEach(id => {
-        const el = document.getElementById(id);
-        const key = id.split('-')[1];
-        if(el) el.innerText = funnelState[key];
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+                
+                if (window.trackEvent) window.trackEvent('nav_scroll', { target: id });
+            }
+        }
+
+        // B. Handle System Actions
+        const actionEl = target.closest('[data-action]');
+        if (actionEl) {
+            const action = actionEl.getAttribute('data-action');
+            handleAction(action);
+        }
+
+        // C. Track data-track elements
+        const trackEl = target.closest('[data-track]');
+        if (trackEl && window.trackEvent) {
+            window.trackEvent('interaction', { id: trackEl.getAttribute('data-track') });
+        }
     });
-}
 
-function trackEvent(name, params = {}) {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: name, timestamp: new Date().toISOString(), ...params });
-    const list = document.getElementById('debug-list');
-    if (list) {
-        const li = document.createElement('li');
-        li.innerText = name;
-        list.prepend(li);
+    // 2. Action Logic
+    function handleAction(action) {
+        switch(action) {
+            case 'strava-connect':
+                const clientId = '205442';
+                const redirectUri = window.location.origin + window.location.pathname;
+                const scope = 'read,activity:read_all';
+                const authUrl = `https://www.strava.com/oauth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&approval_prompt=force&scope=${scope}`;
+                
+                if (window.trackEvent) window.trackEvent('lead_magnet_usage', { type: 'strava_oauth_init' });
+                localStorage.setItem('lead_magnet_done', 'true');
+                window.location.href = authUrl;
+                break;
+                
+            case 'scroll-top':
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                break;
+        }
     }
-}
 
-function calculateScore(timeStr) {
-    const parts = timeStr.split(':').map(Number);
-    const totalMinutes = (parts[0] * 60) + parts[1];
-    let score = Math.round(100 - ((totalMinutes - 180) / 1.2));
-    return Math.max(5, Math.min(99, score));
-}
+    // 3. ScrollSpy (Active Nav Highlighting)
+    const navLinks = document.querySelectorAll('.nav a[href^="#"]');
+    const sections = Array.from(navLinks).map(link => document.querySelector(link.getAttribute('href'))).filter(s => s !== null);
 
-function updateScoreUI(score, time) {
-    const circle = document.getElementById('score-circle');
-    const val = document.getElementById('score-value');
-    const badge = document.getElementById('score-badge');
-    if(val) val.innerText = score;
-    if(badge) badge.innerText = `Score: ${score}/100`;
-    if(circle) {
-        if (score > 80) circle.style.borderColor = "#10b981";
-        else if (score > 60) circle.style.borderColor = "#f59e0b";
-        else circle.style.borderColor = "#ef4444";
+    window.addEventListener('scroll', () => {
+        let current = "";
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= (sectionTop - 200)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    }, { passive: true });
+
+    // 4. API Success Check (from URL params)
+    const code = new URLSearchParams(window.location.search).get('code');
+    if (code) {
+        const API_URL = "https://strava-backend-n6zk.onrender.com/exchange";
+        fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ code: code })
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log('[System] API Connection Verified');
+            localStorage.setItem('api_done', 'true');
+            // Notify tracking
+            if (window.trackEvent) window.trackEvent('api_connection_success');
+        })
+        .catch(err => console.error('[System] API Fetch Error:', err));
     }
-    document.getElementById('percentile-text').innerText = `You are faster than ${score + 2}% of analyzed runners.`;
-}
+    // 5. White Paper PDF Toggle
+    const toggleBtn = document.getElementById('toggle-inline-pdf');
+    const pdfWrap = document.getElementById('pdf-viewer-wrap');
 
-function addToLeaderboard(score, time) {
-    let board = JSON.parse(localStorage.getItem('leaderboard') || '[]');
-    board.push({ score, time, id: Date.now() });
-    board.sort((a, b) => b.score - a.score);
-    board = board.slice(0, 5);
-    localStorage.setItem('leaderboard', JSON.stringify(board));
-    renderLeaderboard(board);
-}
-
-function renderLeaderboard(board = null) {
-    if (!board) board = JSON.parse(localStorage.getItem('leaderboard') || '[]');
-    const list = document.getElementById('leaderboard-list');
-    if(list) {
-        list.innerHTML = board.map((item, idx) => `
-            <li><span>#${idx+1} Anonymous Athlete</span><strong>${item.score} pts (${item.time})</strong></li>
-        `).join('');
+    if (toggleBtn && pdfWrap) {
+        toggleBtn.addEventListener('click', () => {
+            const isVisible = pdfWrap.classList.contains('pdf-visible');
+            
+            if (isVisible) {
+                pdfWrap.classList.remove('pdf-visible');
+                pdfWrap.classList.add('pdf-hidden');
+                toggleBtn.textContent = 'Read Inline';
+            } else {
+                pdfWrap.classList.remove('pdf-hidden');
+                pdfWrap.classList.add('pdf-visible');
+                toggleBtn.textContent = 'Close Preview';
+                
+                if (window.trackEvent) {
+                    window.trackEvent('whitepaper_inline_view', { method: 'button_toggle' });
+                }
+            }
+        });
     }
-}
-
-document.getElementById('strava-connect')?.addEventListener('click', () => {
-    updateFunnel('users');
-    trackEvent('connect_click');
-    setTimeout(() => {
-        const time = "3:12:45";
-        const score = calculateScore(time);
-        document.getElementById('strava-section')?.classList.remove('hidden');
-        document.getElementById('prediction-result').innerText = time;
-        updateScoreUI(score, time);
-        addToLeaderboard(score, time);
-        updateFunnel('api');
-        trackEvent('api_success', { score });
-    }, 1500);
 });
-
-document.getElementById('signup-form')?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    updateFunnel('leads');
-    trackEvent('signup_submit');
-    document.getElementById('lead-form-container')?.classList.add('hidden');
-    document.getElementById('unlocked-container')?.classList.remove('hidden');
-});
-
-document.getElementById('share-btn')?.addEventListener('click', () => {
-    const time = document.getElementById('prediction-result')?.innerText || "3:12:45";
-    const text = `I just got my marathon prediction (${time}) on Growth Lab. Beat me 👉 ${config.SHARE_URL}`;
-    navigator.clipboard.writeText(text);
-    updateFunnel('shares');
-    trackEvent('share_click');
-    alert("Result copied to clipboard!");
-});
-
-renderFunnel();
-renderLeaderboard();
