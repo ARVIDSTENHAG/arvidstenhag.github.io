@@ -1,56 +1,40 @@
 /**
- * ARCHITECTURE: Tracking & System Monitoring
- * Exposed via window.trackEvent
+ * TRACKING HELPER - Core Verification Engine
  */
 
 window.trackEvent = function(name, params = {}) {
     const eventData = {
         event: name,
         timestamp: new Date().toISOString(),
-        page: window.location.pathname,
+        page_path: window.location.pathname,
         ...params
     };
 
-    // Push to GTM
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push(eventData);
+    // 1. Push to GTM dataLayer
+    if (window.dataLayer) {
+        window.dataLayer.push(eventData);
+    } else {
+        console.warn('dataLayer missing - Event logged locally only:', name);
+    }
 
-    // Persist for Audit (Max 50)
-    let log = JSON.parse(localStorage.getItem('sys_audit_log') || '[]');
-    log.unshift(eventData);
-    localStorage.setItem('sys_audit_log', JSON.stringify(log.slice(0, 50)));
+    // 2. Persist in localStorage for Proof/Audit (max 50)
+    let eventLog = JSON.parse(localStorage.getItem('event_log') || '[]');
+    eventLog.unshift(eventData);
+    localStorage.setItem('event_log', JSON.stringify(eventLog.slice(0, 50)));
 
-    // Update Debug UI if active
-    if (window.showDebugPanel) window.showDebugPanel();
+    // 3. Notify Growth Lab UI to update live
+    window.dispatchEvent(new CustomEvent('tracking_updated', { detail: eventData }));
     
-    console.log(`[System.Track] ${name}`, params);
+    console.log(`[Event Tracked]: ${name}`, params);
 };
 
-// Internal Debug Mode (?debug=1)
-(function() {
-    if (new URLSearchParams(window.location.search).get('debug') === '1') {
-        const panel = document.createElement('div');
-        panel.id = 'debug-runtime-panel';
-        panel.style.cssText = 'position:fixed; bottom:0; right:0; width:300px; height:200px; background:rgba(0,0,0,0.9); color:#0f0; font-family:monospace; font-size:10px; padding:10px; z-index:9999; overflow-y:auto; border-top:1px solid #333; pointer-events:auto;';
-        panel.innerHTML = `
-            <div style="border-bottom:1px solid #333; padding-bottom:5px; margin-bottom:5px; display:flex; justify-content:space-between;">
-                <span>RUNTIME_DEBUG: ACTIVE</span>
-                <span onclick="this.parentElement.parentElement.remove()" style="cursor:pointer;">[X]</span>
-            </div>
-            <div id="debug-log-content"></div>
-        `;
-        document.body.appendChild(panel);
-
-        window.showDebugPanel = function() {
-            const content = document.getElementById('debug-log-content');
-            if (!content) return;
-            const log = JSON.parse(localStorage.getItem('sys_audit_log') || '[]');
-            content.innerHTML = log.map(e => `<div>[${e.timestamp.split('T')[1].split('.')[0]}] ${e.event}</div>`).join('');
-        };
-        window.showDebugPanel();
-
-        window.onerror = function(msg, url, line) {
-            window.trackEvent('js_error', { msg, line });
-        };
+// Global Outbound Link Tracking
+document.addEventListener('click', function(e) {
+    const link = e.target.closest('a');
+    if (link && link.hostname && link.hostname !== window.location.hostname) {
+        window.trackEvent('outbound_link_click', {
+            link_url: link.href,
+            link_text: link.innerText.trim()
+        });
     }
-})();
+});

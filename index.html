@@ -194,5 +194,26 @@
     </main>
 
     <script src="script.js"></script>
+    <script>
+        // --- CONFIGURATION ---
+        const PLUGIN_REPO_URL = 'https://github.com/arvidstenhag/strava-runner-predictor'; // TODO: Bekräfta korrekt URL
+        // ---------------------
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const repoLink = document.querySelector('a[data-track="plugin_repo_click"]');
+            if (repoLink) {
+                repoLink.addEventListener('click', (e) => {
+                    if (!PLUGIN_REPO_URL || PLUGIN_REPO_URL.includes('TODO')) {
+                        e.preventDefault();
+                        alert('Repository link is being updated. Please check back soon.');
+                        return;
+                    }
+                    window.trackEvent('plugin_repo_click', { url: PLUGIN_REPO_URL });
+                    localStorage.setItem('plugin_done', 'true');
+                });
+                repoLink.href = PLUGIN_REPO_URL || '#';
+            }
+        });
+    </script>
 </body>
 </html>
