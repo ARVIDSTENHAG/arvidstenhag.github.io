@@ -1,8 +1,7 @@
 /**
- * TRACKING HELPER - Core Verification Engine
+ * TRACKING HELPER: Handles dataLayer pushes and local event logging
  */
-
-window.trackEvent = function(name, params = {}) {
+window.trackEvent = (name, params = {}) => {
     const eventData = {
         event: name,
         timestamp: new Date().toISOString(),
@@ -10,31 +9,17 @@ window.trackEvent = function(name, params = {}) {
         ...params
     };
 
-    // 1. Push to GTM dataLayer
-    if (window.dataLayer) {
-        window.dataLayer.push(eventData);
-    } else {
-        console.warn('dataLayer missing - Event logged locally only:', name);
-    }
+    // 1. Push to Google Tag Manager
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(eventData);
 
-    // 2. Persist in localStorage for Proof/Audit (max 50)
-    let eventLog = JSON.parse(localStorage.getItem('event_log') || '[]');
-    eventLog.unshift(eventData);
-    localStorage.setItem('event_log', JSON.stringify(eventLog.slice(0, 50)));
+    // 2. Save in localStorage for Growth Lab audit (max 50)
+    let log = JSON.parse(localStorage.getItem('event_log') || '[]');
+    log.unshift(eventData);
+    localStorage.setItem('event_log', JSON.stringify(log.slice(0, 50)));
 
-    // 3. Notify Growth Lab UI to update live
+    // 3. Trigger global event for UI updates
     window.dispatchEvent(new CustomEvent('tracking_updated', { detail: eventData }));
     
-    console.log(`[Event Tracked]: ${name}`, params);
+    console.log(`[Track] ${name}:`, params);
 };
-
-// Global Outbound Link Tracking
-document.addEventListener('click', function(e) {
-    const link = e.target.closest('a');
-    if (link && link.hostname && link.hostname !== window.location.hostname) {
-        window.trackEvent('outbound_link_click', {
-            link_url: link.href,
-            link_text: link.innerText.trim()
-        });
-    }
-});

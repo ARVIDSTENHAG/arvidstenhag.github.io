@@ -1,99 +1,89 @@
 /**
- * GROWTH LAB - Verification Logic
+ * GROWTH LAB: Verification and Flag Management
  */
 
-// --- CONFIGURATION ---
-const API_BASE = 'https://strava-backend-n6zk.onrender.com'; // TODO: Bekräfta att detta är din Render URL
-const API_ENDPOINT = '/exchange'; // Vi testar exchange-endpointen som ett ping
-// ---------------------
-
 document.addEventListener('DOMContentLoaded', () => {
-    refreshUI();
+    updateChecklist();
 
-    // 1. Verify Tracking Button
+    // 1. "Verify Tracking" Button
     const verifyBtn = document.getElementById('verify-tracking');
     if (verifyBtn) {
         verifyBtn.addEventListener('click', () => {
-            window.trackEvent('tracking_verify', { source: 'growth_lab_manual' });
+            window.trackEvent('tracking_verify', { source: 'growth-lab' });
             localStorage.setItem('tracking_verified', 'true');
             
-            const output = document.getElementById('api-result'); // Återanvänd log-boxen
+            // Show feedback in UI
+            const output = document.getElementById('api-result');
             if (output) {
-                output.innerHTML = `<span style="color:#0f0">> Event 'tracking_verify' sent to dataLayer. Check GTM Preview!</span>`;
+                output.innerHTML = `<span style="color:#0f0">> Event sent: tracking_verify (${new Date().toLocaleTimeString()})</span>`;
             }
-            refreshUI();
+            updateChecklist();
         });
     }
 
-    // 2. API Prediction Test Button
+    // 2. "Run API Prediction Test" Button
     const apiBtn = document.getElementById('test-api-btn');
     const apiResult = document.getElementById('api-result');
-
-    if (apiBtn) {
+    
+    if (apiBtn && apiResult) {
         apiBtn.addEventListener('click', async () => {
-            if (!apiResult) return;
-            apiResult.innerText = '> Initiating API fetch to ' + API_BASE + '...';
+            const config = window.SITE_CONFIG;
+            
+            if (!config || !config.API_BASE || config.API_BASE.includes('TODO')) {
+                apiResult.innerHTML = `<span style="color:#ff0000">> ERROR: Set API_BASE in /assets/config.js</span>`;
+                return;
+            }
+
+            apiResult.innerText = `> Fetching ${config.API_BASE}${config.API_ENDPOINT}...`;
             
             try {
-                // Vi gör en POST med test-data för att verifiera anslutning
-                const response = await fetch(`${API_BASE}${API_ENDPOINT}`, {
+                const response = await fetch(config.API_BASE + config.API_ENDPOINT, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ test: true })
                 });
                 
                 const status = response.status;
-                const data = await response.json().catch(() => ({ message: "No JSON response" }));
+                const data = await response.json().catch(() => ({ message: "No JSON" }));
 
                 apiResult.innerHTML = `
-                    <div style="color:#0f0">> STATUS: ${status}</div>
-                    <div style="color:#888">> RESPONSE: ${JSON.stringify(data).substring(0, 300)}</div>
-                    <div style="color:#444">> TIME: ${new Date().toLocaleTimeString()}</div>
+                    <div style="color:#0f0">> Status: ${status}</div>
+                    <div>> Body: ${JSON.stringify(data).substring(0, 500)}</div>
+                    <div style="color:#888">> Time: ${new Date().toLocaleTimeString()}</div>
                 `;
 
-                // Om vi får svar (även 400/500 så länge det är från vår server) så är API-kravet bevisat
-                window.trackEvent('api_fetch_success', { status: status });
-                localStorage.setItem('api_done', 'true');
-                
-            } catch (error) {
-                // Fallback: Prova en enkel GET om POST failar (CORS/Sleep)
-                apiResult.innerHTML += `<div style="color:#ff4500">> Error: ${error.message}. Trying health ping...</div>`;
-                try {
-                    const res = await fetch(API_BASE);
-                    apiResult.innerHTML += `<div style="color:#0f0">> Health Ping Success: ${res.status}</div>`;
+                if (status === 200) {
                     localStorage.setItem('api_done', 'true');
-                    window.trackEvent('api_fetch_success', { status: res.status, method: 'ping' });
-                } catch (err) {
-                    apiResult.innerHTML += `<div style="color:#f00">> Critical Error: Could not reach server.</div>`;
-                    window.trackEvent('api_fetch_error', { msg: err.message });
+                    window.trackEvent('api_fetch_success', { status });
+                    updateChecklist();
                 }
+            } catch (error) {
+                apiResult.innerHTML = `<span style="color:#f00">> FETCH ERROR: ${error.message}</span>`;
+                window.trackEvent('api_fetch_error', { message: error.message });
             }
-            refreshUI();
         });
     }
 
-    // Live update of event log
-    window.addEventListener('tracking_updated', (e) => {
-        renderEventLog();
-    });
+    // 3. Listen for live tracking updates
+    window.addEventListener('tracking_updated', updateChecklist);
 });
 
-function refreshUI() {
-    // Uppdatera checklistan (✅/⚠️) baserat på localStorage
-    const flags = [
-        'lead_magnet_done',
-        'tracking_verified',
-        'api_done',
-        'whitepaper_done',
-        'plugin_done'
-    ];
-
-    flags.forEach(key => {
-        const li = document.querySelector(`li[data-flag="${key}"]`);
+function updateChecklist() {
+    // Flags mapping: localStorage key -> data-flag attribute
+    const flags = {
+        'lead_magnet_done': 'lead_magnet_done',
+        'tracking_verified': 'tracking_verified',
+        'api_done': 'api_done',
+        'whitepaper_done': 'whitepaper_done',
+        'plugin_done': 'plugin_done'
+    };
+    
+    Object.keys(flags).forEach(key => {
+        const li = document.querySelector(`li[data-flag="${flags[key]}"]`);
         if (li && localStorage.getItem(key) === 'true') {
             const span = li.querySelector('span');
             if (span) span.innerText = '✅';
-            li.style.color = '#fff';
+            li.style.color = '#fff'; // Highlight completed
         }
     });
 
@@ -108,13 +98,8 @@ function renderEventLog() {
             <tr>
                 <td>${ev.timestamp.split('T')[1].split('.')[0]}</td>
                 <td><strong>${ev.event}</strong></td>
-                <td>${JSON.stringify(paramsToString(ev))}</td>
+                <td>${ev.page_path}</td>
             </tr>
         `).join('');
     }
-}
-
-function paramsToString(ev) {
-    const { event, timestamp, ...rest } = ev;
-    return rest;
 }

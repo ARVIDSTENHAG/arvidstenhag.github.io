@@ -15,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="assets/config.js"></script>
     <script src="assets/tracking.js"></script>
 </head>
 <body class="love-layout">
@@ -103,7 +104,7 @@
                             <h3>CHROME EXTENSION</h3>
                             <p>The Strava Connector reduces friction by injecting functionality directly into the user flow. This companion extension manipulates the Strava DOM to provide instant value within the platform's native interface.</p>
                             <div class="gt-action">
-                                <a href="https://github.com/arvidstenhag/strava-connector" class="btn btn-secondary" target="_blank">Repository Audit &rarr;</a>
+                                <a href="#" data-track="plugin_repo_click" class="btn btn-secondary" target="_blank">Repository Audit &rarr;</a>
                             </div>
                         </div>
                     </div>
@@ -195,24 +196,32 @@
 
     <script src="script.js"></script>
     <script>
-        // --- CONFIGURATION ---
-        const PLUGIN_REPO_URL = 'https://github.com/arvidstenhag/strava-runner-predictor'; // TODO: Bekräfta korrekt URL
-        // ---------------------
-
         document.addEventListener('DOMContentLoaded', () => {
-            const repoLink = document.querySelector('a[data-track="plugin_repo_click"]');
-            if (repoLink) {
-                repoLink.addEventListener('click', (e) => {
-                    if (!PLUGIN_REPO_URL || PLUGIN_REPO_URL.includes('TODO')) {
-                        e.preventDefault();
-                        alert('Repository link is being updated. Please check back soon.');
-                        return;
-                    }
-                    window.trackEvent('plugin_repo_click', { url: PLUGIN_REPO_URL });
-                    localStorage.setItem('plugin_done', 'true');
-                });
-                repoLink.href = PLUGIN_REPO_URL || '#';
-            }
+            const config = window.SITE_CONFIG;
+            const repoLinks = document.querySelectorAll('a[data-track*="plugin"]');
+            
+            repoLinks.forEach(link => {
+                const isTodo = !config || !config.PLUGIN_REPO_URL || config.PLUGIN_REPO_URL.includes('TODO');
+                
+                if (isTodo) {
+                    link.href = "#";
+                    link.style.opacity = "0.5";
+                    link.style.cursor = "not-allowed";
+                    
+                    const info = document.createElement('div');
+                    info.className = 'mono';
+                    info.style.fontSize = '0.6rem';
+                    info.style.marginTop = '0.5rem';
+                    info.innerText = "(Repo link not set yet)";
+                    link.parentElement.appendChild(info);
+                } else {
+                    link.href = config.PLUGIN_REPO_URL;
+                    link.addEventListener('click', () => {
+                        localStorage.setItem('plugin_done', 'true');
+                        window.trackEvent('plugin_repo_click', { url: config.PLUGIN_REPO_URL });
+                    });
+                }
+            });
         });
     </script>
 </body>

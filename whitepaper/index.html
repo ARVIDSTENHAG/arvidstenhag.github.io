@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Whitepaper: Technical Growth Strategies | Arvid Stenhag</title>
+    <title>Whitepaper: Technical Case Study | Arvid Stenhag</title>
     <!-- GTM -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -15,6 +15,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
+    <script src="../assets/config.js"></script>
+    <script src="../assets/tracking.js"></script>
     <style>
         .wp-container { max-width: 800px; margin: 4rem auto; padding: 0 2rem; }
         .wp-hero { background: #111; padding: 4rem; border-left: 8px solid #fff; margin-bottom: 4rem; }
@@ -50,29 +52,24 @@
         <section class="wp-content">
             <p>Denna fallstudie djupdyker i den tekniska arkitekturen bakom moderna growth loops. Genom att kombinera realtidsdata från externa API:er med automatiserad event-tracking skapar vi system som inte bara mäter tillväxt, utan driver den.</p>
             
-            <ul class="wp-list">
-                <li><strong>API Orchestration:</strong> Hur man hanterar OAuth 2.0 flöden säkert i molnmiljöer.</li>
-                <li><strong>Event Engineering:</strong> Implementering av avancerad tracking utan att kompromissa med prestanda.</li>
-                <li><strong>Growth Loops:</strong> Skapandet av tekniska "Lead Magnets" som ger omedelbart värde.</li>
-            </ul>
-
             <div class="download-cta">
                 <h3 class="title" style="font-size: 1.5rem; margin-bottom: 1.5rem;">EXPLORE THE CASE STUDY</h3>
-                <p style="margin-bottom: 2rem; color: #888;">Läs den fullständiga tekniska dokumentationen online (HTML).</p>
-                <a href="../assets/whitepaper.html" id="download-wp-btn" class="btn" target="_blank">Read Case Study &rarr;</a>
+                <p style="margin-bottom: 2rem; color: #888;">Läs den fullständiga tekniska dokumentationen inline.</p>
+                
+                <!-- Länkar till sektionen på startsidan för att garantera att det funkar -->
+                <a href="../#methodology" id="read-wp-btn" class="btn">Read the Case Study &rarr;</a>
+                
+                <div style="margin-top: 1rem;">
+                    <span class="mono" style="font-size: 0.7rem; color: #444;">Download PDF (Coming soon)</span>
+                </div>
             </div>
         </section>
     </main>
 
-    <footer class="footer container">
-        <p>&copy; 2026 Arvid Stenhag // Technical Whitepaper // Distributed via Social Channels</p>
-    </footer>
-
-    <script src="../assets/tracking.js"></script>
     <script>
-        document.getElementById('download-wp-btn').addEventListener('click', function() {
-            window.trackEvent('whitepaper_open', { asset: 'technical_case_study_v1' });
+        document.getElementById('read-wp-btn').addEventListener('click', () => {
             localStorage.setItem('whitepaper_done', 'true');
+            window.trackEvent('whitepaper_open', { method: 'inline_read' });
         });
     </script>
 </body>
