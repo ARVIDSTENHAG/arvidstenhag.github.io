@@ -169,11 +169,11 @@
             
             // Redirect to Strava Auth on Render
             if (window.SITE_CONFIG?.API_BASE) {
-                window.location.href = window.SITE_CONFIG.API_BASE + "/auth/strava";
+                window.location.href = window.SITE_CONFIG.API_BASE + "/login";
             } else {
                 console.error("Critical: SITE_CONFIG not loaded.");
                 // Fallback if config failed for some reason
-                window.location.href = "https://strava-backend-n6zk.onrender.com/auth/strava";
+                window.location.href = "https://strava-backend-n6zk.onrender.com/login";
             }
         });
     </script>

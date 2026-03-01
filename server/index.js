@@ -30,7 +30,7 @@ const FRONTEND_URL = "https://arvidstenhag.github.io/growth-lab/";
  * 1. Start Strava Auth
  * Redirects user to Strava's OAuth page
  */
-app.get('/auth/strava', (req, res) => {
+app.get('/login', (req, res) => {
     const scope = 'read,activity:read_all';
     const authUrl = `https://www.strava.com/oauth/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&approval_prompt=force&scope=${scope}`;
     console.log("Redirecting to Strava:", authUrl);
