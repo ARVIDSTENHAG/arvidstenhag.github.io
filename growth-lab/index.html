@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strava Marathon Predictor | Growth Lab</title>
+    
+    <!-- Google Tag Manager (Using the same ID as in the root) -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NJW2V9RX');</script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --polestar-white: #ffffff;
+            --polestar-black: #000000;
+            --strava-orange: #fc4c02;
+            --border-thin: 1px solid #e0e0e0;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--polestar-white);
+            color: var(--polestar-black);
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .mono { font-family: 'Roboto Mono', monospace; }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .lab-tag {
+            font-size: 0.7rem;
+            color: #999;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            letter-spacing: -0.05em;
+            margin: 0 0 3rem 0;
+            line-height: 1.1;
+        }
+
+        .predictor-box {
+            border: var(--border-thin);
+            padding: 4rem 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .result-label {
+            font-size: 0.75rem;
+            color: #666;
+            letter-spacing: 0.05em;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+
+        .result-time {
+            font-size: 5rem;
+            font-weight: 700;
+            margin: 0 0 1rem 0;
+            letter-spacing: -0.02em;
+        }
+
+        .result-margin {
+            font-size: 1rem;
+            color: #999;
+            margin-bottom: 3rem;
+        }
+
+        .btn-strava {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--polestar-black);
+            color: var(--polestar-white);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-strava:hover {
+            opacity: 0.8;
+            transform: translateY(-2px);
+        }
+
+        .back-link {
+            margin-top: 4rem;
+            font-size: 0.8rem;
+            color: #666;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .back-link:hover {
+            border-bottom-color: #666;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .result-time { font-size: 3.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW2V9RX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <div class="container">
+        <span class="mono lab-tag">// Growth Lab: Experiment 01</span>
+        <h1 class="mono">Strava Marathon Predictor</h1>
+
+        <div class="predictor-box">
+            <span class="mono result-label">ESTIMATED_FINISH_TIME</span>
+            <div class="result-time">3:11:51</div>
+            <div class="mono result-margin">± 6–10 min</div>
+            
+            <button class="btn-strava" id="strava-connect-btn">Connect Strava</button>
+        </div>
+
+        <a href="../index.html" class="back-link mono">&larr; Return to Infrastructure</a>
+    </div>
+
+    <script>
+        console.log("Growth Lab Loaded");
+
+        // Simple Tracking Push for the Growth Lab CTA
+        document.getElementById('strava-connect-btn')?.addEventListener('click', function() {
+            console.log("Connecting to Strava...");
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'event': 'growth_lab_connect_click',
+                'experiment': 'marathon_predictor'
+            });
+            
+            // Placeholder alert to simulate action
+            alert("Connecting to Strava API via Node.js/Render engine...");
+        });
+    </script>
+</body>
+</html>
