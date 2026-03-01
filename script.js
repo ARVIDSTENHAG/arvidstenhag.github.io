@@ -1,13 +1,11 @@
 /**
  * SYSTEM RUNTIME (LOVE + POLESTAR STYLE)
  */
-
 document.addEventListener('DOMContentLoaded', () => {
     
     // 1. Centralized Click Handler (Robust & Safe)
     document.addEventListener('click', (e) => {
         const target = e.target;
-
         // A. Handle Navigation & Anchors
         const anchor = target.closest('a[href^="#"]');
         if (anchor) {
@@ -17,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 return;
             }
-
             const targetElement = document.querySelector(id);
             if (targetElement) {
                 e.preventDefault();
