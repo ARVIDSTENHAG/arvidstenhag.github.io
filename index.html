@@ -49,6 +49,67 @@
             letter-spacing: 0.1em;
         }
 
+        /* --- Growth Loop Popup Style --- */
+        #growth-popup {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 320px;
+            background: var(--polestar-black);
+            color: var(--polestar-white);
+            padding: 2.5rem 2rem;
+            border: var(--border-dark);
+            z-index: 2000;
+            transform: translateY(150%);
+            transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+
+        #growth-popup.active { transform: translateY(0); }
+
+        .popup-tag { font-size: 0.6rem; color: #555; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.2rem; display: block; }
+        .popup-title { font-size: 1.4rem; font-weight: 300; margin: 0 0 1rem 0; letter-spacing: -0.02em; line-height: 1.2; }
+        .popup-text { font-size: 0.85rem; color: #aaa; margin-bottom: 1.8rem; line-height: 1.6; }
+
+        .popup-form { display: flex; flex-direction: column; gap: 0.8rem; }
+        .popup-form input {
+            background: #111;
+            border: 1px solid #222;
+            padding: 1rem;
+            color: white;
+            font-size: 0.85rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .popup-form input:focus { border-color: #444; }
+        
+        .popup-form button {
+            background: white;
+            color: black;
+            border: none;
+            padding: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .popup-form button:hover { background: #eee; transform: translateY(-1px); }
+
+        #close-popup {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: none;
+            border: none;
+            color: #444;
+            font-size: 0.65rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
         /* Navigation */
         nav {
             position: fixed;
@@ -108,31 +169,6 @@
             transition: opacity 0.3s;
         }
 
-        /* System Architecture Section */
-        #architecture {
-            background: var(--polestar-black);
-            color: var(--polestar-white);
-            padding: 12rem 2rem;
-        }
-
-        .arch-header { border-bottom: var(--border-dark); padding-bottom: 2rem; margin-bottom: 6rem; }
-        .arch-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 4rem;
-        }
-
-        .arch-block {
-            padding-top: 1.5rem;
-            border-top: 1px solid #222;
-        }
-
-        .arch-label { font-size: 0.65rem; color: #555; text-transform: uppercase; margin-bottom: 1.5rem; letter-spacing: 0.1em; }
-        .arch-text { font-size: 0.85rem; line-height: 1.8; color: #aaa; }
-        .arch-code { color: var(--polestar-white); display: block; margin-bottom: 1rem; font-weight: 400; font-size: 1rem; }
-
-        .arch-link { color: #fff; text-decoration: underline; }
-
         /* Footer */
         footer { padding: 8rem 2rem; border-top: var(--border-thin); }
         .footer-grid { display: flex; justify-content: space-between; align-items: flex-end; }
@@ -152,6 +188,18 @@
             </div>
         </div>
     </nav>
+
+    <!-- Growth Loop Popup -->
+    <div id="growth-popup">
+        <button id="close-popup" class="mono">Close</button>
+        <span class="mono popup-tag">// System_Expansion: v2.0_Access</span>
+        <h3 class="mono popup-title">Unlock the<br>Full Engine.</h3>
+        <p class="popup-text">Experience deep analytics, recovery forecasting and multi-sport correlation for serious athletes.</p>
+        <form id="popup-signup-form" class="popup-form">
+            <input type="email" id="popup-email" placeholder="athlete@example.com" required class="mono">
+            <button type="submit" class="mono">Join the Beta</button>
+        </form>
+    </div>
 
     <main>
         <!-- WORK / HERO -->
@@ -185,50 +233,33 @@
                 </div>
 
                 <div class="arch-grid mono">
-                    <!-- Block 1 -->
                     <div class="arch-block">
                         <div class="arch-label">Infrastructure</div>
                         <span class="arch-code">API & Logic</span>
                         <p class="arch-text">Live Strava API integration via Node.js/Render. Logic: Riegels Formula.</p>
                     </div>
 
-                    <!-- Block 2 -->
                     <div class="arch-block">
                         <div class="arch-label">Telemetry</div>
                         <span class="arch-code">Event Tracking</span>
                         <p class="arch-text">Google Tag Manager (GTM-NJW2V9RX) active.</p>
                     </div>
 
-                    <!-- Block 3 -->
                     <div class="arch-block">
                         <div class="arch-label">Extensions</div>
                         <span class="arch-code">Browser Extension (VG)</span>
                         <p class="arch-text">
                             Developed Strava Connector (Chrome Manifest V3). <br><br>
-                            <a href="https://github.com/arvidstenhag/strava-connector" 
-                               id="plugin-repo-link" 
-                               class="arch-link" 
-                               target="_blank" 
-                               rel="noopener">
-                               View Repository &rarr;
-                            </a>
+                            <a href="https://github.com/arvidstenhag/strava-connector" id="plugin-repo-link" class="arch-link" target="_blank" rel="noopener">View Repository &rarr;</a>
                         </p>
                     </div>
 
-                    <!-- Block 4 -->
                     <div class="arch-block">
                         <div class="arch-label">Knowledge</div>
                         <span class="arch-code">Whitepaper</span>
                         <p class="arch-text">
                             Technical case study on fullstack dev. <br><br>
-                            <a href="/assets/whitepaper.pdf" 
-                               id="whitepaper-download" 
-                               class="arch-link" 
-                               target="_blank" 
-                               rel="noopener" 
-                               download>
-                               Download Technical Case Study (PDF) &rarr;
-                            </a>
+                            <a href="/assets/whitepaper.pdf" id="whitepaper-download" class="arch-link" target="_blank" rel="noopener" download>Download Technical Case Study (PDF) &rarr;</a>
                         </p>
                     </div>
                 </div>
@@ -251,36 +282,55 @@
     <script src="config.js"></script>
     <script src="script.js"></script>
     <script>
-        // 1. CTA Tracking & Navigation
+        // --- GROWTH LOOP LOGIC ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const popup = document.getElementById('growth-popup');
+            const closeBtn = document.getElementById('close-popup');
+            const form = document.getElementById('popup-signup-form');
+
+            // Trigger after 5 seconds
+            if (!localStorage.getItem('f_leads')) {
+                setTimeout(() => {
+                    popup.classList.add('active');
+                    if (window.trackEvent) window.trackEvent('popup_impression', { type: 'growth_loop' });
+                }, 5000);
+            }
+
+            closeBtn?.addEventListener('click', () => {
+                popup.classList.remove('active');
+            });
+
+            form?.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('popup-email').value;
+                
+                // Track & Update Funnel
+                if (window.updateFunnel) window.updateFunnel('leads');
+                if (window.trackEvent) window.trackEvent('signup_submit', { method: 'growth_popup', email_provided: !!email });
+                
+                popup.innerHTML = `<h3 class="mono" style="color:#fff; margin-bottom: 0.5rem;">Access Pending.</h3><p class="popup-text" style="margin-bottom:0;">Verification sent to ${email}.</p>`;
+                
+                setTimeout(() => {
+                    popup.classList.remove('active');
+                }, 3000);
+            });
+        });
+
+        // CTA Tracking & Navigation
         document.getElementById('main-cta-btn')?.addEventListener('click', function(e) {
             e.preventDefault();
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({
-                'event': 'lead_magnet_usage',
-                'cta_location': 'hero_calculator'
-            });
-            setTimeout(() => {
-                window.location.href = "growth-lab/";
-            }, 100);
+            if (window.trackEvent) window.trackEvent('lead_magnet_usage', { cta_location: 'hero_calculator' });
+            setTimeout(() => { window.location.href = "growth-lab/"; }, 100);
         });
 
-        // 2. Whitepaper Tracking
+        // Whitepaper Tracking
         document.getElementById('whitepaper-download')?.addEventListener('click', function() {
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({
-                'event': 'whitepaper_download',
-                'asset_type': 'pdf',
-                'asset_name': 'predictor_loop_whitepaper'
-            });
+            if (window.trackEvent) window.trackEvent('whitepaper_download', { asset_name: 'predictor_loop_whitepaper' });
         });
 
-        // 3. Plugin Repo Click Tracking
+        // Plugin Repo Click Tracking
         document.getElementById('plugin-repo-link')?.addEventListener('click', function() {
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({
-                'event': 'plugin_repo_click',
-                'location': 'architecture_section'
-            });
+            if (window.trackEvent) window.trackEvent('plugin_repo_click', { location: 'architecture_section' });
         });
     </script>
 </body>
