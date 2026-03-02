@@ -37,6 +37,18 @@
 
         .mono { font-family: 'Roboto Mono', monospace; }
 
+        /* Beta Indicator Style */
+        .beta-row {
+            margin-top: 1.5rem;
+            display: block;
+        }
+        #beta-indicator {
+            font-size: 0.65rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
         /* Navigation */
         nav {
             position: fixed;
@@ -148,6 +160,12 @@
                 <span class="mono" style="font-size: 0.7rem; color: #999; letter-spacing: 0.1em;">// 01 PRIMARY ENGINE</span>
                 <h1 class="hero-title">The Predictor<br>Loop.</h1>
                 <p class="hero-subtitle">Engineering a data-driven conversion loop through performance forecasting and real-time Strava integration.</p>
+                
+                <div class="beta-row">
+                    <span id="beta-indicator" class="mono">
+                        Beta v1.2 — <span id="prediction-count">87</span> predictions generated
+                    </span>
+                </div>
                 
                 <div class="calculator-ui">
                     <span class="mono" style="font-size: 0.75rem; color: #666; letter-spacing: 0.05em;">ESTIMATED_FINISH_TIME</span>

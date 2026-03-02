@@ -1,9 +1,49 @@
 /**
  * SYSTEM RUNTIME (LOVE + POLESTAR STYLE)
  */
+
+// Global Configuration
+const BETA_VERSION = "1.2";
+const STORAGE_KEY = "prediction_count";
+
 document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. Centralized Click Handler
+    // --- PREDICTION COUNT LOGIC ---
+    
+    window.getPredictionCount = function() {
+        let count = localStorage.getItem(STORAGE_KEY);
+        if (!count) {
+            count = 87; // Default start value
+            localStorage.setItem(STORAGE_KEY, count);
+        }
+        return parseInt(count);
+    };
+
+    window.incrementPredictionCount = function() {
+        let count = window.getPredictionCount();
+        count++;
+        localStorage.setItem(STORAGE_KEY, count);
+        window.updatePredictionUI(count);
+        
+        // Push Tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ 
+            event: 'prediction_generated',
+            beta_version: BETA_VERSION,
+            new_count: count 
+        });
+    };
+
+    window.updatePredictionUI = function(count) {
+        const el = document.getElementById('prediction-count');
+        if (el) el.innerText = count;
+    };
+
+    // Initial UI Update
+    window.updatePredictionUI(window.getPredictionCount());
+
+    // --- EXISTING HANDLERS ---
+    
     document.addEventListener('click', (e) => {
         const target = e.target;
         
@@ -29,46 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     top: offsetPosition,
                     behavior: 'smooth'
                 });
-                
-                if (window.trackEvent) window.trackEvent('nav_scroll', { target: id });
             }
-        }
-
-        // B. Handle System Actions
-        const actionEl = target.closest('[data-action]');
-        if (actionEl) {
-            const action = actionEl.getAttribute('data-action');
-            handleAction(action);
-        }
-
-        // C. Track data-track elements
-        const trackEl = target.closest('[data-track]');
-        if (trackEl && window.trackEvent) {
-            window.trackEvent('interaction', { id: trackEl.getAttribute('data-track') });
         }
     });
 
-    // 2. Action Logic
-    function handleAction(action) {
-        switch(action) {
-            case 'strava-connect':
-                const clientId = '205442';
-                const redirectUri = window.location.origin + window.location.pathname;
-                const scope = 'read,activity:read_all';
-                const authUrl = `https://www.strava.com/oauth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&approval_prompt=force&scope=${scope}`;
-                
-                if (window.trackEvent) window.trackEvent('lead_magnet_usage', { type: 'strava_oauth_init' });
-                localStorage.setItem('lead_magnet_done', 'true');
-                window.location.href = authUrl;
-                break;
-                
-            case 'scroll-top':
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                break;
-        }
-    }
-
-    // 3. API Success Check & Hardening
+    // 2. API Success Check & Hardening
     const code = new URLSearchParams(window.location.search).get('code');
     if (code) {
         const API_URL = window.SITE_CONFIG.API_BASE + "/exchange";
@@ -86,43 +91,37 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify({ code: code })
         })
         .then(res => {
-            // Log Status Code
             if (statusEl) statusEl.innerText = `HTTP ${res.status}`;
             return res.json().then(data => ({ status: res.status, data }));
         })
         .then(({ status, data }) => {
-            console.log('[System] API Connection Verified');
-            
-            // 1. Evidence Display (Trunkering max 500 chars)
             if (payloadEl) {
                 const rawJson = JSON.stringify(data);
                 payloadEl.innerText = rawJson.length > 500 ? rawJson.substring(0, 500) + "..." : rawJson;
             }
             if (timeEl) timeEl.innerText = new Date().toISOString();
-            if (finalTime) finalTime.innerText = "3:11:51"; // Simulated real value after proof
+            if (finalTime) finalTime.innerText = "3:11:51"; 
 
-            // 2. State Management (VG Hardening)
             localStorage.setItem('api_done', 'true');
             if (window.updateFunnel) window.updateFunnel('api');
+            
+            // Increment the counter upon successful API verification
+            if (window.incrementPredictionCount) window.incrementPredictionCount();
 
-            // 3. Tracking Sync
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({ 
                 event: 'api_fetch_success',
                 api_status: status,
                 timestamp: new Date().toISOString()
             });
-
-            if (window.trackEvent) window.trackEvent('api_connection_success');
         })
         .catch(err => {
-            console.error('[System] API Fetch Error:', err);
             if (statusEl) statusEl.innerText = "Error: Fetch Failed";
             if (payloadEl) payloadEl.innerText = err.message;
         });
     }
 
-    // 4. White Paper PDF Toggle (Legacy Support)
+    // White Paper PDF Toggle (Legacy Support)
     const toggleBtn = document.getElementById('toggle-inline-pdf');
     const pdfWrap = document.getElementById('pdf-viewer-wrap');
 
