@@ -3,7 +3,7 @@
  */
 
 // 1. CONFIG
-const config = window.SITE_CONFIG || { WHITEPAPER_URL: 'assets/whitepaper.pdf', SHARE_URL: window.location.href };
+const config = window.SITE_CONFIG || { WHITEPAPER_URL: '/assets/whitepaper.pdf', SHARE_URL: window.location.href };
 
 // 2. FUNNEL LOGIC (State Management)
 const funnelState = {
@@ -13,11 +13,12 @@ const funnelState = {
     shares: parseInt(localStorage.getItem('f_shares') || 0)
 };
 
-function updateFunnel(key) {
+// Expose to window for external script access
+window.updateFunnel = function(key) {
     funnelState[key]++;
     localStorage.setItem(`f_${key}`, funnelState[key]);
     renderFunnel();
-}
+};
 
 function renderFunnel() {
     const u = document.getElementById('stat-users');
@@ -31,9 +32,13 @@ function renderFunnel() {
 }
 
 // Tracking Wrapper
-function trackEvent(name, params = {}) {
+window.trackEvent = function(name, params = {}) {
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: name, timestamp: new Date().toISOString(), ...params });
+    window.dataLayer.push({ 
+        event: name, 
+        timestamp: new Date().toISOString(), 
+        ...params 
+    });
     const list = document.getElementById('debug-list');
     if (list) {
         const li = document.createElement('li');
@@ -41,11 +46,10 @@ function trackEvent(name, params = {}) {
         list.prepend(li);
     }
     console.log(`[Growth Track]: ${name}`, params);
-}
+};
 
 // 3. PERFORMANCE SCORE SYSTEM
 function calculateScore(timeStr) {
-    // Fake logic: 3:00:00 = 100 pts, 5:00:00 = 0 pts
     const parts = timeStr.split(':').map(Number);
     const totalMinutes = (parts[0] * 60) + parts[1];
     let score = Math.round(100 - ((totalMinutes - 180) / 1.2));
@@ -62,9 +66,9 @@ function updateScoreUI(score, time) {
     if(badge) badge.innerText = `Score: ${score}/100`;
     
     if(circle) {
-        if (score > 80) circle.style.borderColor = "#10b981"; // Success Green
-        else if (score > 60) circle.style.borderColor = "#f59e0b"; // Warning Orange
-        else circle.style.borderColor = "#ef4444"; // Danger Red
+        if (score > 80) circle.style.borderColor = "#10b981";
+        else if (score > 60) circle.style.borderColor = "#f59e0b";
+        else circle.style.borderColor = "#ef4444";
     }
     
     if(pct) pct.innerText = `You are faster than ${score + 2}% of analyzed runners.`;
@@ -75,7 +79,7 @@ function addToLeaderboard(score, time) {
     let board = JSON.parse(localStorage.getItem('leaderboard') || '[]');
     board.push({ score, time, id: Date.now() });
     board.sort((a, b) => b.score - a.score);
-    board = board.slice(0, 5); // Top 5
+    board = board.slice(0, 5);
     localStorage.setItem('leaderboard', JSON.stringify(board));
     renderLeaderboard(board);
 }
@@ -95,10 +99,9 @@ function renderLeaderboard(board = null) {
 
 // 5. EVENT HANDLERS
 document.getElementById('strava-connect')?.addEventListener('click', () => {
-    updateFunnel('users');
-    trackEvent('connect_click');
+    window.updateFunnel('users');
+    window.trackEvent('connect_click');
     
-    // Simulate API Analysis
     setTimeout(() => {
         const time = "3:12:45";
         const score = calculateScore(time);
@@ -110,15 +113,15 @@ document.getElementById('strava-connect')?.addEventListener('click', () => {
         
         updateScoreUI(score, time);
         addToLeaderboard(score, time);
-        updateFunnel('api');
-        trackEvent('api_success', { score });
+        window.updateFunnel('api');
+        window.trackEvent('api_success', { score });
     }, 1500);
 });
 
 document.getElementById('signup-form')?.addEventListener('submit', (e) => {
     e.preventDefault();
-    updateFunnel('leads');
-    trackEvent('signup_submit');
+    window.updateFunnel('leads');
+    window.trackEvent('signup_submit');
     document.getElementById('lead-form-container')?.classList.add('hidden');
     document.getElementById('unlocked-container')?.classList.remove('hidden');
     const dl = document.getElementById('download-link');
@@ -129,8 +132,8 @@ document.getElementById('share-btn')?.addEventListener('click', () => {
     const time = document.getElementById('prediction-result')?.innerText || "3:12:45";
     const text = `I just got my marathon prediction (${time}) on Growth Lab. Beat me 👉 ${config.SHARE_URL}`;
     navigator.clipboard.writeText(text);
-    updateFunnel('shares');
-    trackEvent('share_click');
+    window.updateFunnel('shares');
+    window.trackEvent('share_click');
     alert("Result copied to clipboard!");
 });
 

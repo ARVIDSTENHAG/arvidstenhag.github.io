@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arvid Stenhag | Growth Infrastructure</title>
+    <meta name="description" content="Strava API-powered marathon prediction tool with GTM tracking, growth loop design and Chrome extension integration.">
     
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -81,7 +82,7 @@
             padding-top: 4rem;
         }
 
-        .calc-result { font-size: 8rem; font-weight: 700; margin: 2rem 0; letter-spacing: -0.02em; }
+        .calc-result { font-size: 8rem; font-weight: 700; margin: 1rem 0 2rem 0; letter-spacing: -0.02em; }
         .btn-connect {
             padding: 1.2rem 3.5rem;
             background: var(--polestar-black);
@@ -150,7 +151,8 @@
                 
                 <div class="calculator-ui">
                     <span class="mono" style="font-size: 0.75rem; color: #666; letter-spacing: 0.05em;">ESTIMATED_FINISH_TIME</span>
-                    <div class="calc-result">3:11:51</div>
+                    <div class="mono" style="font-size: 0.6rem; color: #ccc; margin-top: 1rem; text-transform: uppercase;">Example Output</div>
+                    <div class="calc-result">--:--:--</div>
                     <a href="growth-lab/" class="btn-connect" id="main-cta-btn">Initialize Strava Connect</a>
                 </div>
             </div>
@@ -183,7 +185,16 @@
                     <div class="arch-block">
                         <div class="arch-label">Extensions</div>
                         <span class="arch-code">Browser Extension (VG)</span>
-                        <p class="arch-text">Developed Strava Connector (Chrome Manifest V3).</p>
+                        <p class="arch-text">
+                            Developed Strava Connector (Chrome Manifest V3). <br><br>
+                            <a href="https://github.com/arvidstenhag/strava-connector" 
+                               id="plugin-repo-link" 
+                               class="arch-link" 
+                               target="_blank" 
+                               rel="noopener">
+                               View Repository &rarr;
+                            </a>
+                        </p>
                     </div>
 
                     <!-- Block 4 -->
@@ -192,10 +203,12 @@
                         <span class="arch-code">Whitepaper</span>
                         <p class="arch-text">
                             Technical case study on fullstack dev. <br><br>
-                            <a href="whitepaper/AS_Predictor_Loop_Whitepaper.pdf" 
+                            <a href="/assets/whitepaper.pdf" 
                                id="whitepaper-download" 
                                class="arch-link" 
-                               target="_blank">
+                               target="_blank" 
+                               rel="noopener" 
+                               download>
                                Download Technical Case Study (PDF) &rarr;
                             </a>
                         </p>
@@ -233,13 +246,22 @@
             }, 100);
         });
 
-        // 2. Whitepaper Tracking (Ny)
+        // 2. Whitepaper Tracking
         document.getElementById('whitepaper-download')?.addEventListener('click', function() {
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
                 'event': 'whitepaper_download',
                 'asset_type': 'pdf',
                 'asset_name': 'predictor_loop_whitepaper'
+            });
+        });
+
+        // 3. Plugin Repo Click Tracking
+        document.getElementById('plugin-repo-link')?.addEventListener('click', function() {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'event': 'plugin_repo_click',
+                'location': 'architecture_section'
             });
         });
     </script>

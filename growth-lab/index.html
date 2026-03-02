@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strava Marathon Predictor | Growth Lab</title>
+    <meta name="description" content="Strava API-powered marathon prediction tool with GTM tracking, growth loop design and Chrome extension integration.">
     
     <!-- Google Tag Manager (Using the same ID as in the root) -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -110,6 +111,32 @@
             transform: translateY(-2px);
         }
 
+        /* API Debug Section */
+        #api-proof-container {
+            margin-top: 2rem;
+            text-align: left;
+            padding: 1rem;
+            background: #f9f9f9;
+            border: 1px dashed #ccc;
+            display: none; /* Shown after API call */
+        }
+
+        .debug-label {
+            font-size: 0.6rem;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .debug-value {
+            font-size: 0.7rem;
+            color: #444;
+            word-break: break-all;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
         .back-link {
             margin-top: 4rem;
             font-size: 0.8rem;
@@ -140,10 +167,21 @@
 
         <div class="predictor-box">
             <span class="mono result-label">ESTIMATED_FINISH_TIME</span>
-            <div class="result-time">3:11:51</div>
+            <div class="result-time" id="final-time">--:--:--</div>
             <div class="mono result-margin">± 6–10 min</div>
             
             <button class="btn-strava" id="strava-connect-btn">Connect Strava</button>
+
+            <!-- API Evidence Output -->
+            <div id="api-proof-container" class="mono">
+                <span class="debug-label">API_VERIFICATION_LOG</span>
+                <span class="debug-label">Status</span>
+                <span class="debug-value" id="api-status">Pending...</span>
+                <span class="debug-label">Response Payload (Truncated)</span>
+                <span class="debug-value" id="api-payload">Waiting for connection...</span>
+                <span class="debug-label">Timestamp</span>
+                <span class="debug-value" id="api-timestamp">-</span>
+            </div>
         </div>
 
         <a href="../index.html" class="back-link mono">&larr; Return to Infrastructure</a>
@@ -171,9 +209,12 @@
             if (window.SITE_CONFIG?.API_BASE) {
                 window.location.href = window.SITE_CONFIG.API_BASE + "/login";
             } else {
+                // Technical Evidence if API_BASE is missing
+                const container = document.getElementById('api-proof-container');
+                const status = document.getElementById('api-status');
+                if (container) container.style.display = 'block';
+                if (status) status.innerText = "Error: Set API_BASE in config.js";
                 console.error("Critical: SITE_CONFIG not loaded.");
-                // Fallback if config failed for some reason
-                window.location.href = "https://strava-backend-n6zk.onrender.com/login";
             }
         });
     </script>
