@@ -169,6 +169,30 @@
             transition: opacity 0.3s;
         }
 
+        /* --- System Architecture Section (Restored) --- */
+        #architecture {
+            background: var(--polestar-black);
+            color: var(--polestar-white);
+            padding: 12rem 2rem;
+        }
+
+        .arch-header { border-bottom: var(--border-dark); padding-bottom: 2rem; margin-bottom: 6rem; }
+        .arch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 4rem;
+        }
+
+        .arch-block {
+            padding-top: 1.5rem;
+            border-top: 1px solid #222;
+        }
+
+        .arch-label { font-size: 0.65rem; color: #555; text-transform: uppercase; margin-bottom: 1.5rem; letter-spacing: 0.1em; }
+        .arch-text { font-size: 0.85rem; line-height: 1.8; color: #aaa; }
+        .arch-code { color: var(--polestar-white); display: block; margin-bottom: 1rem; font-weight: 400; font-size: 1rem; }
+        .arch-link { color: #fff; text-decoration: underline; }
+
         /* Footer */
         footer { padding: 8rem 2rem; border-top: var(--border-thin); }
         .footer-grid { display: flex; justify-content: space-between; align-items: flex-end; }
