@@ -87,8 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         whitepaperDownload.addEventListener('click', () => {
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
-                event: 'whitepaper_download',
-                url: window.SITE_CONFIG.WHITEPAPER_URL
+                event: "whitepaper_download"
             });
         });
     }
