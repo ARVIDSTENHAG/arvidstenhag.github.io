@@ -8,8 +8,8 @@
     "identity"
   ],
   "host_permissions": [
-    "http://localhost:3000/*",
-    "https://www.strava.com/*"
+    "https://www.strava.com/*",
+    "https://strava-backend-n6zk.onrender.com/*"
   ],
   "action": {
     "default_popup": "popup.html",
