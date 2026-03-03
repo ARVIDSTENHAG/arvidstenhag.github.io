@@ -4,29 +4,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (connectBtn) {
     connectBtn.addEventListener('click', () => {
-      console.log('Knapp tryckt!');
-      
       const clientId = "205442";
+      
+      /**
+       * Note: OAuth token exchange happens server-side for security reasons.
+       * The redirectUri points to our backend to keep the client_secret hidden.
+       */
       const redirectUri = `${LIVE_URL}/exchange`;
       const scope = "read,activity:read_all";
       
       const authUrl = `https://www.strava.com/oauth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&approval_prompt=force&scope=${scope}`;
       
-      // Öppnar Strava-inloggningen i en ny flik
+      // Opens the Strava authorization flow in a new tab
       chrome.tabs.create({ url: authUrl });
     });
-  } else {
-    console.error('Fel: Kunde inte hitta knappen med id="connect-btn" i HTML-filen.');
-  }
-
-  // Exempel på fetch-anrop till live-servern
-  async function checkServerStatus() {
-    try {
-      const response = await fetch(LIVE_URL);
-      const data = await response.text();
-      console.log("Serverstatus:", data);
-    } catch (err) {
-      console.error("Kunde inte nå live-servern:", err);
-    }
   }
 });

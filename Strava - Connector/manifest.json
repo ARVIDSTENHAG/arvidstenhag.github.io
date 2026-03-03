@@ -3,10 +3,7 @@
   "name": "Strava - Connector",
   "version": "1.0",
   "description": "Connect to Strava and calculate marathon predictions.",
-  "permissions": [
-    "storage",
-    "identity"
-  ],
+  "permissions": [],
   "host_permissions": [
     "https://www.strava.com/*",
     "https://strava-backend-n6zk.onrender.com/*"
