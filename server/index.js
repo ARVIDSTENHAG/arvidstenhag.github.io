@@ -51,7 +51,25 @@ app.get('/auth/strava/callback', (req, res) => {
 });
 
 /**
- * 3. Exchange Token
+ * 3. Exchange Token (GET)
+ * Visar ett framgångsmeddelande för användaren i webbläsaren när de skickas hit
+ */
+app.get('/exchange', (req, res) => {
+    const { code } = req.query;
+    console.log("Exchange GET anropat med kod:", code);
+    
+    res.send(`
+        <html>
+            <body style="font-family: sans-serif; text-align: center; padding-top: 50px;">
+                <h1>Anslutning lyckades!</h1>
+                <p>Du kan nu stänga detta fönster.</p>
+            </body>
+        </html>
+    `);
+});
+
+/**
+ * 3b. Exchange Token (POST)
  * Frontend calls this to exchange the code for an access token
  */
 app.post('/exchange', async (req, res) => {
