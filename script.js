@@ -78,6 +78,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- WHITEPAPER CONFIG & TRACKING ---
+    const whitepaperDownload = document.getElementById('whitepaper-download-link');
+    const whitepaperIframe = document.getElementById('whitepaper-iframe');
+    
+    if (whitepaperDownload && window.SITE_CONFIG.WHITEPAPER_URL) {
+        whitepaperDownload.href = window.SITE_CONFIG.WHITEPAPER_URL;
+        whitepaperDownload.addEventListener('click', () => {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                event: 'whitepaper_download',
+                url: window.SITE_CONFIG.WHITEPAPER_URL
+            });
+        });
+    }
+    
+    if (whitepaperIframe && window.SITE_CONFIG.WHITEPAPER_URL) {
+        // Simple cache-buster
+        const cacheBuster = "?v=" + new Date().toISOString().split('T')[0].replace(/-/g, '');
+        whitepaperIframe.src = window.SITE_CONFIG.WHITEPAPER_URL + cacheBuster;
+    }
+
     // --- EXISTING HANDLERS ---
     
     document.addEventListener('click', (e) => {
