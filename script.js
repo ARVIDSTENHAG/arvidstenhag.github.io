@@ -65,6 +65,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial UI Update
     window.updatePredictionUI(window.getPredictionCount());
 
+    // --- REPO LINK CONFIG & TRACKING ---
+    const repoLink = document.getElementById('plugin-repo-link');
+    if (repoLink && window.SITE_CONFIG.EXTENSION_REPO_URL) {
+        repoLink.href = window.SITE_CONFIG.EXTENSION_REPO_URL;
+        repoLink.addEventListener('click', () => {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ 
+                event: 'plugin_repo_click',
+                url: window.SITE_CONFIG.EXTENSION_REPO_URL
+            });
+        });
+    }
+
     // --- EXISTING HANDLERS ---
     
     document.addEventListener('click', (e) => {
