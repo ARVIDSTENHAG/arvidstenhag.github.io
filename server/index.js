@@ -52,20 +52,77 @@ app.get('/auth/strava/callback', (req, res) => {
 
 /**
  * 3. Exchange Token (GET)
- * Visar ett framgångsmeddelande för användaren i webbläsaren när de skickas hit
+ * Handles the redirect from Strava/Extension, calculates marathon time, and redirects to frontend.
  */
-app.get('/exchange', (req, res) => {
+app.get('/exchange', async (req, res) => {
     const { code } = req.query;
-    console.log("Exchange GET anropat med kod:", code);
-    
-    res.send(`
-        <html>
-            <body style="font-family: sans-serif; text-align: center; padding-top: 50px;">
-                <h1>Anslutning lyckades!</h1>
-                <p>Du kan nu stänga detta fönster.</p>
-            </body>
-        </html>
-    `);
+
+    if (!code) {
+        return res.redirect(`${FRONTEND_URL}?error=no_code`);
+    }
+
+    try {
+        // 1. Exchange code for token
+        const tokenResponse = await fetch('https://www.strava.com/oauth/token', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                client_id: CLIENT_ID,
+                client_secret: CLIENT_SECRET,
+                code: code,
+                grant_type: 'authorization_code'
+            })
+        });
+
+        const tokenData = await tokenResponse.json();
+        
+        if (!tokenData.access_token) {
+            console.error("Token exchange failed:", tokenData);
+            return res.redirect(`${FRONTEND_URL}?error=token_exchange_failed`);
+        }
+
+        const accessToken = tokenData.access_token;
+
+        // 2. Fetch athlete activities
+        const activitiesResponse = await fetch('https://www.strava.com/api/v3/athlete/activities?per_page=10', {
+            headers: { 'Authorization': `Bearer ${accessToken}` }
+        });
+        const activities = await activitiesResponse.json();
+
+        // 3. Find latest run > 5km (5000 meters)
+        const latestRun = activities.find(a => a.type === 'Run' && a.distance > 5000);
+
+        if (!latestRun) {
+            return res.redirect(`${FRONTEND_URL}?error=no_runs_found`);
+        }
+
+        // 4. Riegel's Formula: T2 = T1 * (D2 / D1)^1.06
+        const d1 = latestRun.distance; // in meters
+        const t1 = latestRun.moving_time; // in seconds
+        const d2 = 42195; // Marathon distance in meters
+        
+        const t2 = t1 * Math.pow((d2 / d1), 1.06);
+
+        // 5. Format seconds to HH:MM:SS
+        const hours = Math.floor(t2 / 3600);
+        const minutes = Math.floor((t2 % 3600) / 60);
+        const seconds = Math.round(t2 % 60);
+        
+        const formattedTime = [
+            hours.toString().padStart(2, '0'),
+            minutes.toString().padStart(2, '0'),
+            seconds.toString().padStart(2, '0')
+        ].join(':');
+
+        console.log(`Prediction for ${latestRun.name}: ${formattedTime}`);
+
+        // 6. Redirect to frontend with the result
+        res.redirect(`${FRONTEND_URL}?predicted_time=${formattedTime}`);
+
+    } catch (error) {
+        console.error("Exchange process error:", error);
+        res.redirect(`${FRONTEND_URL}?error=server_error`);
+    }
 });
 
 /**

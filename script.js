@@ -8,6 +8,29 @@ const STORAGE_KEY = "prediction_count";
 
 document.addEventListener('DOMContentLoaded', () => {
     
+    // --- PREDICTION RESULT LOGIC ---
+    const params = new URLSearchParams(window.location.search);
+    const predictedTime = params.get('predicted_time');
+    
+    if (predictedTime) {
+        const resultEl = document.querySelector('.calc-result');
+        if (resultEl) {
+            resultEl.innerText = predictedTime;
+            // Highlight effect
+            resultEl.style.color = '#00ff00'; 
+            setTimeout(() => { resultEl.style.color = ''; }, 2000);
+        }
+        
+        // Increment the counter
+        if (window.incrementPredictionCount) {
+            window.incrementPredictionCount();
+        }
+
+        // Clean up URL without refreshing
+        const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.pushState({ path: newUrl }, '', newUrl);
+    }
+
     // --- PREDICTION COUNT LOGIC ---
     
     window.getPredictionCount = function() {
